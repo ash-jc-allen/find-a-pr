@@ -8,8 +8,7 @@ class IssueOwner
         public readonly string $name,
         public readonly string $url,
         public readonly string $profilePictureUrl,
-    )
-    {
+    ) {
         //
     }
 }
