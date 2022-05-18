@@ -15,25 +15,35 @@ class IssueService
     private const BASE_URL = 'https://api.github.com/repos/';
 
     /**
+     * Get all the issues for displaying.
+     *
      * @return array<Issue>
      */
     public function getAll(): array
     {
-        $issues = [];
+        return collect(config('repos.repos'))
+            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
+            ->toArray();
+    }
 
-        foreach (config('repos.repos') as $repo) {
-            $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
+    /**
+     * @param array<Issue> $repo
+     * @return array
+     */
+    private function getIssuesForRepo(array $repo): array
+    {
+        $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
 
-            $fetchedIssues = Cache::remember($url, now()->addMinutes(10), static fn () => Http::get($url)->json());
+        $fetchedIssues = Cache::remember(
+            $url,
+            now()->addMinutes(10),
+            static fn () => Http::get($url)->json()
+        );
 
-            foreach ($fetchedIssues as $fetchedIssue) {
-                if ($this->shouldIncludeIssue($fetchedIssue)) {
-                    $issues[] = $this->parseIssue($repo, $fetchedIssue);
-                }
-            }
-        }
-
-        return $issues;
+        return collect($fetchedIssues)
+            ->map(fn ($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
+            ->filter()
+            ->toArray();
     }
 
     private function parseIssue(array $repo, array $fetchedIssue): ?Issue
