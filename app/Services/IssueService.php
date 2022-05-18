@@ -6,6 +6,7 @@ use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class IssueService
@@ -19,14 +20,18 @@ class IssueService
         ]
     ];
 
-    public function getAll()
+    /**
+     * @return array<Issue>
+     */
+    public function getAll(): array
     {
         $issues = [];
 
         foreach (static::REPOS as $repo) {
             $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
 
-            $fetchedIssues = Http::get($url)->json();
+            // TODO Improve caching.
+            $fetchedIssues = Cache::rememberForever($url, static fn () => Http::get($url)->json());
 
             foreach ($fetchedIssues as $fetchedIssue) {
                 $issues[] = $this->parseIssue($repo, $fetchedIssue);
@@ -52,7 +57,6 @@ class IssueService
             $labels[] = new Label(
                 name: $label['name'],
                 color: '#'.$label['color'],
-                url: $label['url'],
             );
         }
 
