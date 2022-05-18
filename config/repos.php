@@ -3,6 +3,10 @@
 return [
     'repos' => [
         [
+            'owner' => 'ash-jc-allen',
+            'name' => 'find-a-pr',
+        ],
+        [
             'owner' => 'laravel',
             'name' => 'framework',
         ],
@@ -37,10 +41,6 @@ return [
         [
             'owner' => 'ash-jc-allen',
             'name' => 'laravel-config-validator',
-        ],
-        [
-            'owner' => 'ash-jc-allen',
-            'name' => 'find-a-pr',
         ],
     ],
 
