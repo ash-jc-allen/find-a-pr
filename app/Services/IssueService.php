@@ -15,70 +15,92 @@ class IssueService
     private const BASE_URL = 'https://api.github.com/repos/';
 
     /**
+     * Get all the issues for displaying.
+     *
      * @return array<Issue>
      */
     public function getAll(): array
     {
-        $issues = [];
+        return collect(config('repos.repos'))
+            ->flatMap(fn(array $repo): array => $this->getIssuesForRepo($repo))
+            ->toArray();
+    }
 
-        foreach (config('repos.repos') as $repo) {
-            $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
+    /**
+     * @param array<Issue> $repo
+     * @return array
+     */
+    private function getIssuesForRepo(array $repo): array
+    {
+        $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
 
-            $fetchedIssues = Cache::remember($url, now()->addMinutes(10), static fn () => Http::get($url)->json());
+        $fetchedIssues = Cache::remember(
+            $url,
+            now()->addMinutes(10),
+            static fn() => Http::get($url)->json()
+        );
 
-            foreach ($fetchedIssues as $fetchedIssue) {
-                if ($issue = $this->parseIssue($repo, $fetchedIssue)) {
-                    $issues[] = $issue;
-                }
-            }
-        }
-
-        return $issues;
+        return collect($fetchedIssues)
+            ->map(fn($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
+            ->filter()
+            ->toArray();
     }
 
     private function parseIssue(array $repo, array $fetchedIssue): ?Issue
     {
-        if (isset($fetchedIssue['pull_request'])) {
-            return null;
-        }
-
-        if (!$this->includesAtleastOneLabel($fetchedIssue, config('repos.labels'))) {
-            return null;
-        }
-
-        $repoName = $repo['owner'].'/'.$repo['name'];
-
-        $createdBy = new IssueOwner(
-            name: $fetchedIssue['user']['login'],
-            url: $fetchedIssue['user']['html_url'],
-            profilePictureUrl: $fetchedIssue['user']['avatar_url'],
-        );
-
-        $labels = [];
-
-        foreach ($fetchedIssue['labels'] as $label) {
-            $labels[] = new Label(
-                name: $label['name'],
-                color: '#'.$label['color'],
-            );
-        }
+        $repoName = $repo['owner'] . '/' . $repo['name'];
 
         return new Issue(
             repoName: $repoName,
-            repoUrl: 'https://github.com/'.$repoName,
+            repoUrl: 'https://github.com/' . $repoName,
             title: $fetchedIssue['title'],
             url: $fetchedIssue['html_url'],
             body: $fetchedIssue['body'],
-            labels: $labels,
+            labels: $this->getIssueLabels($fetchedIssue),
             createdAt: Carbon::parse($fetchedIssue['created_at']),
-            createdBy: $createdBy,
+            createdBy: $this->getIssueOwner($fetchedIssue),
         );
     }
 
-    private function includesAtleastOneLabel(array $fetchedIssue, mixed $labels): bool
+    private function shouldIncludeIssue(array $fetchedIssue): bool
+    {
+        return !$this->issueIsAPullRequest($fetchedIssue)
+            && $this->includesAtLeastOneLabel($fetchedIssue, config('repos.labels'));
+    }
+
+    private function includesAtLeastOneLabel(array $fetchedIssue, mixed $labels): bool
     {
         $issueLabels = Arr::pluck($fetchedIssue['labels'], 'name');
 
         return array_intersect($issueLabels, $labels) !== [];
+    }
+
+    private function issueIsAPullRequest(array $fetchedIssue): bool
+    {
+        return isset($fetchedIssue['pull_request']);
+    }
+
+    private function getIssueOwner(array $fetchedIssue): IssueOwner
+    {
+        return new IssueOwner(
+            name: $fetchedIssue['user']['login'],
+            url: $fetchedIssue['user']['html_url'],
+            profilePictureUrl: $fetchedIssue['user']['avatar_url'],
+        );
+    }
+
+    /**
+     * @param array<Label> $fetchedIssue
+     * @return array
+     */
+    private function getIssueLabels(array $fetchedIssue): array
+    {
+        return collect($fetchedIssue['labels'])
+            ->map(function (array $label): Label {
+                return new Label(
+                    name: $label['name'],
+                    color: '#' . $label['color'],
+                );
+            })->toArray();
     }
 }
