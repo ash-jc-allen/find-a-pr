@@ -24,13 +24,15 @@
     @foreach($issues as $issue)
         <div class="border py-5 px-8 my-4 w-3/4 mx-auto rounded-lg shadow bg-white">
             <div class="flex justify-between item-center">
-                <div>
+                <div class="w-3/4">
                     <a href="{{ $issue->url }}" class="text-xl font-bold inline-block">{{ $issue->title }}</a>
                     <div>
                         <a href="{{ $issue->repoUrl }}" class="text-gray-400">{{ $issue->repoName }}</a>
                     </div>
                 </div>
-                <a href="{{ $issue->url }}" class="inline-flex items-center px-4 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View Issue</a>
+                <div>
+                    <a href="{{ $issue->url }}" class="block items-center px-5 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View Issue</a>
+                </div>
             </div>
 
             <div class="my-2">

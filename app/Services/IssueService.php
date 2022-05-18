@@ -13,13 +13,6 @@ class IssueService
 {
     private const BASE_URL = 'https://api.github.com/repos/';
 
-    private const REPOS = [
-        [
-            'owner' => 'laravelio',
-            'name' => 'laravel.io',
-        ]
-    ];
-
     /**
      * @return array<Issue>
      */
@@ -27,21 +20,27 @@ class IssueService
     {
         $issues = [];
 
-        foreach (static::REPOS as $repo) {
+        foreach (config('repos.repos') as $repo) {
             $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
 
             $fetchedIssues = Cache::remember($url, now()->addMinutes(30), static fn () => Http::get($url)->json());
 
             foreach ($fetchedIssues as $fetchedIssue) {
-                $issues[] = $this->parseIssue($repo, $fetchedIssue);
+                if ($issue = $this->parseIssue($repo, $fetchedIssue)) {
+                    $issues[] = $issue;
+                }
             }
         }
 
         return $issues;
     }
 
-    private function parseIssue(array $repo, array $fetchedIssue): Issue
+    private function parseIssue(array $repo, array $fetchedIssue): ?Issue
     {
+        if (isset($fetchedIssue['pull_request'])) {
+            return null;
+        }
+
         $repoName = $repo['owner'].'/'.$repo['name'];
 
         $createdBy = new IssueOwner(
