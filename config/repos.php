@@ -38,6 +38,10 @@ return [
             'owner' => 'ash-jc-allen',
             'name' => 'laravel-config-validator',
         ],
+        [
+            'owner' => 'ash-jc-allen',
+            'name' => 'find-a-pr',
+        ],
     ],
 
     'labels' => [
