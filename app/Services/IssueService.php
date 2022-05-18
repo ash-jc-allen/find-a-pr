@@ -6,6 +6,7 @@ use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -41,6 +42,10 @@ class IssueService
             return null;
         }
 
+        if (!$this->includesAtleastOneLabel($fetchedIssue, config('repos.labels'))) {
+            return null;
+        }
+
         $repoName = $repo['owner'].'/'.$repo['name'];
 
         $createdBy = new IssueOwner(
@@ -68,5 +73,12 @@ class IssueService
             createdAt: Carbon::parse($fetchedIssue['created_at']),
             createdBy: $createdBy,
         );
+    }
+
+    private function includesAtleastOneLabel(array $fetchedIssue, mixed $labels): bool
+    {
+        $issueLabels = Arr::pluck($fetchedIssue['labels'], 'name');
+
+        return array_intersect($issueLabels, $labels) !== [];
     }
 }
