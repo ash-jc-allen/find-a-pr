@@ -20,7 +20,14 @@
 <body class="antialiased text-gray-600 bg-gray-100">
 <div class="max-w-6xl mx-auto py-3">
     <div class="w-3/4 mx-auto mt-12">
-        <img class="w-48" src="/images/findapr.svg" alt="findapr.io logo">
+        <div class="flex justify-between item-center">
+            <img class="w-48" src="/images/findapr.svg" alt="findapr.io logo">
+            <a href="https://github.com/ash-jc-allen/find-a-pr"
+               class="flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <img src="/images/github-logo.png" class="w-6 pr-2 inline">
+                View on GitHub
+            </a>
+        </div>
 
         <div class="mt-12">
             <p class="text-right">
@@ -38,7 +45,7 @@
                         </div>
                         <div>
                             <a href="{{ $issue->url }}"
-                               class="block items-center px-5 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View
+                               class="block items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View
                                 Issue</a>
                         </div>
                     </div>
