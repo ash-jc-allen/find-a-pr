@@ -22,37 +22,37 @@ class IssueService
     public function getAll(): array
     {
         return collect(config('repos.repos'))
-            ->flatMap(fn(array $repo): array => $this->getIssuesForRepo($repo))
+            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
             ->toArray();
     }
 
     /**
-     * @param array<Issue> $repo
+     * @param  array<Issue>  $repo
      * @return array
      */
     private function getIssuesForRepo(array $repo): array
     {
-        $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
+        $url = self::BASE_URL.$repo['owner'].'/'.$repo['name'].'/issues';
 
         $fetchedIssues = Cache::remember(
             $url,
             now()->addMinutes(10),
-            static fn() => Http::get($url)->json()
+            static fn () => Http::get($url)->json()
         );
 
         return collect($fetchedIssues)
-            ->map(fn($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
+            ->map(fn ($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
             ->filter()
             ->toArray();
     }
 
     private function parseIssue(array $repo, array $fetchedIssue): ?Issue
     {
-        $repoName = $repo['owner'] . '/' . $repo['name'];
+        $repoName = $repo['owner'].'/'.$repo['name'];
 
         return new Issue(
             repoName: $repoName,
-            repoUrl: 'https://github.com/' . $repoName,
+            repoUrl: 'https://github.com/'.$repoName,
             title: $fetchedIssue['title'],
             url: $fetchedIssue['html_url'],
             body: $fetchedIssue['body'],
@@ -64,7 +64,7 @@ class IssueService
 
     private function shouldIncludeIssue(array $fetchedIssue): bool
     {
-        return !$this->issueIsAPullRequest($fetchedIssue)
+        return ! $this->issueIsAPullRequest($fetchedIssue)
             && $this->includesAtLeastOneLabel($fetchedIssue, config('repos.labels'));
     }
 
@@ -90,7 +90,7 @@ class IssueService
     }
 
     /**
-     * @param array<Label> $fetchedIssue
+     * @param  array<Label>  $fetchedIssue
      * @return array
      */
     private function getIssueLabels(array $fetchedIssue): array
@@ -99,7 +99,7 @@ class IssueService
             ->map(function (array $label): Label {
                 return new Label(
                     name: $label['name'],
-                    color: '#' . $label['color'],
+                    color: '#'.$label['color'],
                 );
             })->toArray();
     }

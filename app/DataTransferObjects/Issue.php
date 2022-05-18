@@ -15,8 +15,7 @@ class Issue
         public readonly array $labels,
         public readonly CarbonInterface $createdAt,
         public readonly IssueOwner $createdBy,
-    )
-    {
+    ) {
         //
     }
 }
