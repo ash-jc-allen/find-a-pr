@@ -30,8 +30,7 @@ class IssueService
         foreach (static::REPOS as $repo) {
             $url = self::BASE_URL . $repo['owner'] . '/' . $repo['name'] . '/issues';
 
-            // TODO Improve caching.
-            $fetchedIssues = Cache::rememberForever($url, static fn () => Http::get($url)->json());
+            $fetchedIssues = Cache::remember($url, now()->addMinutes(30), static fn () => Http::get($url)->json());
 
             foreach ($fetchedIssues as $fetchedIssue) {
                 $issues[] = $this->parseIssue($repo, $fetchedIssue);
