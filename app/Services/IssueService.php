@@ -40,30 +40,15 @@ class IssueService
     {
         $repoName = $repo['owner'].'/'.$repo['name'];
 
-        $createdBy = new IssueOwner(
-            name: $fetchedIssue['user']['login'],
-            url: $fetchedIssue['user']['html_url'],
-            profilePictureUrl: $fetchedIssue['user']['avatar_url'],
-        );
-
-        $labels = [];
-
-        foreach ($fetchedIssue['labels'] as $label) {
-            $labels[] = new Label(
-                name: $label['name'],
-                color: '#'.$label['color'],
-            );
-        }
-
         return new Issue(
             repoName: $repoName,
             repoUrl: 'https://github.com/'.$repoName,
             title: $fetchedIssue['title'],
             url: $fetchedIssue['html_url'],
             body: $fetchedIssue['body'],
-            labels: $labels,
+            labels: $this->getIssueLabels($fetchedIssue),
             createdAt: Carbon::parse($fetchedIssue['created_at']),
-            createdBy: $createdBy,
+            createdBy: $this->getIssueOwner($fetchedIssue),
         );
     }
 
@@ -83,5 +68,28 @@ class IssueService
     private function issueIsAPullRequest(array $fetchedIssue): bool
     {
         return isset($fetchedIssue['pull_request']);
+    }
+
+    private function getIssueOwner(array $fetchedIssue): IssueOwner
+    {
+        return new IssueOwner(
+            name: $fetchedIssue['user']['login'],
+            url: $fetchedIssue['user']['html_url'],
+            profilePictureUrl: $fetchedIssue['user']['avatar_url'],
+        );
+    }
+
+    /**
+     * @param array<Label> $fetchedIssue
+     * @return array
+     */
+    private function getIssueLabels(array $fetchedIssue): array
+    {
+        return collect($fetchedIssue['labels'])->map(function (array $label): Label {
+            return new Label(
+                name: $label['name'],
+                color: '#'.$label['color'],
+            );
+        })->toArray();
     }
 }
