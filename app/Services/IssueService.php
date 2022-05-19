@@ -36,7 +36,7 @@ class IssueService
 
         $fetchedIssues = Cache::remember(
             $url,
-            now()->addMinutes(10),
+            now()->addMinutes(30),
             static fn () => Http::get($url)->json()
         );
 
