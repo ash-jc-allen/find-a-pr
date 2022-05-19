@@ -29,6 +29,10 @@
             font-family: 'Poppins', sans-serif;
         }
     </style>
+
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script src="https://cdn.usefathom.com/script.js" data-site="CAHVPBCM" defer></script>
+    <!-- / Fathom -->
 </head>
 <body class="antialiased text-gray-600 bg-gray-100">
 <div class="max-w-6xl mx-auto py-3">
