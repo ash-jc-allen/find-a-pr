@@ -28,7 +28,7 @@ class IssueService
     }
 
     /**
-     * @param  array $repo
+     * @param  array  $repo
      * @return array<Issue>
      */
     private function getIssuesForRepo(array $repo): array
