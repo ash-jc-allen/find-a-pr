@@ -42,6 +42,10 @@ return [
             'owner' => 'ash-jc-allen',
             'name' => 'laravel-config-validator',
         ],
+        [
+            'owner' => 'laravel-filament',
+            'name' => 'filament',
+        ],
     ],
 
     'labels' => [
