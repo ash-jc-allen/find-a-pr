@@ -23,12 +23,13 @@ class IssueService
     {
         return collect(config('repos.repos'))
             ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
-            ->toArray();
+            ->shuffle()
+            ->all();
     }
 
     /**
-     * @param  array<Issue>  $repo
-     * @return array
+     * @param  array $repo
+     * @return array<Issue>
      */
     private function getIssuesForRepo(array $repo): array
     {
@@ -43,7 +44,7 @@ class IssueService
         return collect($fetchedIssues)
             ->map(fn ($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
             ->filter()
-            ->toArray();
+            ->all();
     }
 
     private function parseIssue(array $repo, array $fetchedIssue): ?Issue
