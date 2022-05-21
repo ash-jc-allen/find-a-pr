@@ -22,13 +22,13 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
     </style>
+
+    @vite
 
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="CAHVPBCM" defer></script>
