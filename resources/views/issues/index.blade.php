@@ -36,12 +36,12 @@
 </head>
 <body class="antialiased text-gray-600 bg-gray-100">
 <div class="max-w-6xl mx-auto py-3">
-    <div class="w-3/4 mx-auto mt-12">
-        <div class="flex justify-between item-center">
+    <div class="w-full sm:w-3/4 p-4 sm:p-0 mx-auto mt-0 sm:mt-12">
+        <div class="flex flex-col sm:flex-row gap-2 justify-between item-center">
             <img class="w-48" src="/images/findapr.svg" alt="findapr.io logo">
             <a href="https://github.com/ash-jc-allen/find-a-pr"
                class="flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                <img src="/images/github-logo.png" class="w-6 pr-2 inline">
+                <img src="/images/github-logo.png" class="w-6 pr-2 inline" alt="View on GitHub" />
                 View on GitHub
             </a>
         </div>
@@ -52,17 +52,17 @@
             </p>
 
             @foreach($issues as $issue)
-                <div class="border py-5 px-8 my-4 rounded-lg shadow bg-white">
-                    <div class="flex justify-between item-center">
-                        <div class="w-3/4">
+                <div class="border p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow bg-white">
+                    <div class="flex flex-col sm:flex-row justify-start sm:justify-between items-start gap-2">
+                        <div class="w-full">
                             <a href="{{ $issue->url }}" class="text-xl font-bold inline-block">{{ $issue->title }}</a>
                             <div>
                                 <a href="{{ $issue->repoUrl }}" class="text-gray-400">{{ $issue->repoName }}</a>
                             </div>
                         </div>
-                        <div>
+                        <div class="flex-1">
                             <a href="{{ $issue->url }}"
-                               class="block items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View
+                               class="w-full inline-block px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View
                                 Issue</a>
                         </div>
                     </div>
@@ -81,11 +81,11 @@
                         {{ str($issue->body)->limit(150) }}
                     </p>
 
-                    <div class="flex justify-between items-center">
+                    <div class="flex flex-col sm:flex-row gap-2 justify-between items-start sm:items-center">
                         <a href="{{ $issue->createdBy->url }}"
                            class="border hover:bg-gray-100 inline-block p-2 rounded">
                             <img src="{{ $issue->createdBy->profilePictureUrl }}"
-                                 class="inline-block h-6 w-6 rounded-full">
+                                 class="inline-block h-6 w-6 rounded-full" alt="{{ $issue->createdBy->name }}">
                             <p class="inline">{{ $issue->createdBy->name }}</p>
                         </a>
 
