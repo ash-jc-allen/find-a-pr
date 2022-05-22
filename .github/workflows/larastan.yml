@@ -1,0 +1,21 @@
+name: static analysis via larastan
+
+on: [pull_request, push]
+
+jobs:
+  larastan:
+      name: larastan
+      runs-on: ubuntu-22.04
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Validate composer.json
+          run: composer validate
+
+        - name: Install dependencies
+          run: composer install --prefer-dist --no-progress
+
+        - name: analyse via larastan
+          run: vendor/bin/phpstan analyse
+
