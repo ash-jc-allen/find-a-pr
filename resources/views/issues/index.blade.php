@@ -47,6 +47,18 @@
         </div>
 
         <div class="mt-12">
+            <p>
+                Sort By: 
+                <a href="?sort=createdAt" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-5 py-1 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
+                    Created Date
+                </a>
+                <a href="?sort=repoName" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-5 py-1 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
+                    Repo Name
+                </a>
+                <a href="?sort=title" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-5 py-1 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
+                    Title
+                </a>
+            </p>
             <p class="text-right">
                 Found <span class="font-bold">{{ count($issues) }}</span> issue(s)
             </p>

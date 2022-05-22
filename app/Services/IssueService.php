@@ -19,12 +19,22 @@ class IssueService
      *
      * @return array<Issue>
      */
-    public function getAll(): array
+    public function getAll(String $sort = null): array
     {
-        return collect(config('repos.repos'))
-            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
-            ->shuffle()
-            ->all();
+        if ($sort) {
+            $allRepos = collect(config('repos.repos'))
+                ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
+                ->sortBy($sort)
+                ->all();
+        }
+        else {
+            $allRepos = collect(config('repos.repos'))
+                ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
+                ->shuffle()
+                ->all();
+        }
+        
+        return $allRepos;
     }
 
     /**
