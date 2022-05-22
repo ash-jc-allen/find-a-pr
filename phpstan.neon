@@ -12,16 +12,3 @@ parameters:
     ignoreErrors:
 
     excludePaths:
-
-    polluteScopeWithLoopInitialAssignments: false
-    polluteScopeWithAlwaysIterableForeach: false
-    checkAlwaysTrueCheckTypeFunctionCall: true
-    checkAlwaysTrueInstanceof: true
-    checkAlwaysTrueStrictComparison: true
-    checkExplicitMixedMissingReturn: true
-    checkFunctionNameCase: true
-    checkInternalClassCaseSensitivity: true
-    reportMaybesInMethodSignatures: true
-    reportStaticMethodSignatures: true
-    checkTooWideReturnTypesInProtectedAndPublicMethods: true
-    checkMissingIterableValueType: false
