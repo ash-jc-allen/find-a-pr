@@ -1,5 +1,19 @@
 ## About Find A PR
-Find A PR is a platform that curates issues around Laravel based project.
+<div align="center">
+
+![FindAPR](https://findapr.io/images/findapr.svg)
+
+This is the official repository [Find A PR](https://findapr.io/). Find A PR is a platform that curates a list of issues around Laravel based project.
+
+</div>
+
+## Requirements
+The following tools are required in order to start the installation.
+
+- PHP 8.1
+- [Composer](https://getcomposer.org/download/)
+- [Valet](https://laravel.com/docs/valet#installation)
+
 ## Installation
 Here is how you can run the project locally:
 1. Clone this repo
@@ -36,3 +50,4 @@ Here is how you can run the project locally:
     ```sh
     php artisan serve
     ``` 
+
