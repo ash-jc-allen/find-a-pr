@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Collection;
 
 class IssueService
 {
@@ -21,18 +22,14 @@ class IssueService
      */
     public function getAll(String $sort = null): array
     {
-        if ($sort) {
-            $allRepos = collect(config('repos.repos'))
-                ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
-                ->sortBy($sort)
-                ->all();
-        }
-        else {
-            $allRepos = collect(config('repos.repos'))
-                ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
-                ->shuffle()
-                ->all();
-        }
+        $allRepos = collect(config('repos.repos'))
+            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
+            ->when(
+                $sort,
+                fn (Collection $collection): Collection => $collection->sortBy($sort),
+                fn (Collection $collection): Collection => $collection->shuffle()
+            )
+            ->all();
         
         return $allRepos;
     }

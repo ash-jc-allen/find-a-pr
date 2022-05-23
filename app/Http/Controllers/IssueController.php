@@ -7,24 +7,16 @@ use Illuminate\Contracts\View\View;
 
 class IssueController extends Controller
 {
-    private const ACCEPTABLE_SORT_FIELDS = ['title', 'repoName', 'createdAt'];
     private $sort;
-
-    public function __construct()
-    {
-        $this->sort = null;
-
-        if(request()->query('sort')) {
-            if (in_array(request()->query('sort'), self::ACCEPTABLE_SORT_FIELDS)) {
-                $this->sort = request()->query('sort');
-            }
-        }
-    }
 
     public function __invoke(IssueService $issueService): View
     {
+        $sortBy = in_array(request('sort'), ['title', 'repoName', 'createdAt'], true)
+            ? request('sort')
+            : null;
+
         return view('issues.index', [
-            'issues' => $issueService->getAll($this->sort),
+            'issues' => $issueService->getAll($sortBy),
         ]);
     }
 }
