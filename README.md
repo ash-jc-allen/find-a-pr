@@ -3,9 +3,9 @@
 
 ![FindAPR](https://findapr.io/images/findapr.svg)
 
-This is the official repository [Find A PR](https://findapr.io/). Find A PR is a platform that curates a list of issues around Laravel based project.
-
 </div>
+
+This is the official repository for [Find A PR](https://findapr.io/). Find A PR is a platform that curates a list of issues around Laravel based project.
 
 ## Requirements
 The following tools are required in order to start the installation.
