@@ -46,21 +46,21 @@
     <!-- / Fathom -->
 </head>
 
-<body class="antialiased text-gray-600 bg-gray-100 dark:bg-red-600" x-data="app()" x-init="init()">
+<body class="antialiased text-gray-600 dark:text-gray-100 bg-gray-100 dark:bg-slate-700" x-data="app()" x-init="init()">
     <div class="max-w-6xl mx-auto py-3">
         <div class="w-full sm:w-3/4 p-4 sm:p-0 mx-auto mt-0 sm:mt-12">
             <div class="flex flex-col sm:flex-row gap-2 justify-between item-center">
                 <img class="w-48" src="/images/findapr.svg" alt="findapr.io logo">
                 <div class="flex space-x-3 items-center">
-                    <a href="#" x-show="!isDark" @click.prevent="toggleMode()">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    <a href="#" x-show="isDark" @click.prevent="toggleMode()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark:text-white" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                         </svg>
                     </a>
 
-                    <a href="#" x-show="isDark" @click.prevent="toggleMode()">
+                    <a href="#" x-show="!isDark" @click.prevent="toggleMode()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path
@@ -70,7 +70,7 @@
 
 
                     <a href="https://github.com/ash-jc-allen/find-a-pr"
-                        class="flex justify-center items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 dark:bg-green-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        class="flex justify-center items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 dark:bg-green-600 hover:bg-gray-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         <img src="/images/github-logo.png" class="w-6 pr-2 inline" alt="View on GitHub" />
                         View on GitHub
                     </a>
@@ -83,7 +83,7 @@
                 </p>
 
                 @foreach ($issues as $issue)
-                    <div class="border p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow bg-white">
+                    <div class="border dark:border-slate-600 p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow bg-white dark:bg-slate-800">
                         <div class="flex flex-col sm:flex-row justify-start sm:justify-between items-start gap-2">
                             <div class="w-full md:w-3/4">
                                 <a href="{{ $issue->url }}"
@@ -95,7 +95,7 @@
                             </div>
                             <div>
                                 <a href="{{ $issue->url }}"
-                                    class="w-full inline-block px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View
+                                    class="w-full inline-block px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 dark:bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View
                                     Issue</a>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
 
             <div class="text-center">
                 <a href="https://ashallendesign.co.uk"
-                    class="bg-gray-200 hover:bg-gray-300 rounded shadow inline-block px-5 py-2 my-12 mx-auto">
+                    class="bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 rounded shadow inline-block px-5 py-2 my-12 mx-auto">
                     🚀 Powered by <span class="font-bold">Ash Allen Design</span>
                 </a>
             </div>
