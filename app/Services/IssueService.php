@@ -70,13 +70,8 @@ class IssueService
         );
     }
 
-    private function shouldIncludeIssue( $fetchedIssue): bool
+    private function shouldIncludeIssue(array $fetchedIssue): bool
     {
-        dump($fetchedIssue);
-        if (is_string($fetchedIssue)) {
-            dd($fetchedIssue);
-        }
-
         return ! $this->issueIsAPullRequest($fetchedIssue)
             && $this->includesAtLeastOneLabel($fetchedIssue, config('repos.labels'));
     }
