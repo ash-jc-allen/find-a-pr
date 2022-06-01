@@ -39,7 +39,7 @@ return [
             'laravel-sitemap',
             'laravel-newsletter',
             'checklist-going-live',
-        ]
+        ],
     ],
 
     'labels' => [

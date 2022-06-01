@@ -70,7 +70,7 @@ class IssueService
         );
     }
 
-    private function shouldIncludeIssue( $fetchedIssue): bool
+    private function shouldIncludeIssue($fetchedIssue): bool
     {
         dump($fetchedIssue);
         if (is_string($fetchedIssue)) {
