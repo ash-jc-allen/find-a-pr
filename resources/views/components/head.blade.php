@@ -24,7 +24,9 @@
 
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-    <!-- Fathom - beautiful, simple website analytics -->
-    <script src="https://cdn.usefathom.com/script.js" data-site="CAHVPBCM" defer></script>
-    <!-- / Fathom -->
+    @production
+        <!-- Fathom - beautiful, simple website analytics -->
+        <script src="https://cdn.usefathom.com/script.js" data-site="CAHVPBCM" defer></script>
+        <!-- / Fathom -->
+    @endproduction
 </head>
