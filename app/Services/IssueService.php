@@ -7,9 +7,9 @@ use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Collection;
 
 class IssueService
 {
@@ -18,9 +18,8 @@ class IssueService
     /**
      * Get all the issues for displaying.
      *
-     * @param string|null $sort
-     * @param string $sortDirection
-     *
+     * @param  string|null  $sort
+     * @param  string  $sortDirection
      * @return array<Issue>
      */
     public function getAll(?string $sort, string $sortDirection = 'asc'): array
