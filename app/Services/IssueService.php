@@ -7,9 +7,9 @@ use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Collection;
 
 class IssueService
 {
