@@ -2,49 +2,24 @@
 
 return [
     'repos' => [
-        [
-            'owner' => 'ash-jc-allen',
-            'name' => 'find-a-pr',
+        'ash-jc-allen' => [
+            'find-a-pr',
+            'short-url',
+            'laravel-exchange-rates',
+            'favicon-fetcher',
+            'laravel-config-validator',
         ],
-        [
-            'owner' => 'laravel',
-            'name' => 'framework',
+        'laravel' => [
+            'framework',
+            'docs',
+            'vapor-core',
+            'octane',
         ],
-        [
-            'owner' => 'laravel',
-            'name' => 'docs',
+        'laravelio' => [
+            'laravel.io',
         ],
-        [
-            'owner' => 'laravel',
-            'name' => 'vapor-core',
-        ],
-        [
-            'owner' => 'laravel',
-            'name' => 'octane',
-        ],
-        [
-            'owner' => 'laravelio',
-            'name' => 'laravel.io',
-        ],
-        [
-            'owner' => 'ash-jc-allen',
-            'name' => 'short-url',
-        ],
-        [
-            'owner' => 'ash-jc-allen',
-            'name' => 'laravel-exchange-rates',
-        ],
-        [
-            'owner' => 'ash-jc-allen',
-            'name' => 'favicon-fetcher',
-        ],
-        [
-            'owner' => 'ash-jc-allen',
-            'name' => 'laravel-config-validator',
-        ],
-        [
-            'owner' => 'laravel-filament',
-            'name' => 'filament',
+        'laravel-filament' => [
+            'filament',
         ],
     ],
 
