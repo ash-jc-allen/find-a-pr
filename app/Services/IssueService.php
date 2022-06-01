@@ -44,7 +44,7 @@ class IssueService
 
         $fetchedIssues = Cache::remember(
             $url,
-            now()->addMinutes(30),
+            now()->addMinutes(120),
             static fn () => Http::get($url)->json()
         );
 
@@ -70,8 +70,13 @@ class IssueService
         );
     }
 
-    private function shouldIncludeIssue(array $fetchedIssue): bool
+    private function shouldIncludeIssue( $fetchedIssue): bool
     {
+        dump($fetchedIssue);
+        if (is_string($fetchedIssue)) {
+            dd($fetchedIssue);
+        }
+
         return ! $this->issueIsAPullRequest($fetchedIssue)
             && $this->includesAtLeastOneLabel($fetchedIssue, config('repos.labels'));
     }
