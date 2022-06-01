@@ -7,9 +7,9 @@ use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Collection;
 
 class IssueService
 {
@@ -20,7 +20,7 @@ class IssueService
      *
      * @return array<Issue>
      */
-    public function getAll(String $sort = null): array
+    public function getAll(string $sort = null): array
     {
         $allRepos = collect(config('repos.repos'))
             ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
@@ -30,7 +30,7 @@ class IssueService
                 fn (Collection $collection): Collection => $collection->shuffle()
             )
             ->all();
-        
+
         return $allRepos;
     }
 
