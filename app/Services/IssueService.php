@@ -18,15 +18,18 @@ class IssueService
     /**
      * Get all the issues for displaying.
      *
+     * @param string|null $sort
+     * @param string $sortDirection
+     *
      * @return array<Issue>
      */
-    public function getAll(string $sort = null): array
+    public function getAll(?string $sort, string $sortDirection = 'asc'): array
     {
         return collect(config('repos.repos'))
             ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
             ->when(
                 $sort,
-                fn (Collection $collection): Collection => $collection->sortBy($sort),
+                fn (Collection $collection): Collection => $collection->sortBy($sort, descending: $sortDirection === 'desc'),
                 fn (Collection $collection): Collection => $collection->shuffle()
             )
             ->all();

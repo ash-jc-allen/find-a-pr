@@ -48,7 +48,7 @@
         </div>
 
         <div class="mt-12">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-end md:justify-between items-center flex-wrap space-y-2 md:space-y-0">
                 <x-sort-dropdown></x-sort-dropdown>
 
                 <p class="text-right">
