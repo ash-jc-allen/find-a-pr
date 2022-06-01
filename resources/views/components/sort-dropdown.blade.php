@@ -14,12 +14,12 @@
     x-init="$watch('currentSort', value => {
         window.location.href = `/?sort=${value}`
     })"
-     class="w-full md:w-auto text-right"
+     class="w-full md:w-auto"
 >
-    <label for="sort_order" class="inline-block">Sort by:</label>
+    <label for="sort_order" class="inline-block pb-1">Sort by:</label>
     <select x-model="currentSort"
             id="sort_order"
-            class="inline-block rounded-md border border-gray-300 shadow-sm px-2 py-2 ml-2 bg-white font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500"
+            class="w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500"
     >
         <template x-for="sort in sorters">
             <option :value="sort.field"
