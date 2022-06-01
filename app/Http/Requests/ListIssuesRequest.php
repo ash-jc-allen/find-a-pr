@@ -5,9 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * @property string|null sort
- * @property null|string sortField
- * @property null|string sortDirection
+ * @property string|null $sort
+ * @property null|string $sortField
+ * @property null|string $sortDirection
  */
 class ListIssuesRequest extends FormRequest
 {
@@ -36,7 +36,7 @@ class ListIssuesRequest extends FormRequest
 
     public function determineSortField(): ?string
     {
-        return $this->sortField && in_array($this->sortField, static::ALLOWED_SORTS, true)
+        return $this->sortField && in_array($this->sortField, self::ALLOWED_SORTS, true)
             ? $this->sortField
             : null;
     }
