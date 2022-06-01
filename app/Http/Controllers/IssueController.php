@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ListIssuesRequest;
 use App\Services\IssueService;
 use Illuminate\Contracts\View\View;
 
 class IssueController extends Controller
 {
-    private $sort;
-
-    public function __invoke(IssueService $issueService): View
+    public function __invoke(ListIssuesRequest $request, IssueService $issueService): View
     {
-        $sortBy = in_array(request('sort'), ['title', 'repoName', 'createdAt'], true)
-            ? request('sort')
-            : null;
-
         return view('issues.index', [
-            'issues' => $issueService->getAll($sortBy),
+            'issues' => $issueService->getAll(
+                $request->determineSortField(),
+                $request->determineSortDirection()
+            ),
         ]);
     }
 }

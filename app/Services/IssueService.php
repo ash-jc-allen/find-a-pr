@@ -7,9 +7,9 @@ use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Collection;
 
 class IssueService
 {
@@ -18,20 +18,20 @@ class IssueService
     /**
      * Get all the issues for displaying.
      *
+     * @param  string|null  $sort
+     * @param  string  $sortDirection
      * @return array<Issue>
      */
-    public function getAll(String $sort = null): array
+    public function getAll(?string $sort, string $sortDirection = 'asc'): array
     {
-        $allRepos = collect(config('repos.repos'))
+        return collect(config('repos.repos'))
             ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
             ->when(
                 $sort,
-                fn (Collection $collection): Collection => $collection->sortBy($sort),
+                fn (Collection $collection): Collection => $collection->sortBy($sort, descending: $sortDirection === 'desc'),
                 fn (Collection $collection): Collection => $collection->shuffle()
             )
             ->all();
-        
-        return $allRepos;
     }
 
     /**
