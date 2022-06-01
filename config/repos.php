@@ -21,6 +21,25 @@ return [
         'laravel-filament' => [
             'filament',
         ],
+        'spatie' => [
+            'laravel-permission',
+            'laravel-medialibrary',
+            'laravel-backup',
+            'laravel-activitylog',
+            'browsershot',
+            'laravel-query-builder',
+            'laravel-analytics',
+            'image-optimizer',
+            'crawler',
+            'async',
+            'data-transfer-object',
+            'laravel-responsecache',
+            'laravel-fractal',
+            'laravel-translatable',
+            'laravel-sitemap',
+            'laravel-newsletter',
+            'checklist-going-live',
+        ],
     ],
 
     'labels' => [
