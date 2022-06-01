@@ -22,14 +22,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="CAHVPBCM" defer></script>
@@ -39,10 +34,10 @@
 <div class="max-w-6xl mx-auto py-3">
     <div class="w-full sm:w-3/4 p-4 sm:p-0 mx-auto mt-0 sm:mt-12">
         <div class="flex flex-col sm:flex-row gap-2 justify-between item-center">
-            <img class="w-48" src="/images/findapr.svg" alt="findapr.io logo">
+            <img class="w-48" src="{{ mix('/images/findapr.svg') }}" alt="findapr.io logo">
             <a href="https://github.com/ash-jc-allen/find-a-pr"
                class="flex justify-center items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                <img src="/images/github-logo.png" class="w-6 pr-2 inline" alt="View on GitHub" />
+                <img src="{{ mix('/images/github-logo.png') }}" class="w-6 pr-2 inline" alt="View on GitHub" />
                 View on GitHub
             </a>
         </div>
