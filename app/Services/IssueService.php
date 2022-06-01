@@ -20,9 +20,9 @@ class IssueService
      *
      * @return array<Issue>
      */
-    public function getAll(String $sort = null): array
+    public function getAll(string $sort = null): array
     {
-        $allRepos = collect(config('repos.repos'))
+        return collect(config('repos.repos'))
             ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
             ->when(
                 $sort,
@@ -30,8 +30,6 @@ class IssueService
                 fn (Collection $collection): Collection => $collection->shuffle()
             )
             ->all();
-        
-        return $allRepos;
     }
 
     /**

@@ -23,6 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
 
     <style>
         body {
@@ -47,21 +48,13 @@
         </div>
 
         <div class="mt-12">
-            <p>
-                Sort By: 
-                <a href="?sort=createdAt" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-5 py-1 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-                    Created Date
-                </a>
-                <a href="?sort=repoName" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-5 py-1 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-                    Repo Name
-                </a>
-                <a href="?sort=title" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-5 py-1 rounded dark:bg-blue-200 dark:text-blue-800 dark:hover:bg-blue-300">
-                    Title
-                </a>
-            </p>
-            <p class="text-right">
-                Found <span class="font-bold">{{ count($issues) }}</span> issue(s)
-            </p>
+            <div class="flex justify-between items-center">
+                <x-sort-dropdown></x-sort-dropdown>
+
+                <p class="text-right">
+                    Found <span class="font-bold">{{ count($issues) }}</span> issue(s)
+                </p>
+            </div>
 
             @foreach($issues as $issue)
                 <div class="border p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow bg-white">
