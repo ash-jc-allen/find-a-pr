@@ -24,7 +24,7 @@ class IssueService
      */
     public function getAll(?string $sort, string $sortDirection = 'asc'): array
     {
-        return collect(config('repos.repos'))
+        return app(RepoService::class)->reposToCrawl()
             ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
             ->when(
                 $sort,
