@@ -55,7 +55,6 @@ class ListIssues extends Component
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
 
-
         return view('livewire.list-issues', [
             'issues' => $issues,
             'sorts' => self::SORTS,
