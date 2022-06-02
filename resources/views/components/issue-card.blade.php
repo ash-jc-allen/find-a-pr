@@ -8,7 +8,7 @@
         </div>
         <div>
             <a href="{{ $issue->url }}"
-               class="w-full inline-block px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 dark:bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">View
+               class="w-full inline-block px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700 transition ease-out">View
                 Issue</a>
         </div>
     </div>
@@ -29,7 +29,7 @@
 
     <div class="flex flex-col sm:flex-row gap-2 justify-between items-start sm:items-center">
         <a href="{{ $issue->createdBy->url }}"
-           class="border hover:bg-gray-100 inline-block p-2 rounded dark:border-slate-600">
+           class="border hover:bg-gray-100 inline-block p-2 rounded dark:border-slate-600 dark:hover:bg-slate-600 transition ease-out">
             <img src="{{ $issue->createdBy->profilePictureUrl }}"
                  class="inline-block h-6 w-6 rounded-full" alt="{{ $issue->createdBy->name }}">
             <p class="inline">{{ $issue->createdBy->name }}</p>
