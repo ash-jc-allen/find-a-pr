@@ -8,6 +8,10 @@
             </p>
         </div>
 
+        @if($shouldDisplayFirstTimeNotice)
+            <x-first-time-notice/>
+        @endif
+
         @forelse($issues as $issue)
             <x-issue-card :issue="$issue"/>
         @empty

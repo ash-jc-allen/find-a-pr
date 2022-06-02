@@ -7,6 +7,7 @@ use App\Services\IssueService;
 use App\Services\RepoService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
 class ListIssues extends Component
@@ -54,12 +55,16 @@ class ListIssues extends Component
 
     public ?string $searchTerm = null;
 
+    public bool $shouldDisplayFirstTimeNotice;
+
     public function mount(): void
     {
         $this->labels = config('repos.labels');
         $this->repos = app(RepoService::class)->reposToCrawl()->sort();
 
         $this->originalIssues = app(IssueService::class)->getAll()->shuffle();
+
+        $this->shouldDisplayFirstTimeNotice = ! Cookie::get('firstTimeNoticeClosed');
     }
 
     public function render(): View
@@ -113,5 +118,13 @@ class ListIssues extends Component
         return function (Collection $issues): Collection {
             return $issues->sortBy($this->sortField, descending: $this->sortDirection === 'desc');
         };
+    }
+
+    public function hideFirstTimeNotice(): void
+    {
+        $this->shouldDisplayFirstTimeNotice = false;
+
+        // 4 weeks = 40,320 minutes
+        Cookie::queue('firstTimeNoticeClosed', true, 40_320);
     }
 }
