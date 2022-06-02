@@ -26,7 +26,7 @@
 
     @foreach($repos as $repo)
         <div>
-            <a href="https://github.com/{{ $repo['owner'] }}/{{ $repo['name'] }}" class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold border bg-green-400 text-white hover:bg-green-600">
+            <a href="https://github.com/{{ $repo['owner'] }}/{{ $repo['name'] }}" class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold border bg-green-400 dark:bg-green-600 text-white hover:bg-green-600">
                 {{ $repo['owner'] }}/{{ $repo['name'] }}
             </a>
         </div>
@@ -41,7 +41,7 @@
 
     @foreach($labels as $label)
         <div>
-            <p class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold border bg-gray-400 text-white">
+            <p class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold border bg-gray-400 dark:bg-gray-600 text-white">
                 {{ $label }}
             </p>
         </div>
