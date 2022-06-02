@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('repos:preload')->hourly();
 
         // Ping OhDear to make sure the scheduler is running.
-        $schedule->call(fn () => Http::get(config('services.ohdear.ping_url')));
+        $schedule->call(fn () => Http::get(config('services.ohdear.ping_url')))->everyMinute();
     }
 
     /**
