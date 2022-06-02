@@ -29,7 +29,7 @@
 
     <div class="flex flex-col sm:flex-row gap-2 justify-between items-start sm:items-center">
         <a href="{{ $issue->createdBy->url }}"
-           class="border hover:bg-gray-100 inline-block p-2 rounded">
+           class="border hover:bg-gray-100 inline-block p-2 rounded dark:border-slate-600">
             <img src="{{ $issue->createdBy->profilePictureUrl }}"
                  class="inline-block h-6 w-6 rounded-full" alt="{{ $issue->createdBy->name }}">
             <p class="inline">{{ $issue->createdBy->name }}</p>
