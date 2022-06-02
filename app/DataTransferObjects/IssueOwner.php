@@ -12,8 +12,8 @@ class IssueOwner
         //
     }
 
-    public static function fromArray(array $ownerDetails): static
+    public static function fromArray(array $ownerDetails): self
     {
-        return new static(...$ownerDetails);
+        return new self(...$ownerDetails);
     }
 }

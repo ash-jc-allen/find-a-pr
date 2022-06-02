@@ -14,16 +14,16 @@ class Label
         //
     }
 
-    public static function fromArray(array $label): Label
+    public static function fromArray(array $label): self
     {
-        return new static(...$label);
+        return new self(...$label);
     }
 
     public static function multipleFromArray(array $labels): array
     {
         return Arr::map(
             $labels,
-            static fn (array $label): Label => static::fromArray($label)
+            static fn (array $label): Label => self::fromArray($label)
         );
     }
 }

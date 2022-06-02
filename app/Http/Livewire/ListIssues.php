@@ -91,9 +91,9 @@ class ListIssues extends Component
 
     public function updatedSort(string $newSort): void
     {
-        if (array_key_exists($newSort, static::SORTS)) {
-            $this->sortField = static::SORTS[$newSort]['field'];
-            $this->sortDirection = static::SORTS[$newSort]['direction'] ?? 'asc';
+        if (array_key_exists($newSort, self::SORTS)) {
+            $this->sortField = self::SORTS[$newSort]['field'];
+            $this->sortDirection = self::SORTS[$newSort]['direction'] ?? 'asc';
         }
     }
 

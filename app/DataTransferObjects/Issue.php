@@ -20,12 +20,12 @@ class Issue
         //
     }
 
-    public static function fromArray(array $issueDetails): static
+    public static function fromArray(array $issueDetails): self
     {
         $issueDetails['createdAt'] = Carbon::parse($issueDetails['createdAt']);
         $issueDetails['createdBy'] = IssueOwner::fromArray($issueDetails['createdBy']);
         $issueDetails['labels'] = Label::multipleFromArray($issueDetails['labels']);
 
-        return new static(...$issueDetails);
+        return new self(...$issueDetails);
     }
 }
