@@ -13,25 +13,25 @@ class ListIssues extends Component
 {
     private const SORTS = [
         'random' => [
-            'friendly' => 'Random', 'field' => 'random'
+            'friendly' => 'Random', 'field' => 'random',
         ],
         'created_at' => [
-            'friendly' => 'Created At (Oldest First)', 'field' => 'createdAt', 'direction' => 'asc'
+            'friendly' => 'Created At (Oldest First)', 'field' => 'createdAt', 'direction' => 'asc',
         ],
         'created_at_desc' => [
-            'friendly' => 'Created At (Newest First)', 'field' => 'createdAt', 'direction' => 'desc'
+            'friendly' => 'Created At (Newest First)', 'field' => 'createdAt', 'direction' => 'desc',
         ],
         'title' => [
-            'friendly' => 'Title (A-Z)', 'field' => 'title', 'direction' => 'asc'
+            'friendly' => 'Title (A-Z)', 'field' => 'title', 'direction' => 'asc',
         ],
         'title_desc' => [
-            'friendly' => 'Title (Z-A)', 'field' => 'title', 'direction' => 'desc'
+            'friendly' => 'Title (Z-A)', 'field' => 'title', 'direction' => 'desc',
         ],
         'repo_name' => [
-            'friendly' => 'Repo Name (A-Z)', 'field' => 'repoName', 'direction' => 'asc'
+            'friendly' => 'Repo Name (A-Z)', 'field' => 'repoName', 'direction' => 'asc',
         ],
         'repo_name_desc' => [
-            'friendly' => 'Repo Name (Z-A)', 'field' => 'repoName', 'direction' => 'desc'
+            'friendly' => 'Repo Name (Z-A)', 'field' => 'repoName', 'direction' => 'desc',
         ],
     ];
 
@@ -67,7 +67,6 @@ class ListIssues extends Component
         $issues = $this->originalIssues
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
-
 
         return view('livewire.list-issues', [
             'issues' => $issues,
