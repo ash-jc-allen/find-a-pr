@@ -14,6 +14,9 @@
 
                 return theme === 'dark'
                     || (theme === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            },
+            darkModeIcon() {
+                return this.isDark ? '☀️' : '🌙';
             }
         }"
         x-init="shouldUseDarkMode() ? toggleDarkMode(true) : toggleDarkMode(false)"

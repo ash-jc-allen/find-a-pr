@@ -5,19 +5,10 @@
 
     <div class="flex space-x-3 items-center">
         <button type="button"
-                x-show="isDark"
-                @click="toggleDarkMode(false)"
+                @click="toggleDarkMode(! isDark)"
+                x-text="darkModeIcon()"
                 class="flex justify-center items-center px-4 py-1.5 border border-transparent font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
         >
-            ☀️
-        </button>
-
-        <button type="button"
-                x-show="!isDark"
-                @click="toggleDarkMode(true)"
-                class="flex justify-center items-center px-4 py-1.5 border border-transparent font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-        >
-            🌙
         </button>
 
         <a href="https://github.com/ash-jc-allen/find-a-pr"
