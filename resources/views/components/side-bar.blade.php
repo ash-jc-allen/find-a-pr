@@ -19,7 +19,10 @@
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto">
 
-    <p class="block pb-1">Repositories:</p>
+    <div class="flex justify-between pb-1 items-center">
+        <p>Repositories:</p>
+        <p class="text-gray-400 text-sm">({{ $repos->count() }})</p>
+    </div>
 
     @foreach($repos as $repo)
         <div>
@@ -31,7 +34,10 @@
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto">
 
-    <p class="inline-block pb-1">Labels:</p>
+    <div class="flex justify-between pb-1 items-center">
+        <p>Labels:</p>
+        <p class="text-gray-400 text-sm">({{ count($labels) }})</p>
+    </div>
 
     @foreach($labels as $label)
         <div>
