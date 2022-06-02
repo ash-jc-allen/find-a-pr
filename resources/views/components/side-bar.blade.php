@@ -1,6 +1,7 @@
 @props([
     'repos',
     'labels',
+    'sorts',
 ])
 
 <div class="w-1/4 my-10 pr-6 hidden md:block">
@@ -14,7 +15,7 @@
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto">
 
-    <x-sort-dropdown></x-sort-dropdown>
+    <x-sort-dropdown :sorts="$sorts"></x-sort-dropdown>
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto">
 
