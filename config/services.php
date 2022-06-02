@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ohdear' => [
+        'ping_url' => env('OHDEAR_PING_URL'),
+    ]
+
 ];

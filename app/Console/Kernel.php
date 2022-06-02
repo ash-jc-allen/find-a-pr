@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Http;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +17,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('repos:preload')->hourly();
+
+        // Ping OhDear to make sure the scheduler is running.
+        $schedule->call(fn () => Http::get(config('services.ohdear.ping_url')));
     }
 
     /**
