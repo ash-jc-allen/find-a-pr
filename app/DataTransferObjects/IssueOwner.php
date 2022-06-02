@@ -11,4 +11,9 @@ class IssueOwner
     ) {
         //
     }
+
+    public static function fromArray(array $ownerDetails): self
+    {
+        return new self(...$ownerDetails);
+    }
 }

@@ -1,14 +1,28 @@
 @props([
     'repos',
     'labels',
+    'sorts',
 ])
 
 <div class="w-1/4 my-10 pr-6 hidden md:block">
-    <x-sort-dropdown></x-sort-dropdown>
+    <label for="search" class="inline-block pb-1">Search:</label>
+    <input id="search"
+           wire:model.debounce="searchTerm"
+           type="search"
+           placeholder="Search..."
+           class="w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500"
+    >
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto">
 
-    <p class="block pb-1">Repositories:</p>
+    <x-sort-dropdown :sorts="$sorts"></x-sort-dropdown>
+
+    <hr class="my-6 border-gray-300 w-3/4 mx-auto">
+
+    <div class="flex justify-between pb-1 items-center">
+        <p>Repositories:</p>
+        <p class="text-gray-400 text-sm">({{ $repos->count() }})</p>
+    </div>
 
     @foreach($repos as $repo)
         <div>
@@ -20,7 +34,10 @@
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto">
 
-    <p class="inline-block pb-1">Labels:</p>
+    <div class="flex justify-between pb-1 items-center">
+        <p>Labels:</p>
+        <p class="text-gray-400 text-sm">({{ count($labels) }})</p>
+    </div>
 
     @foreach($labels as $label)
         <div>

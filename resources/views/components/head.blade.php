@@ -29,4 +29,6 @@
         <script src="https://cdn.usefathom.com/script.js" data-site="CAHVPBCM" defer></script>
         <!-- / Fathom -->
     @endproduction
+
+    @livewireStyles
 </head>
