@@ -48,7 +48,6 @@ class ListIssues extends Component
                 });
             });
 
-
         return view('livewire.list-issues', [
             'issues' => $issues,
         ]);
@@ -63,7 +62,6 @@ class ListIssues extends Component
 
     public function updatedSortField(): void
     {
-
     }
 
     // todo handle update direction
