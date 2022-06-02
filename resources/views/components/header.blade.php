@@ -4,7 +4,7 @@
     </a>
 
     <div class="flex space-x-3 items-center">
-        <a href="#" x-show="isDark" @click.prevent="toggleLightMode()">
+        <a href="#" x-show="isDark" @click.prevent="toggleDarkMode(false)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark:text-white" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -12,7 +12,7 @@
             </svg>
         </a>
 
-        <a href="#" x-show="!isDark" @click.prevent="toggleDarkMode()">
+        <a href="#" x-show="!isDark" @click.prevent="toggleDarkMode(true)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20"
                 fill="currentColor">
                 <path

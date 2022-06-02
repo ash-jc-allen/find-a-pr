@@ -18,26 +18,16 @@
     function app() {
         return {
             init() {
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
-                        '(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark')
-                    this.isDark = true;
-                    localStorage.theme = 'dark'
-                } else {
-                    document.documentElement.classList.remove('dark')
-                    this.isDark = false;
-                    localStorage.theme = 'light'
-                }
+                this.shouldUseDarkMode() ? this.toggleDarkMode(true) : this.toggleDarkMode(false);
             },
-            toggleLightMode() {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-                this.isDark = false;
+            toggleDarkMode(enabled) {
+                document.documentElement.classList.toggle('dark', enabled)
+                this.isDark = enabled;
+                localStorage.theme = enabled ? 'dark' : 'light';
             },
-            toggleDarkMode() {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-                this.isDark = true;
+            shouldUseDarkMode() {
+                return localStorage.theme === 'dark'
+                    || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
             }
         }
     }
