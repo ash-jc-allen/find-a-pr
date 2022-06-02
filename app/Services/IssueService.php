@@ -18,20 +18,12 @@ class IssueService
     /**
      * Get all the issues for displaying.
      *
-     * @param  string|null  $sort
-     * @param  string  $sortDirection
-     * @return array<Issue>
+     * @return Collection
      */
-    public function getAll(?string $sort, string $sortDirection = 'asc'): array
+    public function getAll(): Collection
     {
         return app(RepoService::class)->reposToCrawl()
-            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo))
-            ->when(
-                $sort,
-                fn (Collection $collection): Collection => $collection->sortBy($sort, descending: $sortDirection === 'desc'),
-                fn (Collection $collection): Collection => $collection->shuffle()
-            )
-            ->all();
+            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\DataTransferObjects;
 
+use Carbon\Carbon;
 use Carbon\CarbonInterface;
 
 class Issue
@@ -17,5 +18,14 @@ class Issue
         public readonly IssueOwner $createdBy,
     ) {
         //
+    }
+
+    public static function fromArray(array $issueDetails): static
+    {
+        $issueDetails['createdAt'] = Carbon::parse($issueDetails['createdAt']);
+        $issueDetails['createdBy'] = IssueOwner::fromArray($issueDetails['createdBy']);
+        $issueDetails['labels'] = Label::multipleFromArray($issueDetails['labels']);
+
+        return new static(...$issueDetails);
     }
 }

@@ -19,7 +19,7 @@
     <label for="sort_order" class="inline-block pb-1">Sort by:</label>
     <select x-model="currentSort"
             id="sort_order"
-            class="w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500"
+            class="w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500"
     >
         <template x-for="sort in sorters">
             <option :value="sort.field"
