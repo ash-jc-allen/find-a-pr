@@ -1,4 +1,4 @@
-<div class="border bg-green-200 dark:border-slate-600 p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow bg-white dark:bg-green-400 dark:text-gray-700">
+<div class="border bg-green-200 dark:border-slate-600 p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow dark:bg-green-400 dark:text-gray-700">
     <div class="flex flex-col sm:flex-row justify-start sm:justify-between items-start gap-2">
         <div class="w-full md:w-3/4">
             <p class="text-xl font-bold inline-block">First time here? 👋</p>
