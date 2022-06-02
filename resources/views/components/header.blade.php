@@ -4,6 +4,14 @@
     </a>
 
     <div class="flex space-x-3 items-center">
+        <a href="https://docs.findapr.io"
+           target="_blank"
+           rel="noreferrer noopener"
+           class="underline font-medium mr-3 text-gray-600 hover:text-green-600 transition ease-out dark:text-gray-100 dark:hover:text-green-600"
+        >
+            Documentation
+        </a>
+
         <button type="button"
                 @click="toggleDarkMode(! isDark)"
                 x-text="darkModeIcon()"
