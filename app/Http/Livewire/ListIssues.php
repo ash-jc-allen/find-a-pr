@@ -6,20 +6,33 @@ use App\DataTransferObjects\Issue;
 use App\Services\IssueService;
 use App\Services\RepoService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class ListIssues extends Component
 {
     private const SORTS = [
-        ['friendly' => 'Random', 'field' => 'random'],
-        ['friendly' => 'Created At (Newest First)', 'field' => 'createdAt|desc'],
-        ['friendly' => 'Created At (Oldest First)', 'field' => 'createdAt|asc'],
-        ['friendly' => 'Title (A-Z)', 'field' => 'title|asc'],
-        ['friendly' => 'Title (Z-A)', 'field' => 'title|desc'],
-        ['friendly' => 'Repo Name (A-Z)', 'field' => 'repoName|asc'],
-        ['friendly' => 'Repo Name (Z-A)', 'field' => 'repoName|desc'],
+        'random' => [
+            'friendly' => 'Random', 'field' => 'random'
+        ],
+        'created_at' => [
+            'friendly' => 'Created At (Oldest First)', 'field' => 'createdAt', 'direction' => 'asc'
+        ],
+        'created_at_desc' => [
+            'friendly' => 'Created At (Newest First)', 'field' => 'createdAt', 'direction' => 'desc'
+        ],
+        'title' => [
+            'friendly' => 'Title (A-Z)', 'field' => 'title', 'direction' => 'asc'
+        ],
+        'title_desc' => [
+            'friendly' => 'Title (Z-A)', 'field' => 'title', 'direction' => 'desc'
+        ],
+        'repo_name' => [
+            'friendly' => 'Repo Name (A-Z)', 'field' => 'repoName', 'direction' => 'asc'
+        ],
+        'repo_name_desc' => [
+            'friendly' => 'Repo Name (Z-A)', 'field' => 'repoName', 'direction' => 'desc'
+        ],
     ];
 
     public array $labels;
@@ -78,11 +91,9 @@ class ListIssues extends Component
 
     public function updatedSort(string $newSort): void
     {
-        $explodedSort = explode('|', $newSort);
-
-        if (in_array($newSort, Arr::pluck(self::SORTS, 'field'), true)) {
-            $this->sortField = $explodedSort[0];
-            $this->sortDirection = $explodedSort[1] ?? 'asc';
+        if (array_key_exists($newSort, static::SORTS)) {
+            $this->sortField = static::SORTS[$newSort]['field'];
+            $this->sortDirection = static::SORTS[$newSort]['direction'] ?? 'asc';
         }
     }
 
