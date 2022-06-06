@@ -114,7 +114,7 @@ class IssueService
     {
         $emojis = config('repos.reactions');
         $reactions = collect();
-        foreach($fetchedIssue['reactions'] as $key => $value) {
+        foreach ($fetchedIssue['reactions'] as $key => $value) {
             ! in_array($key, array_keys($emojis)) ?: $reactions->push(new Reaction(
                 content: $key,
                 count: $value,
