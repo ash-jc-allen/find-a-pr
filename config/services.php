@@ -33,6 +33,6 @@ return [
 
     'ohdear' => [
         'ping_url' => env('OHDEAR_PING_URL'),
-    ]
+    ],
 
 ];
