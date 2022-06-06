@@ -1,6 +1,7 @@
 <div class="flex flex-col sm:flex-row gap-2 justify-between item-center">
     <a href="/">
-        <img class="w-48" src="{{ mix('/images/findapr.svg') }}" alt="findapr.io logo">
+        <img class="w-48 dark:hidden" src="{{ mix('/images/findapr.svg') }}" alt="findapr.io logo - light mode">
+        <img class="w-48 hidden dark:block" src="{{ mix('/images/findapr-white.svg') }}" alt="findapr.io logo - dark mode">
     </a>
 
     <div class="flex space-x-3 items-center">
