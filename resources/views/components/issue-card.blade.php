@@ -1,7 +1,8 @@
-<div class="border dark:border-slate-600 p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow bg-white dark:bg-slate-800">
-    <div class="flex flex-col sm:flex-row justify-start sm:justify-between items-start gap-2">
+<div class="p-4 my-4 bg-white border rounded-lg shadow dark:border-slate-600 sm:py-5 sm:px-8 dark:bg-slate-800">
+    <div class="flex flex-col items-start justify-start gap-2 sm:flex-row sm:justify-between">
         <div class="w-full md:w-3/4">
-            <a href="{{ $issue->url }}" target="_blank" class="text-xl font-bold inline-block">{{ $issue->title }}</a>
+            <a href="{{ $issue->url }}" target="_blank"
+                class="inline-block text-xl font-bold">{{ $issue->title }}</a>
             <div>
                 <a href="{{ $issue->repoUrl }}" target="_blank" class="text-gray-400">{{ $issue->repoName }}</a>
             </div>
@@ -9,19 +10,19 @@
 
         <div class="flex">
             <a href="{{ $issue->url }}" target="_blank"
-               class="w-full inline-block px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700 transition ease-out">View
-                Issue</a>
-            <x-ignore-issue issueUrl="{{$issue->url}}"/>
+                class="inline-block w-full px-5 py-2 text-sm font-medium text-white transition ease-out bg-green-400 border border-transparent rounded-md shadow-sm dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700">View
+                Issue
+            </a>
+            <x-ignore-issue issueUrl="{{ $issue->url }}" />
         </div>
     </div>
 
     <div class="my-2">
-        @foreach($issue->labels as $label)
-            <span
-                class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold border bg-opacity-20"
-                style="color: {{ $label->color }}; border-color: {{ $label->color }}; background-color: {{ $label->color.'30' }}">
-                        {{ $label->name }}
-                    </span>
+        @foreach ($issue->labels as $label)
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold border bg-opacity-20"
+                style="color: {{ $label->color }}; border-color: {{ $label->color }}; background-color: {{ $label->color . '30' }}">
+                {{ $label->name }}
+            </span>
         @endforeach
     </div>
 
@@ -29,11 +30,21 @@
         {{ str($issue->body)->limit(150) }}
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-2 justify-between items-start sm:items-center">
+    <div class="my-3">
+        @foreach ($issue->reactions as $reaction)
+            @if ($reaction->count > 0)
+                <span class="inline-flex items-center px-2 py-1 text-sm border rounded bg-opacity-20">
+                    {{ $reaction->emoji }} {{ $reaction->count }}
+                </span>
+            @endif
+        @endforeach
+    </div>
+
+    <div class="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
         <a href="{{ $issue->createdBy->url }}" target="_blank"
-           class="border hover:bg-gray-100 inline-block p-2 rounded dark:border-slate-600 dark:hover:bg-slate-600 transition ease-out">
-            <img src="{{ $issue->createdBy->profilePictureUrl }}"
-                 class="inline-block h-6 w-6 rounded-full" alt="{{ $issue->createdBy->name }}">
+            class="inline-block p-2 transition ease-out border rounded hover:bg-gray-100 dark:border-slate-600 dark:hover:bg-slate-600">
+            <img src="{{ $issue->createdBy->profilePictureUrl }}" class="inline-block w-6 h-6 rounded-full"
+                alt="{{ $issue->createdBy->name }}">
             <p class="inline">{{ $issue->createdBy->name }}</p>
         </a>
 

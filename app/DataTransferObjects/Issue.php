@@ -14,6 +14,7 @@ class Issue
         public readonly string $url,
         public readonly ?string $body,
         public readonly array $labels,
+        public readonly array $reactions,
         public readonly CarbonInterface $createdAt,
         public readonly IssueOwner $createdBy,
     ) {
@@ -25,6 +26,7 @@ class Issue
         $issueDetails['createdAt'] = Carbon::parse($issueDetails['createdAt']);
         $issueDetails['createdBy'] = IssueOwner::fromArray($issueDetails['createdBy']);
         $issueDetails['labels'] = Label::multipleFromArray($issueDetails['labels']);
+        $issueDetails['reactions'] = Reaction::fromArray($issueDetails['reactions']);
 
         return new self(...$issueDetails);
     }
