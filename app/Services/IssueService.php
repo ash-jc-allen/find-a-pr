@@ -121,6 +121,7 @@ class IssueService
                 emoji: $emojis[$key]
             ));
         }
+
         return $reactions->toArray();
     }
 }
