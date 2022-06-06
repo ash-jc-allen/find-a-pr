@@ -1,11 +1,11 @@
 <div
     x-data="{
-        setIgnoredUrls(){
-            @this.set('ignoredUrls', Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) ?? []));
+        'ignoredUrls': @entangle('ignoredUrls'),
+        getIgnoredUrls(){
+            this.ignoredUrls = Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) || []);
         }
     }"
-    x-init="setIgnoredUrls();"
-    @set-ignore-url.window="setIgnoredUrls();"
+    x-init="getIgnoredUrls();"
     class="mt-12 flex">
     <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts"/>
 
