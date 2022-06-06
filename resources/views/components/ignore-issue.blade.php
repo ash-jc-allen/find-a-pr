@@ -5,6 +5,8 @@
             let ignoredUrls = JSON.parse(localStorage.getItem('ignoreUrl')) ?? [];
             ignoredUrls.push(issueUrl);
             localStorage.setItem('ignoreUrl', JSON.stringify(ignoredUrls));
+
+            getIgnoredUrls();
         }
      }"
 >
@@ -58,7 +60,6 @@
                         <button
                             @click="
                                 addIgnoredUrl('{{$issueUrl}}');
-                                $dispatch('set-ignore-url');
                                 ignoreModalOpen = false;
                             "
                             type="button"
