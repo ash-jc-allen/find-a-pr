@@ -43,10 +43,13 @@ class ListIssues extends Component
     /**
      * A collection of the issues when the component was first mounted.
      *
-     * @var Collection
+     * @var Collection<Issue>
      */
     public Collection $originalIssues;
 
+    /**
+     * @var array<string>
+     */
     public array $ignoredUrls = [];
 
     public ?string $sortField = null;
@@ -103,11 +106,12 @@ class ListIssues extends Component
         }
     }
 
-    public function updatedIgnoredUrls(array $urls)
+    public function updatedIgnoredUrls(array $urls): void
     {
         $this->ignoredUrls = $urls;
-        $this->originalIssues = $this->originalIssues->filter(function ($value) {
-            return !in_array($value->url, $this->ignoredUrls);
+
+        $this->originalIssues = $this->originalIssues->filter(function (Issue $value): bool {
+            return !in_array($value->url, $this->ignoredUrls, true);
         });
     }
 
