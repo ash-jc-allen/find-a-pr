@@ -33,7 +33,7 @@
     <div class="my-3">
         @foreach ($issue->reactions as $reaction)
             @if ($reaction->count > 0)
-                <span class="inline-flex items-center px-2 py-1 text-sm border rounded bg-opacity-20">
+                <span class="inline-flex items-center px-2 py-1 text-sm border rounded bg-opacity-20 dark:border-slate-600">
                     {{ $reaction->emoji }} {{ $reaction->count }}
                 </span>
             @endif

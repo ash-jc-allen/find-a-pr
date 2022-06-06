@@ -113,15 +113,17 @@ class IssueService
     private function getIssueReactions(array $fetchedIssue): array
     {
         $emojis = config('repos.reactions');
-        $reactions = collect();
-        foreach ($fetchedIssue['reactions'] as $key => $value) {
-            ! in_array($key, array_keys($emojis)) ?: $reactions->push(new Reaction(
-                content: $key,
-                count: $value,
-                emoji: $emojis[$key]
-            ));
-        }
 
-        return $reactions->toArray();
+        return collect($fetchedIssue['reactions'])
+            ->only(array_keys($emojis))
+            ->map(function (int $count, string $content) use ($emojis): Reaction {
+                return new Reaction(
+                    content: $content,
+                    count: $count,
+                    emoji: $emojis[$content]
+                );
+            })
+            ->values()
+            ->all();
     }
 }
