@@ -5,6 +5,7 @@ namespace App\Services;
 use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
+use App\DataTransferObjects\Reaction;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -57,6 +58,7 @@ class IssueService
             url: $fetchedIssue['html_url'],
             body: $fetchedIssue['body'],
             labels: $this->getIssueLabels($fetchedIssue),
+            reactions: $this->getIssueReactions($fetchedIssue),
             createdAt: Carbon::parse($fetchedIssue['created_at']),
             createdBy: $this->getIssueOwner($fetchedIssue),
         );
@@ -102,5 +104,24 @@ class IssueService
                     color: '#'.$label['color'],
                 );
             })->toArray();
+    }
+
+    /**
+     * @param  array<Reaction>  $fetchedIssue
+     * @return array
+     */
+    private function getIssueReactions(array $fetchedIssue): array
+    {
+        $emojis = config('repos.reactions');
+        $reactions = collect();
+        foreach ($fetchedIssue['reactions'] as $key => $value) {
+            ! in_array($key, array_keys($emojis)) ?: $reactions->push(new Reaction(
+                content: $key,
+                count: $value,
+                emoji: $emojis[$key]
+            ));
+        }
+
+        return $reactions->toArray();
     }
 }
