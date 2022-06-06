@@ -6,10 +6,12 @@
                 <a href="{{ $issue->repoUrl }}" target="_blank" class="text-gray-400">{{ $issue->repoName }}</a>
             </div>
         </div>
-        <div>
+
+        <div class="flex">
             <a href="{{ $issue->url }}" target="_blank"
                class="w-full inline-block px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-400 dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700 transition ease-out">View
                 Issue</a>
+            <x-ignore-issue issueUrl="{{$issue->url}}"/>
         </div>
     </div>
 

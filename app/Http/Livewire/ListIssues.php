@@ -47,6 +47,8 @@ class ListIssues extends Component
      */
     public Collection $originalIssues;
 
+    public array $ignoredUrls = [];
+
     public ?string $sortField = null;
 
     public string $sortDirection = 'asc';
@@ -99,6 +101,14 @@ class ListIssues extends Component
             $this->sortField = self::SORTS[$newSort]['field'];
             $this->sortDirection = self::SORTS[$newSort]['direction'] ?? 'asc';
         }
+    }
+
+    public function updatedIgnoredUrls(array $urls)
+    {
+        $this->ignoredUrls = $urls;
+        $this->originalIssues = $this->originalIssues->filter(function ($value) {
+            return !in_array($value->url, $this->ignoredUrls);
+        });
     }
 
     private function applySearch(): \Closure
