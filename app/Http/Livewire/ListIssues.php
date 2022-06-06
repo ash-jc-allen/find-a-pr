@@ -107,7 +107,7 @@ class ListIssues extends Component
     {
         $this->ignoredUrls = $urls;
         $this->originalIssues = $this->originalIssues->filter(function ($value) {
-            return !in_array($value->url, $this->ignoredUrls);
+            return ! in_array($value->url, $this->ignoredUrls);
         });
     }
 
