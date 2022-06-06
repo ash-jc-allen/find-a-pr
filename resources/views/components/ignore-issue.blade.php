@@ -10,7 +10,7 @@
 >
     <button
         @click="ignoreModalOpen = ! ignoreModalOpen"
-        class="flex-1 bg-pink-500 dark:bg-pink-600 text-white hover:bg-pink-600 dark:hover:bg-pink-700 font-bold px-3 py-2 ml-1 rounded-md shadow-sm hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150"
+        class="flex-1 border text-gray-400 hover:bg-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 font-bold px-3 py-2 ml-1 rounded-md outline-none focus:outline-none ease-linear transition-all duration-150"
         type="button"
     >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -19,6 +19,7 @@
                   d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
         </svg>
     </button>
+
     <div x-show="ignoreModalOpen" class="relative z-10" aria-labelledby="modal-title"
          role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -39,14 +40,16 @@
                                 </svg>
                             </div>
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white"
-                                    id="modal-title">Ignore
-                                    Issue</h3>
+                                <h3 class="text-lg leading-6 font-medium text-gray-700 dark:text-white">
+                                    Ignore Issue
+                                </h3>
                                 <div class="mt-2">
-                                    <p class="text-md text-gray-600 dark:text-stone-200">Are you sure you want to ignore
-                                        the issue?</p>
-                                    <p class="text-md text-gray-600 dark:text-stone-200">This action cannot be
-                                        undone.</p>
+                                    <p class="text-md text-gray-600 dark:text-stone-200">
+                                        Are you sure you want to ignore the issue?
+                                    </p>
+                                    <p class="text-md text-gray-600 dark:text-stone-200">
+                                        This action cannot be undone.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +68,7 @@
                         <button
                             @click="ignoreModalOpen = false"
                             type="button"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-400 shadow-sm px-4 py-2 bg-white dark:bg-slate-800 text-base font-medium text-gray-700 dark:text-stone-200 hover:bg-gray-50 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-400 shadow-sm px-4 py-2 bg-white dark:bg-slate-800 text-base font-medium text-gray-700 dark:text-stone-200 hover:bg-gray-50 dark:hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                             Cancel
                         </button>
                     </div>
