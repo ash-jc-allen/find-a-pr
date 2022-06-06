@@ -26,7 +26,7 @@ class Issue
         $issueDetails['createdAt'] = Carbon::parse($issueDetails['createdAt']);
         $issueDetails['createdBy'] = IssueOwner::fromArray($issueDetails['createdBy']);
         $issueDetails['labels'] = Label::multipleFromArray($issueDetails['labels']);
-        $issueDetails['reactions'] = Reaction::fromArray($issueDetails['reactions']);
+        $issueDetails['reactions'] = Reaction::multipleFromArray($issueDetails['reactions']);
 
         return new self(...$issueDetails);
     }
