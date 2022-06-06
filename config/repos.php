@@ -45,7 +45,7 @@ return [
             'url',
             'query-string',
             'robots-txt',
-        ]
+        ],
     ],
 
     'labels' => [
