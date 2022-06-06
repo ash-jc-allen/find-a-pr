@@ -40,6 +40,12 @@ return [
             'laravel-newsletter',
             'checklist-going-live',
         ],
+        'crwlrsoft' => [
+            'crawler',
+            'url',
+            'query-string',
+            'robots-txt',
+        ],
     ],
 
     'labels' => [
