@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <x-head/>
-<body class="antialiased text-gray-600 dark:text-gray-100 bg-gray-100 dark:bg-slate-700"
+<body class="antialiased text-gray-600 bg-gray-100 dark:text-gray-100 dark:bg-slate-700"
         x-data="{
             isDark: false,
             toggleDarkMode(enabled) {
@@ -21,8 +21,8 @@
         }"
         x-init="shouldUseDarkMode() ? toggleDarkMode(true) : toggleDarkMode(false)"
 >
-<div class="max-w-6xl mx-auto py-3" x-cloak>
-    <div class="w-full p-4 sm:p-0 mx-auto mt-0 sm:mt-12">
+<div class="max-w-6xl py-3 mx-auto" x-cloak>
+    <div class="w-full p-4 mx-auto mt-0 sm:p-0 sm:mt-12">
         <x-header/>
 
         @livewire('list-issues')
