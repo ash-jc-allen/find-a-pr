@@ -19,11 +19,11 @@ class Reaction
         return new self(...$reaction);
     }
 
-    public static function multipleFromArray(array $labels): array
+    public static function multipleFromArray(array $reactions): array
     {
         return Arr::map(
-            $labels,
-            static fn (array $label): Reaction => self::fromArray($label)
+            $reactions,
+            static fn (array $reactions): Reaction => self::fromArray($reactions)
         );
     }
 }
