@@ -4,24 +4,24 @@
     'sorts',
 ])
 
-<div class="w-1/4 my-10 pr-6 hidden md:block">
+<div class="hidden w-1/4 pr-6 my-10 md:block">
     <label for="search" class="inline-block pb-1">Search:</label>
     <input id="search"
            wire:model.debounce="searchTerm"
            type="search"
            placeholder="Search..."
-           class="w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500 dark:bg-slate-900 dark:border-slate-600 dark:focus:ring-offset-slate-700 dark:text-gray-100"
+           class="w-full px-2 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500 dark:bg-slate-900 dark:border-slate-600 dark:focus:ring-offset-slate-700 dark:text-gray-100"
     >
 
-    <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
+    <hr class="w-3/4 mx-auto my-6 border-gray-300 dark:border-slate-500">
 
     <x-sort-dropdown :sorts="$sorts"></x-sort-dropdown>
 
-    <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
+    <hr class="w-3/4 mx-auto my-6 border-gray-300 dark:border-slate-500">
 
-    <div class="flex justify-between pb-1 items-center">
+    <div class="flex items-center justify-between pb-1">
         <p>Repositories:</p>
-        <p class="text-gray-400 text-sm">({{ $repos->count() }})</p>
+        <p class="text-sm text-gray-400">({{ $repos->count() }})</p>
     </div>
 
     @foreach($repos as $repo)
@@ -32,11 +32,11 @@
         </div>
     @endforeach
 
-    <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
+    <hr class="w-3/4 mx-auto my-6 border-gray-300 dark:border-slate-500">
 
-    <div class="flex justify-between pb-1 items-center">
+    <div class="flex items-center justify-between pb-1">
         <p>Labels:</p>
-        <p class="text-gray-400 text-sm">({{ count($labels) }})</p>
+        <p class="text-sm text-gray-400">({{ count($labels) }})</p>
     </div>
 
     @foreach($labels as $label)

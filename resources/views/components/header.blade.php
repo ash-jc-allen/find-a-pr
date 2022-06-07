@@ -1,14 +1,14 @@
-<div class="flex flex-col sm:flex-row gap-2 justify-between item-center">
+<div class="flex flex-col justify-between gap-2 sm:flex-row item-center">
     <a href="/">
         <img class="w-48 dark:hidden" src="{{ mix('/images/findapr.svg') }}" alt="findapr.io logo - light mode">
-        <img class="w-48 hidden dark:block" src="{{ mix('/images/findapr-white.svg') }}" alt="findapr.io logo - dark mode">
+        <img class="hidden w-48 dark:block" src="{{ mix('/images/findapr-white.svg') }}" alt="findapr.io logo - dark mode">
     </a>
 
-    <div class="flex space-x-3 items-center">
+    <div class="flex items-center space-x-3">
         <a href="https://docs.findapr.io"
            target="_blank"
            rel="noreferrer noopener"
-           class="underline font-medium mr-3 text-gray-600 hover:text-green-600 transition ease-out dark:text-gray-100 dark:hover:text-green-600"
+           class="mr-3 font-medium text-gray-600 underline transition ease-out hover:text-green-600 dark:text-gray-100 dark:hover:text-green-600"
         >
             Documentation
         </a>
@@ -21,8 +21,8 @@
         </button>
 
         <a href="https://github.com/ash-jc-allen/find-a-pr"
-           class="flex justify-center items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-gray-900 transition ease-out">
-            <img src="{{ mix('/images/github-logo.png') }}" class="w-6 pr-2 inline" alt="View on GitHub" />
+           class="flex items-center justify-center px-5 py-2 text-sm font-medium text-white transition ease-out bg-gray-800 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-gray-900">
+            <img src="{{ mix('/images/github-logo.png') }}" class="inline w-6 pr-2" alt="View on GitHub" />
             View on GitHub
         </a>
     </div>
