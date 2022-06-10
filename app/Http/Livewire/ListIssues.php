@@ -136,11 +136,6 @@ class ListIssues extends Component
         Cookie::queue('firstTimeNoticeClosed', true, 40_320);
     }
 
-    public function showIgnored(): void
-    {
-        $this->showIgnoredIssues = false;
-    }
-
     public function updatedIgnoredUrls(array $urls): void
     {
         if (!$urls) {
