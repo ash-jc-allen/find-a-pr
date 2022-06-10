@@ -17,6 +17,10 @@
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
 
+    <x-sort-dropdown :sorts="$sorts"></x-sort-dropdown>
+
+    <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
+
     @if($ignoredUrls)
         <div class="flex items-center justify-between" x-data="{ 'showIgnoredIssues': @entangle('showIgnoredIssues') }">
             <span class="flex-grow flex flex-col">
@@ -29,10 +33,6 @@
 
         <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
     @endif
-
-    <x-sort-dropdown :sorts="$sorts"></x-sort-dropdown>
-
-    <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
 
     <div class="flex justify-between pb-1 items-center">
         <p>Repositories:</p>
