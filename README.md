@@ -12,10 +12,48 @@ The following tools are required in order to start the installation and run the 
 
 - PHP 8.1
 - [Composer](https://getcomposer.org/download/)
-- [Valet](https://laravel.com/docs/valet#installation)
 
 ## Installation
-Here is how you can run the project locally:
+
+### Using Sail
+
+> Make sure you have [Sail](https://laravel.com/docs/9.x/sail) installed.
+
+1. Clone this repo
+    ```sh
+    git clone https://github.com/ash-jc-allen/find-a-pr.git
+    ```
+2. Go into the project root directory
+    ```sh
+    cd find-a-pr
+    ```
+3. Copy .env.example file to .env file
+    ```sh
+    cp .env.example .env
+    ```
+4. Install PHP dependencies
+    ```sh
+    composer install --ignore-platform-reqs
+    ```   
+5. Boot Sail
+    ```sh
+   sail up -d
+    ```   
+6. Generate app key
+    ```sh
+    sail php artisan key:generate
+    ```
+7. Install NPM dependencies
+    ```sh
+    sail npm install
+    ```
+8. Build assets using NPM
+    ```sh
+    sail npm run dev
+    ```
+
+### Using `artisan serve`
+
 1. Clone this repo
     ```sh
     git clone https://github.com/ash-jc-allen/find-a-pr.git
