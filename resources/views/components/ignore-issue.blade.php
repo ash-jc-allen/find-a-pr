@@ -9,10 +9,7 @@
                 ignoredUrls.push(issueUrl);
             }
 
-            console.log(ignoredUrls);
-
             localStorage.setItem('ignoreUrl', JSON.stringify(ignoredUrls));
-            console.log(JSON.parse(localStorage.getItem('ignoreUrl')) ?? []);
 
             getIgnoredUrls();
         }
