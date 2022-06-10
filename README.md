@@ -12,11 +12,13 @@ The following tools are required in order to start the installation and run the 
 
 - PHP 8.1
 - [Composer](https://getcomposer.org/download/)
-- [Valet](https://laravel.com/docs/valet#installation)
 
 ## Installation
 
 ### Using Sail
+
+> Make sure you have [Sail](https://laravel.com/docs/9.x/sail) installed.
+
 1. Clone this repo
     ```sh
     git clone https://github.com/ash-jc-allen/find-a-pr.git
