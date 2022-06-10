@@ -77,7 +77,7 @@ class ListIssues extends Component
     public function render(): View
     {
         $issues = $this->originalIssues
-            ->filter(fn(Issue $issue): bool => $this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true))
+            ->filter(fn (Issue $issue): bool => $this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true))
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
 
@@ -138,7 +138,7 @@ class ListIssues extends Component
 
     public function updatedIgnoredUrls(array $urls): void
     {
-        if (!$urls) {
+        if (! $urls) {
             $this->showIgnoredIssues = false;
         }
     }
