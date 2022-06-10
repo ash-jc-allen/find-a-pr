@@ -1,3 +1,5 @@
+@props(['issue', 'isIgnored'])
+
 <div class="p-4 my-4 bg-white border rounded-lg shadow dark:border-slate-600 sm:py-5 sm:px-8 dark:bg-slate-800">
     <div class="flex flex-col items-start justify-start gap-2 sm:flex-row sm:justify-between">
         <div class="w-full md:w-3/4">
@@ -13,7 +15,7 @@
                 class="inline-block w-full px-5 py-2 text-sm font-medium text-white transition ease-out bg-green-400 border border-transparent rounded-md shadow-sm dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700">View
                 Issue
             </a>
-            <x-ignore-issue issueUrl="{{ $issue->url }}" />
+            <x-ignore-issue issueUrl="{{ $issue->url }}" :is-ignored="$isIgnored" />
         </div>
     </div>
 
