@@ -1,10 +1,11 @@
 @props(['issue', 'isIgnored'])
 
-<div class="p-4 my-4 bg-white border rounded-lg shadow dark:border-slate-600 sm:py-5 sm:px-8 dark:bg-slate-800">
+<div class="p-4 my-4 break-words bg-white border rounded-lg shadow dark:border-slate-600 sm:py-5 sm:px-8 dark:bg-slate-800">
     <div class="flex flex-col items-start justify-start gap-2 sm:flex-row sm:justify-between">
         <div class="w-full md:w-3/4">
             <a href="{{ $issue->url }}" target="_blank"
-                class="inline-block text-xl font-bold">{{ $issue->title }}</a>
+                class="inline-block w-full text-xl font-bold">{{ $issue->title }}
+            </a>
             <div>
                 <a href="{{ $issue->repoUrl }}" target="_blank" class="text-gray-400">{{ $issue->repoName }}</a>
             </div>

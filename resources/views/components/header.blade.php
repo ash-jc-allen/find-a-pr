@@ -22,8 +22,8 @@
 
         <a href="https://github.com/ash-jc-allen/find-a-pr"
            class="flex justify-center items-center px-5 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-gray-900 transition ease-out">
-            <img src="{{ mix('/images/github-logo.png') }}" class="w-6 pr-2 inline" alt="View on GitHub" />
-            View on GitHub
+            <img src="{{ mix('/images/github-logo.png') }}" class="inline w-5 md:pr-2 md:w-6" alt="View on GitHub" />
+            <span class="hidden md:inline">View on GitHub</span>
         </a>
     </div>
 
