@@ -49,6 +49,11 @@ return [
         'yieldigit' => [
             'synext',
         ],
+        'php-flasher' => [
+            'php-flasher',
+            'php-flasher.github.io',
+            'flasher-js',
+        ],
     ],
 
     'labels' => [
