@@ -46,6 +46,9 @@ return [
             'query-string',
             'robots-txt',
         ],
+        'yieldigit' => [
+            'synext',
+        ]
     ],
 
     'labels' => [
