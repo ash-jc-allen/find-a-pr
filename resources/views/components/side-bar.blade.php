@@ -27,7 +27,7 @@
                 <span class="text-sm font-medium" id="show-ignored-issues">Show {{ count($ignoredUrls) }} ignored {{ str('issue')->plural(count($ignoredUrls)) }}</span>
             </span>
             <button type="button" x-on:click="showIgnoredIssues = ! showIgnoredIssues" :class="showIgnoredIssues ? 'bg-green-500' : 'bg-gray-200'" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" role="switch" :aria-checked="showIgnoredIssues" aria-labelledby="show-ignored-issues">
-                <span aria-hidden="true" :class="showIgnoredIssues ? 'translate-x-5' : 'translate-x-0'" class="translate-x-0 pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
+                <span aria-hidden="true" :class="showIgnoredIssues ? 'translate-x-5' : 'translate-x-0'" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
             </button>
         </div>
 
