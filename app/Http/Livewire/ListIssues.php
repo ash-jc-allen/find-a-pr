@@ -62,6 +62,8 @@ class ListIssues extends Component
 
     public bool $shouldDisplayFirstTimeNotice;
 
+    public bool $showIgnoredIssues = false;
+
     public function mount(): void
     {
         $this->labels = config('repos.labels');
@@ -75,6 +77,7 @@ class ListIssues extends Component
     public function render(): View
     {
         $issues = $this->originalIssues
+            ->filter(fn (Issue $issue): bool => $this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true))
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
 
@@ -106,15 +109,6 @@ class ListIssues extends Component
         }
     }
 
-    public function updatedIgnoredUrls(array $urls): void
-    {
-        $this->ignoredUrls = $urls;
-
-        $this->originalIssues = $this->originalIssues->filter(function (Issue $value): bool {
-            return ! in_array($value->url, $this->ignoredUrls, true);
-        });
-    }
-
     private function applySearch(): \Closure
     {
         return static function (Collection $issues, string $searchTerm): Collection {
@@ -140,5 +134,12 @@ class ListIssues extends Component
 
         // 4 weeks = 40,320 minutes
         Cookie::queue('firstTimeNoticeClosed', true, 40_320);
+    }
+
+    public function updatedIgnoredUrls(array $urls): void
+    {
+        if (! $urls) {
+            $this->showIgnoredIssues = false;
+        }
     }
 }

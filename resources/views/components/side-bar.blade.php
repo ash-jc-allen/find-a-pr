@@ -2,6 +2,8 @@
     'repos',
     'labels',
     'sorts',
+    'showIgnoredIssues',
+    'ignoredUrls'
 ])
 
 <div class="w-1/4 my-10 pr-6 hidden md:block">
@@ -18,6 +20,19 @@
     <x-sort-dropdown :sorts="$sorts"></x-sort-dropdown>
 
     <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
+
+    @if($ignoredUrls)
+        <div class="flex items-center justify-between" x-data="{ 'showIgnoredIssues': @entangle('showIgnoredIssues') }">
+            <span class="flex-grow flex flex-col">
+                <span class="text-sm font-medium" id="show-ignored-issues">Show {{ count($ignoredUrls) }} ignored {{ str('issue')->plural(count($ignoredUrls)) }}</span>
+            </span>
+            <button type="button" x-on:click="showIgnoredIssues = ! showIgnoredIssues" :class="showIgnoredIssues ? 'bg-green-500' : 'bg-gray-200'" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" role="switch" :aria-checked="showIgnoredIssues" aria-labelledby="show-ignored-issues">
+                <span aria-hidden="true" :class="showIgnoredIssues ? 'translate-x-5' : 'translate-x-0'" class="translate-x-0 pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
+            </button>
+        </div>
+
+        <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
+    @endif
 
     <div class="flex justify-between pb-1 items-center">
         <p>Repositories:</p>
