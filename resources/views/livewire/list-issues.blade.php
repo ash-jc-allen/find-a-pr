@@ -1,17 +1,21 @@
 <div
     x-data="{
+        'showSideBar': false,
         'ignoredUrls': @entangle('ignoredUrls'),
         getIgnoredUrls(){
             this.ignoredUrls = Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) || []);
         }
     }"
     x-init="getIgnoredUrls();"
-    class="mt-12 flex">
-    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls"/>
+    class="mt-12 md:flex">
+
+    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" x-show="showSideBar" x-cloak/>
+    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" class="hidden md:block"/>
 
     <main class="w-full md:w-3/4">
-        <div class="flex justify-end items-center flex-wrap space-y-2 md:space-y-0">
-            <p class="text-right">
+        <div class="flex justify-between md:justify-end items-center flex-wrap">
+            <p class="underline hover:text-gray-900 hover:cursor-pointer md:hidden" x-on:click="showSideBar = ! showSideBar" x-text="showSideBar ? 'Hide filter' : 'Show filter'"></p>
+            <p>
                 Found <span class="font-bold">{{ count($issues) }}</span> {{ str('issue')->plural(count($issues)) }}
             </p>
         </div>
