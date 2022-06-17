@@ -36,6 +36,13 @@ class ListIssues extends Component
         ],
     ];
 
+    protected $queryString = [
+        'sortField' => ['except' => 'random'],
+        'sortDirection' => ['except' => 'asc'],
+        'searchTerm' => ['except' => ''],
+        'showIgnoredIssues' => ['except' => false],
+    ];
+
     public array $labels;
 
     public Collection $repos;
