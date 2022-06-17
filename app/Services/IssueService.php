@@ -59,6 +59,7 @@ class IssueService
             body: $fetchedIssue['body'],
             labels: $this->getIssueLabels($fetchedIssue),
             reactions: $this->getIssueReactions($fetchedIssue),
+            commentCount: $fetchedIssue['comments'],
             createdAt: Carbon::parse($fetchedIssue['created_at']),
             createdBy: $this->getIssueOwner($fetchedIssue),
         );
