@@ -34,6 +34,12 @@
     </p>
 
     <div class="my-3">
+        @if($issue->commentCount > 0)
+            <span class="inline-flex items-center px-2 py-1 text-sm border rounded bg-opacity-20 dark:border-slate-600">
+                {{ $issue->commentCount }} {{ str('comment')->plural($issue->commentCount) }}
+            </span>
+        @endif
+
         @foreach ($issue->reactions as $reaction)
             @if ($reaction->count > 0)
                 <span class="inline-flex items-center px-2 py-1 text-sm border rounded bg-opacity-20 dark:border-slate-600">
@@ -41,12 +47,6 @@
                 </span>
             @endif
         @endforeach
-
-        @if($issue->commentCount > 0)
-            <span class="inline-flex items-center px-2 py-1 text-sm border rounded bg-opacity-20 dark:border-slate-600">
-                {{ $issue->commentCount }} {{ str('comment')->plural($issue->commentCount) }}
-            </span>
-        @endif
     </div>
 
     <div class="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
