@@ -30,7 +30,7 @@
     </div>
 
     <p class="my-4">
-        {{ str($issue->body)->limit(150) }}
+        {{ str($issue->body)->markdown()->stripTags()->limit(150) }}
     </p>
 
     <div class="my-3">
