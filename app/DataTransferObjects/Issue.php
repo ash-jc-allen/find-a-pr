@@ -15,6 +15,7 @@ class Issue
         public readonly ?string $body,
         public readonly array $labels,
         public readonly array $reactions,
+        public readonly int $commentCount,
         public readonly CarbonInterface $createdAt,
         public readonly IssueOwner $createdBy,
     ) {
