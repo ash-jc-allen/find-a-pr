@@ -1,6 +1,6 @@
 @props(['issue', 'isIgnored'])
 
-<div class="p-4 my-4 break-words bg-white border rounded-lg shadow dark:border-slate-600 sm:py-5 sm:px-8 dark:bg-slate-800">
+<div class="p-4 my-4 break-words bg-white border rounded-lg shadow dark:border-slate-600 sm:py-5 sm:px-8 dark:bg-slate-800" x-data="{showMore: false}">
     <div class="flex flex-col items-start justify-start gap-2 sm:flex-row sm:justify-between">
         <div class="w-full md:w-3/4">
             <a href="{{ $issue->url }}" target="_blank"
@@ -29,9 +29,15 @@
         @endforeach
     </div>
 
-    <p class="my-4">
-        {{ str($issue->body)->limit(150) }}
-    </p>
+
+    <div class="my-4 overflow-hidden relative" :class="showMore ? '' : 'max-h-32'">
+        <article class="prose dark:prose-invert">
+            {!! str($issue->body)->markdown() !!}
+        </article>
+        <div x-on:click="showMore = ! showMore" x-text="showMore ? 'View less' : 'View more'" :class="showMore ? '' : 'bg-gradient-to-t from-white dark:from-slate-800 to-transparent absolute left-0 bottom-0'" class="h-20 w-full z-10 text-center pt-14 hover:text-gray-500 cursor-pointer">
+            View more
+        </div>
+    </div>
 
     <div class="my-3">
         @if($issue->commentCount > 0)
