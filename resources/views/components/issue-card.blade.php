@@ -30,7 +30,7 @@
     </div>
 
 
-    <div class="my-4 overflow-hidden relative" :class="showMore ? '' : 'max-h-32'">
+    <div class="my-4 overflow-hidden relative font-bold" :class="showMore ? '' : 'max-h-32'">
         <article class="prose dark:prose-invert">
             {!! str($issue->body)->markdown() !!}
         </article>
