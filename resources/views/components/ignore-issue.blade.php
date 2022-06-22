@@ -16,7 +16,10 @@
 
             getIgnoredUrls();
 
-            $dispatch('notify', { content: ignore ? 'Issue ignored' : 'Issue un-ignored' })
+            $dispatch('notify', {
+                content: ignore ? 'Issue ignored' : 'Issue un-ignored',
+                type: 'success'
+            })
         }
      }"
 >
