@@ -3,15 +3,21 @@
         toggleIgnoredUrl(issueUrl){
             let ignoredUrls = JSON.parse(localStorage.getItem('ignoreUrl')) ?? [];
 
+            let ignore = false;
+
             if (ignoredUrls.includes(issueUrl)) {
                 ignoredUrls = ignoredUrls.filter(ignoredUrl => ignoredUrl !== issueUrl);
             } else {
                 ignoredUrls.push(issueUrl);
+                ignore = true;
             }
 
             localStorage.setItem('ignoreUrl', JSON.stringify(ignoredUrls));
 
             getIgnoredUrls();
+
+            let content = ignore ? 'Issue ignored' : 'Issue un-ignored';
+            $dispatch('notify', { content: content })
         }
      }"
 >
