@@ -12,7 +12,7 @@
     <main class="w-full md:w-3/4">
         <div class="flex justify-end items-center flex-wrap space-y-2 md:space-y-0">
             <p class="text-right">
-                Found <span class="font-bold">{{ count($issues) }}</span> {{ str('issue')->plural(count($issues)) }}
+                Found <span class="font-bold">{{ count($issues) }}</span> {{ $showIgnoredIssues ? 'ignored' : '' }} {{ str('issue')->plural(count($issues)) }}
             </p>
         </div>
 
@@ -28,7 +28,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
 
-                <p class="font-medium my-4">No Issues Found!</p>
+                <p class="font-medium my-4">No {{ $showIgnoredIssues ? 'Ignored' : '' }} Issues Found!</p>
                 <p>It looks there aren't any issues that fit your criteria.</p>
             </div>
         @endforelse
