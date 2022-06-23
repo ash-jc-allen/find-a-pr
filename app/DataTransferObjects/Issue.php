@@ -21,7 +21,7 @@ class Issue
         public readonly CarbonInterface $createdAt,
         public readonly IssueOwner $createdBy,
     ) {
-        $this->interactionsCount = collect($this->reactions)->reduce(fn ($carry, $reaction) => ($carry ?? 0) + $reaction->count);
+        $this->interactionsCount = collect($this->reactions)->reduce(fn ($carry, $reaction) => $reaction->count + $this->commentCount, 0);
     }
 
     public static function fromArray(array $issueDetails): self
