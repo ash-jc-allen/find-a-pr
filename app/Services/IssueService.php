@@ -86,7 +86,7 @@ class IssueService
     private function getIssueOwner(array $fetchedIssue): IssueOwner
     {
         // Set avatar size to 48px
-        $fetchedIssue['user']['avatar_url'] .= (parse_url($fetchedIssue['user']['avatar_url'], PHP_URL_QUERY) ? '&' : '?') . 's=48';
+        $fetchedIssue['user']['avatar_url'] .= (parse_url($fetchedIssue['user']['avatar_url'], PHP_URL_QUERY) ? '&' : '?').'s=48';
 
         return new IssueOwner(
             name: $fetchedIssue['user']['login'],
