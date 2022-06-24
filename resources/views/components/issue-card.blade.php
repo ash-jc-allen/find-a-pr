@@ -32,7 +32,7 @@
 
     <div class="my-4 overflow-hidden relative" :class="showMore ? '' : 'max-h-32'">
         <article class="prose dark:prose-invert">
-            {!! str($issue->body)->markdown() !!}
+            {!! str($issue->body)->markdown(['html_input' => 'strip']) !!}
         </article>
         <div x-on:click="showMore = ! showMore" :class="showMore ? '' : 'bg-gradient-to-t from-white dark:from-slate-800 to-transparent absolute left-0 bottom-0'" class="font-bold h-20 w-full z-10 text-center pt-14 hover:text-gray-500 cursor-pointer">
             <span x-text="showMore ? 'View less' : 'View more'" class="border-b border-b-green-400">View more</span>
