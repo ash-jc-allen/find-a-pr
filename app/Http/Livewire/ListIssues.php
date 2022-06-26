@@ -34,6 +34,19 @@ class ListIssues extends Component
         'repo_name_desc' => [
             'friendly' => 'Repo Name (Z-A)', 'field' => 'repoName', 'direction' => 'desc',
         ],
+        'interactions' => [
+            'friendly' => 'Interactions (Least first)', 'field' => 'interactionsCount', 'direction' => 'asc',
+        ],
+        'interactions_desc' => [
+            'friendly' => 'Interactions (Most first)', 'field' => 'interactionsCount', 'direction' => 'desc',
+        ],
+    ];
+
+    protected $queryString = [
+        'sortField' => ['except' => 'random'],
+        'sortDirection' => ['except' => 'asc'],
+        'searchTerm' => ['except' => ''],
+        'showIgnoredIssues' => ['except' => false],
     ];
 
     public array $labels;

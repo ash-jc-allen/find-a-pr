@@ -7,6 +7,8 @@ use Carbon\CarbonInterface;
 
 class Issue
 {
+    public readonly int $interactionsCount;
+
     public function __construct(
         public readonly string $repoName,
         public readonly string $repoUrl,
@@ -15,10 +17,11 @@ class Issue
         public readonly ?string $body,
         public readonly array $labels,
         public readonly array $reactions,
+        public readonly int $commentCount,
         public readonly CarbonInterface $createdAt,
         public readonly IssueOwner $createdBy,
     ) {
-        //
+        $this->interactionsCount = collect($this->reactions)->reduce(fn ($carry, $reaction) => ($carry ?? 0) + $reaction->count);
     }
 
     public static function fromArray(array $issueDetails): self
@@ -27,6 +30,8 @@ class Issue
         $issueDetails['createdBy'] = IssueOwner::fromArray($issueDetails['createdBy']);
         $issueDetails['labels'] = Label::multipleFromArray($issueDetails['labels']);
         $issueDetails['reactions'] = Reaction::multipleFromArray($issueDetails['reactions']);
+
+        unset($issueDetails['interactionsCount']);
 
         return new self(...$issueDetails);
     }

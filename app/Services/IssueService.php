@@ -59,6 +59,7 @@ class IssueService
             body: $fetchedIssue['body'],
             labels: $this->getIssueLabels($fetchedIssue),
             reactions: $this->getIssueReactions($fetchedIssue),
+            commentCount: $fetchedIssue['comments'],
             createdAt: Carbon::parse($fetchedIssue['created_at']),
             createdBy: $this->getIssueOwner($fetchedIssue),
         );
@@ -84,6 +85,9 @@ class IssueService
 
     private function getIssueOwner(array $fetchedIssue): IssueOwner
     {
+        // Set avatar size to 48px
+        $fetchedIssue['user']['avatar_url'] .= (parse_url($fetchedIssue['user']['avatar_url'], PHP_URL_QUERY) ? '&' : '?').'s=48';
+
         return new IssueOwner(
             name: $fetchedIssue['user']['login'],
             url: $fetchedIssue['user']['html_url'],

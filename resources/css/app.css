@@ -9,3 +9,7 @@ body {
 [x-cloak] {
     display: none !important;
 }
+
+.prose a {
+    @apply hover:text-gray-500;
+}

@@ -27,6 +27,8 @@
 
         @livewire('list-issues')
 
+        <x-notifications/>
+
         <x-footer/>
     </div>
 </div>

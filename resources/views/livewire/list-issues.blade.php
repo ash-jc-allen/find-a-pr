@@ -32,7 +32,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
 
-                <p class="font-medium my-4">No Issues Found!</p>
+                <p class="font-medium my-4">No {{ $showIgnoredIssues ? 'Ignored' : '' }} Issues Found!</p>
                 <p>It looks there aren't any issues that fit your criteria.</p>
             </div>
         @endforelse
