@@ -14,7 +14,12 @@
 
     <main class="w-full md:w-3/4">
         <div class="flex justify-between md:justify-end items-center flex-wrap">
-            <p class="underline hover:text-gray-900 hover:cursor-pointer md:hidden" x-on:click="showSideBar = ! showSideBar" x-text="showSideBar ? 'Hide filter' : 'Show filter'"></p>
+            <button type="button"
+                    x-on:click="showSideBar = ! showSideBar"
+                    x-text="showSideBar ? 'Hide filter' : 'Show filter'"
+                    class="flex justify-center items-center px-4 py-1.5 border border-transparent font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-gray-900 transition ease-out"
+            >
+            </button>
             <p>
                 Found <span class="font-bold">{{ count($issues) }}</span> {{ str('issue')->plural(count($issues)) }}
             </p>
