@@ -9,7 +9,7 @@
     x-init="getIgnoredUrls();"
     class="mt-12 md:flex">
 
-    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" x-show="showSideBar" x-cloak/>
+    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" x-show="showSideBar" class="block md:hidden" x-cloak/>
     <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" class="hidden md:block"/>
 
     <main class="w-full md:w-3/4">
@@ -17,7 +17,7 @@
             <button type="button"
                     x-on:click="showSideBar = ! showSideBar"
                     x-text="showSideBar ? 'Hide filter' : 'Show filter'"
-                    class="flex justify-center items-center px-4 py-1.5 border border-transparent font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-gray-900 transition ease-out"
+                    class="flex md:hidden justify-center items-center px-4 py-1.5 border border-transparent font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-gray-900 transition ease-out"
             >
             </button>
             <p>
