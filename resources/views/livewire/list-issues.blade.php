@@ -1,17 +1,26 @@
 <div
     x-data="{
+        'showSideBar': false,
         'ignoredUrls': @entangle('ignoredUrls'),
         getIgnoredUrls(){
             this.ignoredUrls = Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) || []);
         }
     }"
     x-init="getIgnoredUrls();"
-    class="mt-12 flex">
-    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls"/>
+    class="mt-12 md:flex">
+
+    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" x-show="showSideBar" class="block md:hidden" x-cloak/>
+    <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" class="hidden md:block"/>
 
     <main class="w-full md:w-3/4">
-        <div class="flex justify-end items-center flex-wrap space-y-2 md:space-y-0">
-            <p class="text-right">
+        <div class="flex justify-between md:justify-end items-center flex-wrap">
+            <button type="button"
+                    x-on:click="showSideBar = ! showSideBar"
+                    x-text="showSideBar ? 'Hide filter' : 'Show filter'"
+                    class="flex md:hidden justify-center items-center px-4 py-1.5 border border-transparent font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-gray-900 transition ease-out"
+            >
+            </button>
+            <p>
                 Found <span class="font-bold">{{ count($issues) }}</span> {{ $showIgnoredIssues ? 'ignored' : '' }} {{ str('issue')->plural(count($issues)) }}
             </p>
         </div>
