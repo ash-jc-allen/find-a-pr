@@ -21,7 +21,7 @@
             >
             </button>
             <p>
-                Found <span class="font-bold">{{ count($issues) }}</span> {{ str('issue')->plural(count($issues)) }}
+                Found <span class="font-bold">{{ count($issues) }}</span> {{ $showIgnoredIssues ? 'ignored' : '' }} {{ str('issue')->plural(count($issues)) }}
             </p>
         </div>
 
