@@ -20,9 +20,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @production
         <!-- Fathom - beautiful, simple website analytics -->

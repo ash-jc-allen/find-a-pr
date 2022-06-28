@@ -21,7 +21,7 @@
         }"
         x-init="shouldUseDarkMode() ? toggleDarkMode(true) : toggleDarkMode(false)"
 >
-<div class="max-w-6xl mx-auto py-3" x-cloak>
+<div class="max-w-6xl mx-auto py-3">
     <div class="w-full p-4 xs:p-0 mx-auto mt-0 sm:mt-12">
         <x-header/>
 
