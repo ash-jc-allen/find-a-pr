@@ -2,25 +2,25 @@
 
 return [
     'repos' => [
-//        'ash-jc-allen' => [
-//            'find-a-pr',
-//            'short-url',
-//            'laravel-exchange-rates',
-//            'favicon-fetcher',
-//            'laravel-config-validator',
-//        ],
-//        'laravel' => [
-//            'framework',
-//            'docs',
-//            'vapor-core',
-//            'octane',
-//        ],
-//        'laravelio' => [
-//            'laravel.io',
-//        ],
-//        'laravel-filament' => [
-//            'filament',
-//        ],
+        'ash-jc-allen' => [
+            'find-a-pr',
+            'short-url',
+            'laravel-exchange-rates',
+            'favicon-fetcher',
+            'laravel-config-validator',
+        ],
+        'laravel' => [
+            'framework',
+            'docs',
+            'vapor-core',
+            'octane',
+        ],
+        'laravelio' => [
+            'laravel.io',
+        ],
+        'laravel-filament' => [
+            'filament',
+        ],
         'spatie' => [
             'laravel-permission',
             'laravel-medialibrary',
