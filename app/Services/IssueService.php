@@ -41,7 +41,6 @@ class IssueService
             static fn () => Http::get($url)->json()
         );
 
-
         return collect($fetchedIssues)
             ->map(fn ($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
             ->filter()
