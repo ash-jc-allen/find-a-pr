@@ -6,6 +6,7 @@ use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use App\DataTransferObjects\Reaction;
+use App\Exceptions\GitHubRateLimitException;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -38,7 +39,7 @@ class IssueService
         $fetchedIssues = Cache::remember(
             $url,
             now()->addMinutes(120),
-            static fn () => Http::get($url)->json()
+            fn () => $this->getIssueFromGitHubApi($url),
         );
 
         return collect($fetchedIssues)
@@ -129,5 +130,22 @@ class IssueService
             })
             ->values()
             ->all();
+    }
+
+    /**
+     * @param  string  $url
+     * @return array
+     *
+     * @throws GitHubRateLimitException
+     */
+    private function getIssueFromGitHubApi(string $url): array
+    {
+        $result = Http::get($url);
+
+        if (! $result->successful()) {
+            throw new GitHubRateLimitException('GitHub API rate limit reached!');
+        }
+
+        return $result->json();
     }
 }
