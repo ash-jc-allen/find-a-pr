@@ -133,8 +133,9 @@ class IssueService
     }
 
     /**
-     * @param string $url
+     * @param  string  $url
      * @return array
+     *
      * @throws GitHubRateLimitException
      */
     private function getIssueFromGitHubApi(string $url): array
