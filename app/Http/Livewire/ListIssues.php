@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\DataTransferObjects\Issue;
+use App\Exceptions\GitHubRateLimitException;
 use App\Services\IssueService;
 use App\Services\RepoService;
 use Illuminate\Contracts\View\View;
@@ -82,7 +83,11 @@ class ListIssues extends Component
         $this->labels = config('repos.labels');
         $this->repos = app(RepoService::class)->reposToCrawl()->sort();
 
-        $this->originalIssues = app(IssueService::class)->getAll()->shuffle();
+        try {
+            $this->originalIssues = app(IssueService::class)->getAll()->shuffle();
+        } catch (GitHubRateLimitException $e) {
+            abort(503, $e->getMessage());
+        }
 
         $this->shouldDisplayFirstTimeNotice = ! Cookie::get('firstTimeNoticeClosed');
     }
