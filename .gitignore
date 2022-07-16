@@ -2,7 +2,6 @@
 /public/hot
 /public/storage
 /public/css
-/public/images
 /public/js
 /public/mix-manifest.json
 /storage/*.key
@@ -17,3 +16,4 @@ yarn-error.log
 /.idea
 /.vscode
 /public/vendor
+/public/build
