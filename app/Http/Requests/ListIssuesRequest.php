@@ -27,6 +27,9 @@ class ListIssuesRequest extends FormRequest
         ]);
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function rules(): array
     {
         return [

@@ -12,6 +12,10 @@ class IssueOwner
         //
     }
 
+    /**
+     * @param array<string, string> $ownerDetails
+     * @return IssueOwner
+     */
     public static function fromArray(array $ownerDetails): self
     {
         return new self(...$ownerDetails);

@@ -6,6 +6,7 @@ use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use App\DataTransferObjects\Reaction;
+use App\DataTransferObjects\Repository;
 use App\Exceptions\GitHubRateLimitException;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
@@ -20,37 +21,40 @@ class IssueService
     /**
      * Get all the issues for displaying.
      *
-     * @return Collection
+     * @return Collection<int, Issue>
      */
     public function getAll(): Collection
     {
         return app(RepoService::class)->reposToCrawl()
-            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo));
+            ->flatMap(fn (Repository $repo): array => $this->getIssuesForRepo($repo));
     }
 
     /**
-     * @param  array  $repo
+     * @param Repository $repo
      * @return array<Issue>
      */
-    private function getIssuesForRepo(array $repo): array
+    private function getIssuesForRepo(Repository $repo): array
     {
-        $url = self::BASE_URL.$repo['owner'].'/'.$repo['name'].'/issues';
-
+        /** @var array<int, Issue> $fetchedIssues */
         $fetchedIssues = Cache::remember(
-            $url,
+            $repo->owner.'/'.$repo->name,
             now()->addMinutes(120),
-            fn () => $this->getIssueFromGitHubApi($url),
+            fn () => $this->getIssueFromGitHubApi($repo),
         );
 
         return collect($fetchedIssues)
-            ->map(fn ($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
-            ->filter()
+            ->filter(fn ($issue) => $this->shouldIncludeIssue($issue))
             ->all();
     }
 
-    private function parseIssue(array $repo, array $fetchedIssue): ?Issue
+    /**
+     * @param Repository $repo
+     * @param array<string, string|array<string, string>> $fetchedIssue
+     * @return Issue
+     */
+    private function parseIssue(Repository $repo, array $fetchedIssue): Issue
     {
-        $repoName = $repo['owner'].'/'.$repo['name'];
+        $repoName = $repo->owner.'/'.$repo->name;
 
         return new Issue(
             repoName: $repoName,
@@ -60,30 +64,34 @@ class IssueService
             body: $fetchedIssue['body'],
             labels: $this->getIssueLabels($fetchedIssue),
             reactions: $this->getIssueReactions($fetchedIssue),
-            commentCount: $fetchedIssue['comments'],
+            commentCount: (int)$fetchedIssue['comments'],
             createdAt: Carbon::parse($fetchedIssue['created_at']),
             createdBy: $this->getIssueOwner($fetchedIssue),
+            isPullRequest: !empty($fetchedIssue['pull_request']),
         );
     }
 
-    private function shouldIncludeIssue(array $fetchedIssue): bool
+    /**
+     * @param Issue $fetchedIssue
+     * @return bool
+     */
+    private function shouldIncludeIssue(Issue $fetchedIssue): bool
     {
-        return ! $this->issueIsAPullRequest($fetchedIssue)
+        return ! $fetchedIssue->isPullRequest
             && $this->includesAtLeastOneLabel($fetchedIssue, config('repos.labels'));
     }
 
-    private function includesAtLeastOneLabel(array $fetchedIssue, mixed $labels): bool
+    private function includesAtLeastOneLabel(Issue $fetchedIssue, mixed $labels): bool
     {
-        $issueLabels = Arr::pluck($fetchedIssue['labels'], 'name');
+        $issueLabels = Arr::pluck($fetchedIssue->labels, 'name');
 
         return array_intersect($issueLabels, $labels) !== [];
     }
 
-    private function issueIsAPullRequest(array $fetchedIssue): bool
-    {
-        return isset($fetchedIssue['pull_request']);
-    }
-
+    /**
+     * @param array<string, string|array<string, string>> $fetchedIssue
+     * @return IssueOwner
+     */
     private function getIssueOwner(array $fetchedIssue): IssueOwner
     {
         // Set avatar size to 48px
@@ -97,12 +105,15 @@ class IssueService
     }
 
     /**
-     * @param  array<Label>  $fetchedIssue
-     * @return array
+     * @param  array<string, string|array<string, string>> $fetchedIssue
+     * @return array<Label>
      */
     private function getIssueLabels(array $fetchedIssue): array
     {
-        return collect($fetchedIssue['labels'])
+        /** @var array<int, array<string, string>> $labels */
+        $labels = $fetchedIssue['labels'];
+
+        return collect($labels)
             ->map(function (array $label): Label {
                 return new Label(
                     name: $label['name'],
@@ -112,14 +123,16 @@ class IssueService
     }
 
     /**
-     * @param  array<Reaction>  $fetchedIssue
-     * @return array
+     * @param  array<string, string|array<string, string>> $fetchedIssue
+     * @return array<Reaction>
      */
     private function getIssueReactions(array $fetchedIssue): array
     {
         $emojis = config('repos.reactions');
+        /** @var array<string, int> $reactions */
+        $reactions = $fetchedIssue['reactions'];
 
-        return collect($fetchedIssue['reactions'])
+        return collect($reactions)
             ->only(array_keys($emojis))
             ->map(function (int $count, string $content) use ($emojis): Reaction {
                 return new Reaction(
@@ -133,19 +146,25 @@ class IssueService
     }
 
     /**
-     * @param  string  $url
-     * @return array
+     * @param Repository $repo
+     * @return array<Issue>
      *
      * @throws GitHubRateLimitException
      */
-    private function getIssueFromGitHubApi(string $url): array
+    private function getIssueFromGitHubApi(Repository $repo): array
     {
+        $url = self::BASE_URL.$repo->owner.'/'.$repo->name.'/issues';
+
         $result = Http::get($url);
 
         if (! $result->successful()) {
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
         }
 
-        return $result->json();
+        /** @var array<int, array<string, array<string, string>|string>> $fetchedIssues */
+        $fetchedIssues = $result->json();
+        return collect($fetchedIssues)
+            ->map(fn ($fetchedIssue) => $this->parseIssue($repo, $fetchedIssue))
+            ->all();
     }
 }

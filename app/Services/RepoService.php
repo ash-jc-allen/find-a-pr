@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DataTransferObjects\Repository;
 use Illuminate\Support\Collection;
 
 class RepoService
@@ -10,18 +11,17 @@ class RepoService
      * Loop through the repos specified in the config and return them in
      * a format that can be used in the application.
      *
-     * @return Collection
+     * @return Collection<int, Repository>
      */
     public function reposToCrawl(): Collection
     {
-        return collect(config('repos.repos'))
+        $repos = (array) config('repos.repos');
+
+        return collect($repos)
             ->flatMap(function (array $repoNames, string $owner): array {
-                return collect($repoNames)->map(function (string $repoName) use ($owner): array {
-                    return [
-                        'owner' => $owner,
-                        'name' => $repoName,
-                    ];
-                })->all();
+                return collect($repoNames)
+                    ->map(fn(string $repoName): Repository => new Repository($owner, $repoName))
+                    ->all();
             });
     }
 }

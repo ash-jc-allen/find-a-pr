@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\DataTransferObjects\Issue;
+use App\DataTransferObjects\Repository;
 use App\Exceptions\GitHubRateLimitException;
 use App\Services\IssueService;
 use App\Services\RepoService;
@@ -43,6 +44,9 @@ class ListIssues extends Component
         ],
     ];
 
+    /**
+     * @var array<string, array<string, string|bool>>
+     */
     protected $queryString = [
         'sortField' => ['except' => 'random'],
         'sortDirection' => ['except' => 'asc'],
@@ -50,14 +54,20 @@ class ListIssues extends Component
         'showIgnoredIssues' => ['except' => false],
     ];
 
+    /**
+     * @var array<int, string>
+     */
     public array $labels;
 
+    /**
+     * @var Collection<int, Repository>
+     */
     public Collection $repos;
 
     /**
      * A collection of the issues when the component was first mounted.
      *
-     * @var Collection<Issue>
+     * @var Collection<int, Issue>
      */
     public Collection $originalIssues;
 
@@ -115,7 +125,11 @@ class ListIssues extends Component
     public function hydrate(): void
     {
         $this->originalIssues = $this->originalIssues->map(
-            fn ($issueArray): Issue => Issue::fromArray($issueArray)
+            fn ($issueArray): Issue => Issue::fromArray($issueArray) // @phpstan-ignore-line
+        );
+
+        $this->repos = $this->repos->map(
+            fn ($repo): Repository => new Repository($repo['owner'], $repo['name'])
         );
     }
 
@@ -154,6 +168,10 @@ class ListIssues extends Component
         Cookie::queue('firstTimeNoticeClosed', true, 40_320);
     }
 
+    /**
+     * @param array<int, string> $urls
+     * @return void
+     */
     public function updatedIgnoredUrls(array $urls): void
     {
         if (! $urls) {

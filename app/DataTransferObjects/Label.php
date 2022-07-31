@@ -13,11 +13,19 @@ class Label
         //
     }
 
+    /**
+     * @param array<string, string> $label
+     * @return Label
+     */
     public static function fromArray(array $label): self
     {
         return new self(...$label);
     }
 
+    /**
+     * @param array<array<string, string>> $labels
+     * @return array<Label>
+     */
     public static function multipleFromArray(array $labels): array
     {
         return Arr::map(
