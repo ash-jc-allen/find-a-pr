@@ -1,5 +1,6 @@
 {
     "name": "ash-js-allen/find-a-pr",
+    "description": "Find Your First Laravel PR",
     "type": "project",
     "license": "MIT",
     "require": {
