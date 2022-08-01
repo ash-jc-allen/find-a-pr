@@ -62,7 +62,7 @@ class IssueService
             commentCount: $fetchedIssue['comments'],
             createdAt: Carbon::parse($fetchedIssue['created_at']),
             createdBy: $this->getIssueOwner($fetchedIssue),
-            isPullRequest: !empty($fetchedIssue['pull_request']),
+            isPullRequest: ! empty($fetchedIssue['pull_request']),
         );
     }
 
