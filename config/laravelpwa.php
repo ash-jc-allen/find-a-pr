@@ -4,10 +4,10 @@ return [
     'name' => 'LaravelPWA',
     'manifest' => [
         'name' => env('APP_NAME', 'findapr'),
-        'short_name' => 'FPR',
+        'short_name' => 'findapr.io',
         'start_url' => '/',
         'background_color' => '#ffffff',
-        'theme_color' => '#000000',
+        'theme_color' => '#F3F4F6',
         'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',
