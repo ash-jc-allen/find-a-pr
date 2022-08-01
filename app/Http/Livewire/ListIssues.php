@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\DataTransferObjects\Issue;
+use App\DataTransferObjects\Repository;
 use App\Exceptions\GitHubRateLimitException;
 use App\Services\IssueService;
 use App\Services\RepoService;
@@ -106,8 +107,8 @@ class ListIssues extends Component
     }
 
     /**
-     * When the component re-renders, the items in the 'originalIssues' will be
-     * an array. So, hydrate these arrays back into Issue objects before we
+     * When the component re-renders, the items in the 'originalIssues' and 'repos' will be
+     * an array. So, hydrate these arrays back into Issue and Repository objects before we
      * try working with them.
      *
      * @return void
@@ -116,6 +117,10 @@ class ListIssues extends Component
     {
         $this->originalIssues = $this->originalIssues->map(
             fn ($issueArray): Issue => Issue::fromArray($issueArray)
+        );
+
+        $this->repos = $this->repos->map(
+            fn (array $repo): Repository => new Repository($repo['owner'], $repo['name'])
         );
     }
 
