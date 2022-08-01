@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DataTransferObjects\Repository;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class RepoService
@@ -17,9 +18,10 @@ class RepoService
     {
         return collect(config('repos.repos'))
             ->flatMap(function (array $repoNames, string $owner): array {
-                return collect($repoNames)->map(function (string $repoName) use ($owner): Repository {
-                    return new Repository($owner, $repoName);
-                })->all();
+                return Arr::map(
+                    $repoNames,
+                    static fn (string $repoName): Repository => new Repository($owner, $repoName)
+                );
             });
     }
 }
