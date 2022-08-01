@@ -116,11 +116,11 @@ class ListIssues extends Component
     public function hydrate(): void
     {
         $this->originalIssues = $this->originalIssues->map(
-            fn ($issueArray): Issue => Issue::fromArray($issueArray)
+            fn (array $issueArray): Issue => Issue::fromArray($issueArray),
         );
 
         $this->repos = $this->repos->map(
-            fn (array $repo): Repository => new Repository($repo['owner'], $repo['name'])
+            fn (array $repo): Repository => new Repository($repo['owner'], $repo['name']),
         );
     }
 
