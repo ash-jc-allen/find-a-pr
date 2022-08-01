@@ -21,7 +21,7 @@ class IssueService
     /**
      * Get all the issues for displaying.
      *
-     * @return Collection
+     * @return Collection<Issue>
      */
     public function getAll(): Collection
     {
@@ -39,11 +39,11 @@ class IssueService
         $fetchedIssues = Cache::remember(
             $repo->owner.'/'.$repo->name,
             now()->addMinutes(120),
-            fn () => $this->getIssuesFromGitHubApi($repo),
+            fn (): array => $this->getIssuesFromGitHubApi($repo),
         );
 
         return collect($fetchedIssues)
-            ->filter(fn (Issue $issue) => $this->shouldIncludeIssue($issue))
+            ->filter(fn (Issue $issue): bool => $this->shouldIncludeIssue($issue))
             ->all();
     }
 
@@ -129,7 +129,7 @@ class IssueService
 
     /**
      * @param  Repository  $repo
-     * @return array
+     * @return array<Issue>
      *
      * @throws GitHubRateLimitException
      */
@@ -144,8 +144,9 @@ class IssueService
         }
 
         $fetchedIssues = $result->json();
+
         return collect($fetchedIssues)
-            ->map(fn ($fetchedIssue) => $this->parseIssue($repo, $fetchedIssue))
+            ->map(fn (array $fetchedIssue): Issue => $this->parseIssue($repo, $fetchedIssue))
             ->all();
     }
 }
