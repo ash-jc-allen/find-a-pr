@@ -21,7 +21,7 @@ class TweetAboutNewIssues extends Command
         $issues = $this->getUntweetedIssues();
 
         if ($issues->count() === 0) {
-            $this->info('There are no new issues to tweet about');
+            $this->components->info('There are no new issues to tweet about');
             return 0;
         }
 
@@ -57,13 +57,12 @@ class TweetAboutNewIssues extends Command
         $this->components->info('Fetching issues');
         $issues = app(IssueService::class)->getAll();
 
+        $this->components->info('Filtering out already tweeted issues');
+
         $tweetedIssueIds = SocialPost::query()
-            ->whereNull('tweeted_at')
+            ->whereNotNull('tweeted_at')
             ->pluck('issue_id');
 
-        $this->components->info('Filtering out already tweeted issues');
-        $issues = $issues->filter(fn(Issue $issue) => $tweetedIssueIds->doesntContain($issue->id));
-
-        return $issues;
+        return $issues->filter(fn(Issue $issue) => $tweetedIssueIds->doesntContain($issue->id));
     }
 }
