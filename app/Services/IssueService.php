@@ -137,7 +137,11 @@ class IssueService
     {
         $url = self::BASE_URL.$repo->owner.'/'.$repo->name.'/issues';
 
-        $result = Http::get($url);
+        if (config('services.github.username') && config('services.github.token')) {
+            $result = Http::withBasicAuth(config('services.github.username'), config('services.github.token'))->get($url);
+        } else {
+            $result = Http::get($url);
+        }
 
         if (! $result->successful()) {
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
