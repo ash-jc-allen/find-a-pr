@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('issue_repo');
             $table->integer('issue_number')->unsigned();
             $table->bigInteger('issue_id')->unsigned();
-            $table->string('twitter_url');
-            $table->timestamp('twitter_sent_at');
+            $table->string('twitter_url')->nullable();
+            $table->timestamp('twitter_sent_at')->nullable();
             $table->timestamps();
         });
     }
