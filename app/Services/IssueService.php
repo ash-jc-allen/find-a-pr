@@ -13,12 +13,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 class IssueService
 {
-    private const BASE_URL = 'https://api.github.com/repos/';
-
     /**
      * Get all the issues for displaying.
      *
