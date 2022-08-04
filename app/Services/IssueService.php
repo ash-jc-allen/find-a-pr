@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Clients\GitHub;
 use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
@@ -135,13 +136,9 @@ class IssueService
      */
     private function getIssuesFromGitHubApi(Repository $repo): array
     {
-        $url = self::BASE_URL.$repo->owner.'/'.$repo->name.'/issues';
-
-        if (config('services.github.username') && config('services.github.token')) {
-            $result = Http::withBasicAuth(config('services.github.username'), config('services.github.token'))->get($url);
-        } else {
-            $result = Http::get($url);
-        }
+        $result = app(GitHub::class)
+            ->client()
+            ->get($repo->owner.'/'.$repo->name.'/issues');
 
         if (! $result->successful()) {
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
