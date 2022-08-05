@@ -42,4 +42,9 @@ return [
         'ping_url' => env('OHDEAR_PING_URL'),
     ],
 
+    'github' => [
+        'username' => env('GITHUB_USERNAME'),
+        'token' => env('GITHUB_TOKEN'),
+    ],
+
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Clients\GitHub;
 use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
@@ -12,12 +13,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 class IssueService
 {
-    private const BASE_URL = 'https://api.github.com/repos/';
-
     /**
      * Get all the issues for displaying.
      *
@@ -137,9 +135,9 @@ class IssueService
      */
     private function getIssuesFromGitHubApi(Repository $repo): array
     {
-        $url = self::BASE_URL.$repo->owner.'/'.$repo->name.'/issues';
-
-        $result = Http::get($url);
+        $result = app(GitHub::class)
+            ->client()
+            ->get($repo->owner.'/'.$repo->name.'/issues');
 
         if (! $result->successful()) {
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
