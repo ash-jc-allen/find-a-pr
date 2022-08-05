@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SocialPost extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'issue_id',
         'issue_repo',

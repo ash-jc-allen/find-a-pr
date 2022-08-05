@@ -4,6 +4,7 @@ namespace App\Services\Twitter;
 
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\Assert;
+use stdClass;
 
 class TwitterFake implements TwitterInterface
 {
@@ -13,9 +14,11 @@ class TwitterFake implements TwitterInterface
     {
         $this->tweets[] = $status;
 
-        return [
-            'status' => $status,
-        ];
+        $data = new stdClass();
+        $data->id = fake()->numberBetween(1_000_000_000_000_000_000, 2_000_000_000_000_000_000);
+        $data->text = $status;
+
+        return compact('data');
     }
 
     public function assertTweetSent(string $status): self

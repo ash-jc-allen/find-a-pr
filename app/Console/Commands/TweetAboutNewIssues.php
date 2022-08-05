@@ -60,7 +60,7 @@ class TweetAboutNewIssues extends Command
         $this->components->info('Filtering out already tweeted issues');
 
         $tweetedIssueIds = SocialPost::query()
-            ->whereNotNull('tweeted_at')
+            ->whereNotNull('twitter_sent_at')
             ->pluck('issue_id');
 
         return $issues->filter(fn(Issue $issue) => $tweetedIssueIds->doesntContain($issue->id));
