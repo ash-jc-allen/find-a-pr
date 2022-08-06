@@ -2,55 +2,52 @@
 
 namespace App\Services;
 
+use App\Clients\GitHub;
 use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\IssueOwner;
 use App\DataTransferObjects\Label;
 use App\DataTransferObjects\Reaction;
+use App\DataTransferObjects\Repository;
 use App\Exceptions\GitHubRateLimitException;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 class IssueService
 {
-    private const BASE_URL = 'https://api.github.com/repos/';
-
     /**
      * Get all the issues for displaying.
      *
-     * @return Collection
+     * @return Collection<Issue>
      */
     public function getAll(): Collection
     {
-        return app(RepoService::class)->reposToCrawl()
-            ->flatMap(fn (array $repo): array => $this->getIssuesForRepo($repo));
+        return app(RepoService::class)
+            ->reposToCrawl()
+            ->flatMap(fn (Repository $repo): array => $this->getIssuesForRepo($repo));
     }
 
     /**
-     * @param  array  $repo
+     * @param  Repository  $repo
      * @return array<Issue>
      */
-    private function getIssuesForRepo(array $repo): array
+    private function getIssuesForRepo(Repository $repo): array
     {
-        $url = self::BASE_URL.$repo['owner'].'/'.$repo['name'].'/issues';
-
         $fetchedIssues = Cache::remember(
-            $url,
+            $repo->owner.'/'.$repo->name,
             now()->addMinutes(120),
-            fn () => $this->getIssueFromGitHubApi($url),
+            fn (): array => $this->getIssuesFromGitHubApi($repo),
         );
 
         return collect($fetchedIssues)
-            ->map(fn ($issue) => $this->shouldIncludeIssue($issue) ? $this->parseIssue($repo, $issue) : null)
-            ->filter()
+            ->filter(fn (Issue $issue): bool => $this->shouldIncludeIssue($issue))
             ->all();
     }
 
-    private function parseIssue(array $repo, array $fetchedIssue): ?Issue
+    private function parseIssue(Repository $repo, array $fetchedIssue): Issue
     {
-        $repoName = $repo['owner'].'/'.$repo['name'];
+        $repoName = $repo->owner.'/'.$repo->name;
 
         return new Issue(
             repoName: $repoName,
@@ -63,25 +60,21 @@ class IssueService
             commentCount: $fetchedIssue['comments'],
             createdAt: Carbon::parse($fetchedIssue['created_at']),
             createdBy: $this->getIssueOwner($fetchedIssue),
+            isPullRequest: ! empty($fetchedIssue['pull_request']),
         );
     }
 
-    private function shouldIncludeIssue(array $fetchedIssue): bool
+    private function shouldIncludeIssue(Issue $fetchedIssue): bool
     {
-        return ! $this->issueIsAPullRequest($fetchedIssue)
-            && $this->includesAtLeastOneLabel($fetchedIssue, config('repos.labels'));
+        return ! $fetchedIssue->isPullRequest
+            && $this->includesAtLeastOneLabel($fetchedIssue, (array) config('repos.labels'));
     }
 
-    private function includesAtLeastOneLabel(array $fetchedIssue, mixed $labels): bool
+    private function includesAtLeastOneLabel(Issue $fetchedIssue, array $labels): bool
     {
-        $issueLabels = Arr::pluck($fetchedIssue['labels'], 'name');
+        $issueLabels = Arr::pluck($fetchedIssue->labels, 'name');
 
         return array_intersect($issueLabels, $labels) !== [];
-    }
-
-    private function issueIsAPullRequest(array $fetchedIssue): bool
-    {
-        return isset($fetchedIssue['pull_request']);
     }
 
     private function getIssueOwner(array $fetchedIssue): IssueOwner
@@ -133,19 +126,25 @@ class IssueService
     }
 
     /**
-     * @param  string  $url
-     * @return array
+     * @param  Repository  $repo
+     * @return array<Issue>
      *
      * @throws GitHubRateLimitException
      */
-    private function getIssueFromGitHubApi(string $url): array
+    private function getIssuesFromGitHubApi(Repository $repo): array
     {
-        $result = Http::get($url);
+        $result = app(GitHub::class)
+            ->client()
+            ->get($repo->owner.'/'.$repo->name.'/issues');
 
         if (! $result->successful()) {
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
         }
 
-        return $result->json();
+        $fetchedIssues = $result->json();
+
+        return collect($fetchedIssues)
+            ->map(fn (array $fetchedIssue): Issue => $this->parseIssue($repo, $fetchedIssue))
+            ->all();
     }
 }

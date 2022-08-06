@@ -20,6 +20,7 @@ class Issue
         public readonly int $commentCount,
         public readonly CarbonInterface $createdAt,
         public readonly IssueOwner $createdBy,
+        public readonly bool $isPullRequest,
     ) {
         $this->interactionsCount = collect($this->reactions)->reduce(fn ($carry, $reaction) => $reaction->count + $carry, $this->commentCount);
     }
