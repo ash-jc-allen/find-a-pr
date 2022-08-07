@@ -1,0 +1,29 @@
+name: TestSuite
+
+on: [pull_request, push]
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-22.04
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
+
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Install composer dependencies
+        run: |
+          composer install --no-scripts
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          cp .env.ci .env.testing
+          php artisan key:generate
+          npm ci
+          npm run build
+      - name: Run Testsuite
+        run: php artisan test
