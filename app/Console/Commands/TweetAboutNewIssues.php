@@ -22,6 +22,7 @@ class TweetAboutNewIssues extends Command
 
         if ($issues->count() === 0) {
             $this->components->info('There are no new issues to tweet about');
+
             return 0;
         }
 
@@ -63,6 +64,6 @@ class TweetAboutNewIssues extends Command
             ->whereNotNull('twitter_sent_at')
             ->pluck('issue_id');
 
-        return $issues->filter(fn(Issue $issue) => $tweetedIssueIds->doesntContain($issue->id));
+        return $issues->filter(fn (Issue $issue) => $tweetedIssueIds->doesntContain($issue->id));
     }
 }

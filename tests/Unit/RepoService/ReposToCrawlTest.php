@@ -34,17 +34,17 @@ class ReposToCrawlTest extends TestCase
         ]]);
 
         $expectedResult = [
-            new Repository('ash-jc-allen','find-a-pr'),
-            new Repository('ash-jc-allen','favicon-fetcher'),
-            new Repository('ash-jc-allen','laravel-config-validator'),
-            new Repository('ash-jc-allen','short-url'),
-            new Repository('ash-jc-allen','laravel-exchange-rates'),
-            new Repository('laravel','framework'),
-            new Repository('laravel','docs'),
-            new Repository('laravel','vapor-core'),
-            new Repository('laravel','octane'),
-            new Repository('laravelio','laravel.io'),
-            new Repository('laravel-filament','filament'),
+            new Repository('ash-jc-allen', 'find-a-pr'),
+            new Repository('ash-jc-allen', 'favicon-fetcher'),
+            new Repository('ash-jc-allen', 'laravel-config-validator'),
+            new Repository('ash-jc-allen', 'short-url'),
+            new Repository('ash-jc-allen', 'laravel-exchange-rates'),
+            new Repository('laravel', 'framework'),
+            new Repository('laravel', 'docs'),
+            new Repository('laravel', 'vapor-core'),
+            new Repository('laravel', 'octane'),
+            new Repository('laravelio', 'laravel.io'),
+            new Repository('laravel-filament', 'filament'),
         ];
 
         self::assertEquals($expectedResult, (new RepoService())->reposToCrawl()->toArray());

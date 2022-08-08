@@ -45,10 +45,11 @@ class TweetNewIssue implements ShouldQueue, ShouldBeUnique
             return;
         }
 
-        $response = Twitter::tweet("An issue in {$this->issue->repoName} may need your help: {$this->issue->title}" . PHP_EOL . $this->issue->url);
+        $response = Twitter::tweet("An issue in {$this->issue->repoName} may need your help: {$this->issue->title}".PHP_EOL.$this->issue->url);
 
         if (empty($response['data']->id)) {
             RateLimiter::clear('twitter');
+
             return;
         }
 
