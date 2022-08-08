@@ -65,7 +65,7 @@ class TweetNewIssue implements ShouldQueue, ShouldBeUnique
      */
     public function middleware(): array
     {
-        return [new RateLimited('twitter')];
+        return [(new RateLimited('twitter'))->dontRelease()];
     }
 
     public function uniqueId(): string
