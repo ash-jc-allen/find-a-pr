@@ -20,8 +20,7 @@ jobs:
           composer install --no-scripts
       - name: Prepare Laravel Application
         run: |
-          cp .env.ci .env
-          cp .env.ci .env.testing
+          cp .env.example .env
           php artisan key:generate
           npm ci
           npm run build
