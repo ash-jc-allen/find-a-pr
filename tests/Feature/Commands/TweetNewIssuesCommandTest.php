@@ -59,7 +59,7 @@ class TweetNewIssuesCommandTest extends TestCase
 
         $issue = app(IssueService::class)->getAll()->first();
 
-        Twitter::assertLastTweet("An issue in {$issue->repoName} may need your help: {$issue->title}" . PHP_EOL . $issue->url);
+        Twitter::assertLastTweet("An issue in {$issue->repoName} may need your help: {$issue->title}".PHP_EOL.$issue->url);
     }
 
     public function test_correctly_sets_tweeted_timestamp()

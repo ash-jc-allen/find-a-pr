@@ -13,7 +13,7 @@ class TwitterServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->bind(TwitterOAuth::class, function(): TwitterOAuth {
+        $this->app->bind(TwitterOAuth::class, function (): TwitterOAuth {
             return new TwitterOAuth(
                 (string) config('services.twitter.consumer_key'),
                 (string) config('services.twitter.consumer_secret'),
@@ -22,7 +22,7 @@ class TwitterServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->bind(TwitterInterface::class, function(Application $app) {
+        $this->app->bind(TwitterInterface::class, function (Application $app) {
             if ($app->environment() === 'production') {
                 return $app->get(OAuthTwitter::class);
             }
