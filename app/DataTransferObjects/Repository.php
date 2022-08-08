@@ -10,4 +10,9 @@ class Repository
     ) {
         //
     }
+
+    public function __toString(): string
+    {
+        return $this->owner.'/'.$this->name;
+    }
 }

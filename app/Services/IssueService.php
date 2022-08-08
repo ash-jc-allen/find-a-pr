@@ -50,6 +50,8 @@ class IssueService
         $repoName = $repo->owner.'/'.$repo->name;
 
         return new Issue(
+            id: $fetchedIssue['id'],
+            number: $fetchedIssue['number'],
             repoName: $repoName,
             repoUrl: 'https://github.com/'.$repoName,
             title: $fetchedIssue['title'],

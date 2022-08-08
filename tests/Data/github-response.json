@@ -1,0 +1,73 @@
+[
+    {
+        "url": "https://api.github.com/repos/ash-jc-allen/find-a-pr/issues/102",
+        "repository_url": "https://api.github.com/repos/ash-jc-allen/find-a-pr",
+        "labels_url": "https://api.github.com/repos/ash-jc-allen/find-a-pr/issues/102/labels{/name}",
+        "comments_url": "https://api.github.com/repos/ash-jc-allen/find-a-pr/issues/102/comments",
+        "events_url": "https://api.github.com/repos/ash-jc-allen/find-a-pr/issues/102/events",
+        "html_url": "https://github.com/ash-jc-allen/find-a-pr/issues/102",
+        "id": 1306817207,
+        "node_id": "I_kwDOHW5eds5N5HK3",
+        "number": 102,
+        "title": "Tweet new issues",
+        "user": {
+            "login": "rubenvanerk",
+            "id": 20305359,
+            "node_id": "MDQ6VXNlcjIwMzA1MzU5",
+            "avatar_url": "https://avatars.githubusercontent.com/u/20305359?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/rubenvanerk",
+            "html_url": "https://github.com/rubenvanerk",
+            "followers_url": "https://api.github.com/users/rubenvanerk/followers",
+            "following_url": "https://api.github.com/users/rubenvanerk/following{/other_user}",
+            "gists_url": "https://api.github.com/users/rubenvanerk/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/rubenvanerk/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/rubenvanerk/subscriptions",
+            "organizations_url": "https://api.github.com/users/rubenvanerk/orgs",
+            "repos_url": "https://api.github.com/users/rubenvanerk/repos",
+            "events_url": "https://api.github.com/users/rubenvanerk/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/rubenvanerk/received_events",
+            "type": "User",
+            "site_admin": false
+        },
+        "labels": [
+            {
+                "id": 4144832478,
+                "node_id": "LA_kwDOHW5eds73DR_e",
+                "url": "https://api.github.com/repos/ash-jc-allen/find-a-pr/labels/help%20wanted",
+                "name": "help wanted",
+                "color": "008672",
+                "default": true,
+                "description": "Extra attention is needed"
+            }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignee": null,
+        "assignees": [
+        ],
+        "milestone": null,
+        "comments": 6,
+        "created_at": "2022-07-16T14:14:33Z",
+        "updated_at": "2022-08-01T20:33:45Z",
+        "closed_at": null,
+        "author_association": "CONTRIBUTOR",
+        "active_lock_reason": null,
+        "body": "To increase the reach of issues that need help, we could tweet them automatically.",
+        "reactions": {
+            "url": "https://api.github.com/repos/ash-jc-allen/find-a-pr/issues/102/reactions",
+            "total_count": 1,
+            "+1": 0,
+            "-1": 0,
+            "laugh": 0,
+            "hooray": 0,
+            "confused": 0,
+            "heart": 0,
+            "rocket": 1,
+            "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/ash-jc-allen/find-a-pr/issues/102/timeline",
+        "performed_via_github_app": null,
+        "state_reason": null
+    }
+]
