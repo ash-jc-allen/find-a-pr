@@ -35,19 +35,27 @@ The following tools are required in order to start the installation and run the 
     ```sh
     composer install --ignore-platform-reqs
     ```   
-5. Boot Sail
+5. Install Sail
+```sh
+composer require laravel/sail --dev
+```
+6.  Publish sail 
+```sh
+php artisan sail:install
+```
+7. Boot Sail
     ```sh
    sail up -d
     ```   
-6. Generate app key
+8. Generate app key
     ```sh
     sail php artisan key:generate
     ```
-7. Install NPM dependencies
+9. Install NPM dependencies
     ```sh
     sail npm install
     ```
-8. Build assets using NPM
+10. Build assets using NPM
     ```sh
     sail npm run dev
     ```
