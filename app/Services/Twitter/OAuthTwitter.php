@@ -9,7 +9,7 @@ class OAuthTwitter implements TwitterInterface
     public function __construct(
         protected TwitterOAuth $twitter,
     ) {
-        $this->twitter->setApiVersion(2);
+        $this->twitter->setApiVersion('2');
     }
 
     public function tweet(string $status): ?array
