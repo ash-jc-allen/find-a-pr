@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'Find A PR',
     'manifest' => [
         'name' => env('APP_NAME', 'findapr'),
         'short_name' => 'findapr.io',
         'start_url' => '/',
-        'background_color' => '#ffffff',
-        'theme_color' => '#F3F4F6',
+        'background_color' => '#334155',
+        'theme_color' => '#16a34a',
         'display' => 'standalone',
         'orientation'=> 'any',
-        'status_bar'=> 'black',
+        'status_bar'=> '#334155',
         'icons' => [
             '72x72' => [
                 'path' => '/images/icons/icon-72x72.png',
