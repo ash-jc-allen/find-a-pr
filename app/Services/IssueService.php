@@ -92,7 +92,7 @@ class IssueService
     }
 
     /**
-     * @param  array<Label>  $fetchedIssue
+     * @param  array  $fetchedIssue
      * @return array
      */
     private function getIssueLabels(array $fetchedIssue): array
@@ -107,7 +107,7 @@ class IssueService
     }
 
     /**
-     * @param  array<Reaction>  $fetchedIssue
+     * @param  array  $fetchedIssue
      * @return array
      */
     private function getIssueReactions(array $fetchedIssue): array

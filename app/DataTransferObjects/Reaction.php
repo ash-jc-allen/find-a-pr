@@ -8,7 +8,7 @@ class Reaction
 {
     public function __construct(
         public readonly string $content,
-        public readonly string $count,
+        public readonly int $count,
         public readonly string $emoji,
     ) {
         //
