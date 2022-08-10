@@ -7,7 +7,7 @@ return [
         'short_name' => 'findapr.io',
         'start_url' => '/',
         'background_color' => '#334155',
-        'theme_color' => '#16a34a',
+        'theme_color' => '#334155',
         'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> '#334155',
