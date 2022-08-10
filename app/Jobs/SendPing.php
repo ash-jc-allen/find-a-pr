@@ -18,7 +18,6 @@ class SendPing implements ShouldQueue
 
     public function __construct(private readonly string $url)
     {
-
     }
 
     public function handle(): void
