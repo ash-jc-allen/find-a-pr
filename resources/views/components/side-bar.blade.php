@@ -35,7 +35,7 @@
     @endif
 
     <div class="hidden md:block">
-        <div class="flex justify-between pb-1 items-center hidden">
+        <div class="flex justify-between pb-1 items-center">
             <p>Repositories:</p>
             <p class="text-gray-400 text-sm">({{ $repos->count() }})</p>
         </div>
