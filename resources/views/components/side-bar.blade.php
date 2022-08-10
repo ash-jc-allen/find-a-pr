@@ -40,13 +40,19 @@
             <p class="text-gray-400 text-sm">({{ $repos->count() }})</p>
         </div>
 
-        @foreach($repos as $repo)
-            <div>
-                <a href="https://github.com/{{ $repo->owner }}/{{ $repo->name }}" class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold bg-green-400 dark:bg-green-600 text-white hover:bg-green-500 dark:hover:bg-green-700 transition ease-out">
-                    {{ $repo->owner }}/{{ $repo->name }}
-                </a>
+        <div x-data="{showMore: false}" class="overflow-hidden relative" :class="showMore ? '' : 'max-h-32'">
+            @foreach($repos as $repo)
+                <div>
+                    <a href="https://github.com/{{ $repo->owner }}/{{ $repo->name }}" class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold bg-green-400 dark:bg-green-600 text-white hover:bg-green-500 dark:hover:bg-green-700 transition ease-out">
+                        {{ $repo->owner }}/{{ $repo->name }}
+                    </a>
+                </div>
+            @endforeach
+
+            <div x-on:click="showMore = ! showMore" :class="showMore ? '' : 'bg-gradient-to-t from-gray-100 dark:from-slate-700 to-transparent absolute left-0 bottom-0'" class="font-bold h-20 w-full z-10 text-center pt-14 hover:text-gray-500 cursor-pointer">
+                <span x-text="showMore ? 'View less' : 'View more'" class="border-b border-b-green-400">View more</span>
             </div>
-        @endforeach
+        </div>
 
         <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
 
