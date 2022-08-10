@@ -50,6 +50,8 @@ class IssueService
         $repoName = $repo->owner.'/'.$repo->name;
 
         return new Issue(
+            id: $fetchedIssue['id'],
+            number: $fetchedIssue['number'],
             repoName: $repoName,
             repoUrl: 'https://github.com/'.$repoName,
             title: $fetchedIssue['title'],
@@ -90,7 +92,7 @@ class IssueService
     }
 
     /**
-     * @param  array<Label>  $fetchedIssue
+     * @param  array  $fetchedIssue
      * @return array
      */
     private function getIssueLabels(array $fetchedIssue): array
@@ -105,7 +107,7 @@ class IssueService
     }
 
     /**
-     * @param  array<Reaction>  $fetchedIssue
+     * @param  array  $fetchedIssue
      * @return array
      */
     private function getIssueReactions(array $fetchedIssue): array

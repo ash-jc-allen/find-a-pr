@@ -10,6 +10,8 @@ class Issue
     public readonly int $interactionsCount;
 
     public function __construct(
+        public readonly int $id,
+        public readonly int $number,
         public readonly string $repoName,
         public readonly string $repoUrl,
         public readonly string $title,
