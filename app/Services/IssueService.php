@@ -32,7 +32,7 @@ class IssueService
      * @param  Repository  $repo
      * @return array<Issue>
      */
-    private function getIssuesForRepo(Repository $repo): array
+    public function getIssuesForRepo(Repository $repo): array
     {
         $fetchedIssues = Cache::remember(
             $repo->owner.'/'.$repo->name,
