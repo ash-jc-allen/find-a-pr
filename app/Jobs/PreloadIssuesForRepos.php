@@ -21,7 +21,7 @@ class PreloadIssuesForRepos implements ShouldQueue
     use SerializesModels;
 
     /**
-     * @param Collection<Repository> $repos
+     * @param  Collection<Repository>  $repos
      */
     public function __construct(private readonly Collection $repos)
     {
