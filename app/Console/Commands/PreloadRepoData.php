@@ -19,6 +19,7 @@ class PreloadRepoData extends Command
     {
         $this->components->info('Preloading and caching issues...');
 
+        logger('start');
         $batches = app(RepoService::class)
             ->reposToCrawl()
             ->chunk(10)
@@ -31,6 +32,7 @@ class PreloadRepoData extends Command
 
         Bus::batch($batches)
             ->then(function (): void {
+                logger('finished');
                 Artisan::call('issues:tweet');
             })
             ->dispatch();
