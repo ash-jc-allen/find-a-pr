@@ -31,7 +31,7 @@ class PreloadIssuesForRepos implements ShouldQueue
     public function handle(IssueService $issueService): void
     {
         foreach ($this->repos as $repo) {
-            $issueService->getIssuesForRepo($repo);
+            $issueService->getIssuesForRepo(repo: $repo, forceRefresh: true);
         }
     }
 }

@@ -30,12 +30,19 @@ class IssueService
 
     /**
      * @param  Repository  $repo
+     * @param  bool  $forceRefresh
      * @return array<Issue>
      */
-    public function getIssuesForRepo(Repository $repo): array
+    public function getIssuesForRepo(Repository $repo, bool $forceRefresh = false): array
     {
+        $cacheKey = $repo->owner.'/'.$repo->name;
+
+        if ($forceRefresh) {
+            Cache::forget($cacheKey);
+        }
+
         $fetchedIssues = Cache::remember(
-            $repo->owner.'/'.$repo->name,
+            $cacheKey,
             now()->addMinutes(120),
             fn (): array => $this->getIssuesFromGitHubApi($repo),
         );
