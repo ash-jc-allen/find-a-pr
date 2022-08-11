@@ -22,7 +22,7 @@ class PreloadRepoData extends Command
         logger('start');
         $batches = app(RepoService::class)
             ->reposToCrawl()
-            ->chunk(10)
+            ->chunk(25)
             ->map(function (Collection $repos): PreloadIssuesForRepos {
                 return new PreloadIssuesForRepos($repos);
             })
