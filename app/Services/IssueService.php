@@ -29,8 +29,8 @@ class IssueService
     }
 
     /**
-     * @param Repository $repo
-     * @param bool $forceRefresh
+     * @param  Repository  $repo
+     * @param  bool  $forceRefresh
      * @return array<Issue>
      */
     public function getIssuesForRepo(Repository $repo, bool $forceRefresh = false): array
