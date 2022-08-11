@@ -16,9 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('repos:preload')
-            ->hourly()
-            ->then(fn () => $this->call('issues:tweet'));
+        $schedule->command('repos:preload')->hourly();
 
         // Ping OhDear to make sure the scheduler and default queue is running.
         $schedule->job(new SendPing(config('services.ohdear.ping_url')))->everyMinute();
