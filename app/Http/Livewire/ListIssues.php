@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
-use Illuminate\Support\Facades\Log;
 
 class ListIssues extends Component
 {
