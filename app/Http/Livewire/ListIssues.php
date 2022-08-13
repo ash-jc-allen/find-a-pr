@@ -82,7 +82,7 @@ class ListIssues extends Component
     public function mount(): void
     {
         if ($this->sortField) {
-            if (!$this->sortDirection) {
+            if (! $this->sortDirection) {
                 $this->sortDirection = 'asc';
             }
             foreach (self::SORTS as $key => $sort) {
@@ -92,7 +92,7 @@ class ListIssues extends Component
                 }
             }
         }
-        
+
         $this->labels = config('repos.labels');
         $this->repos = app(RepoService::class)->reposToCrawl()->sort();
 
