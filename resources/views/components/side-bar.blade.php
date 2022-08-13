@@ -9,6 +9,7 @@
 <div {{ $attributes->class('md:w-1/4 my-10 pr-6') }} x-transition>
     <label for="search" class="inline-block pb-1">Search:</label>
     <input id="search"
+           x-ref="search"
            wire:model.debounce="searchTerm"
            type="search"
            placeholder="Search..."
