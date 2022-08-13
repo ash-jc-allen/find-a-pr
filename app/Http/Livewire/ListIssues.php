@@ -81,6 +81,8 @@ class ListIssues extends Component
 
     public function mount(): void
     {
+        $this->setSortOrderOnPageLoad();
+
         $this->labels = config('repos.labels');
         $this->repos = app(RepoService::class)->reposToCrawl()->sort();
 
@@ -163,6 +165,17 @@ class ListIssues extends Component
     {
         if (! $urls) {
             $this->showIgnoredIssues = false;
+        }
+    }
+
+    private function setSortOrderOnPageLoad(): void
+    {
+        if ($this->sortField) {
+            $this->sort = collect(self::SORTS)
+                ->where('field', $this->sortField)
+                ->where('direction', $this->sortDirection)
+                ->keys()
+                ->first();
         }
     }
 }
