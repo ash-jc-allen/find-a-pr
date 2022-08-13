@@ -4,11 +4,18 @@
         'ignoredUrls': @entangle('ignoredUrls'),
         getIgnoredUrls(){
             this.ignoredUrls = Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) || []);
+        },
+        searchFocus(event){
+            if (event.srcElement.id == 'search') {
+                return;
+            }
+            event.preventDefault();
+            $refs.search.focus();
         }
     }"
     x-init="getIgnoredUrls();"
     class="mt-12 md:flex"
-    @keyup.slash.window="$refs.search.focus();">
+    @keydown.slash.window="searchFocus">
 
     <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" x-show="showSideBar" class="block md:hidden" x-cloak/>
     <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" class="hidden md:block"/>
