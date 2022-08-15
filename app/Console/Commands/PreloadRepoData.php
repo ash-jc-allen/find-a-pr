@@ -21,7 +21,7 @@ class PreloadRepoData extends Command
 
         $jobs = app(RepoService::class)
             ->reposToCrawl()
-            ->map(fn(Repository $repo): PreloadIssuesForRepo => new PreloadIssuesForRepo($repo))
+            ->map(fn (Repository $repo): PreloadIssuesForRepo => new PreloadIssuesForRepo($repo))
             ->all();
 
         $this->components->info('Dispatching '.count($jobs).' jobs in a batch to find issues.');
