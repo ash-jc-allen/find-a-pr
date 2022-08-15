@@ -7,7 +7,8 @@
         }
     }"
     x-init="getIgnoredUrls();"
-    class="mt-12 md:flex">
+    class="mt-12 md:flex"
+    @keydown.slash.window.prevent="$refs.search.focus()">
 
     <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" x-show="showSideBar" class="block md:hidden" x-cloak/>
     <x-side-bar :repos="$repos" :labels="$labels" :sorts="$sorts" :ignored-urls="$ignoredUrls" class="hidden md:block"/>
