@@ -19,14 +19,14 @@ class PreloadRepoData extends Command
     {
         $this->components->info('Preloading and caching issues...');
 
-        $repos = app(RepoService::class)
+        $jobs = app(RepoService::class)
             ->reposToCrawl()
             ->map(fn(Repository $repo): PreloadIssuesForRepo => new PreloadIssuesForRepo($repo))
             ->all();
 
-        $this->components->info('Dispatching '.count($repos).' jobs in a batch to find issues.');
+        $this->components->info('Dispatching '.count($jobs).' jobs in a batch to find issues.');
 
-        Bus::batch($repos)
+        Bus::batch($jobs)
             ->then(function (): void {
                 Artisan::call('issues:tweet');
             })
