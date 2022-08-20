@@ -26,8 +26,10 @@ class PreloadRepoData extends Command
 
         $this->components->info('Dispatching '.count($jobs).' jobs in a batch to find issues.');
 
+        logger('start');
         Bus::batch($jobs)
             ->then(function (): void {
+                logger('end');
                 Artisan::call('issues:tweet');
             })
             ->dispatch();
