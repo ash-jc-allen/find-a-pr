@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\DataTransferObjects\Repository;
-use App\Jobs\PreloadIssuesForRepo;
+use App\Jobs\PreloadIssuesForRepos;
 use App\Services\RepoService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
 
@@ -19,14 +19,17 @@ class PreloadRepoData extends Command
     {
         $this->components->info('Preloading and caching issues...');
 
-        $jobs = app(RepoService::class)
+        $batches = app(RepoService::class)
             ->reposToCrawl()
-            ->map(fn (Repository $repo): PreloadIssuesForRepo => new PreloadIssuesForRepo($repo))
+            ->chunk(25)
+            ->map(function (Collection $repos): PreloadIssuesForRepos {
+                return new PreloadIssuesForRepos($repos);
+            })
             ->all();
 
-        $this->components->info('Dispatching '.count($jobs).' jobs in a batch to find issues.');
+        $this->components->info('Dispatching '.count($batches).' jobs in a batch to find repos.');
 
-        Bus::batch($jobs)
+        Bus::batch($batches)
             ->then(function (): void {
                 Artisan::call('issues:tweet');
             })
