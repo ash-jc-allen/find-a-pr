@@ -10,9 +10,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Collection;
 
-class PreloadIssuesForRepos implements ShouldQueue
+class PreloadIssuesForRepo implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -20,18 +19,13 @@ class PreloadIssuesForRepos implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /**
-     * @param  Collection<Repository>  $repos
-     */
-    public function __construct(private readonly Collection $repos)
+    public function __construct(private readonly Repository $repo)
     {
         //
     }
 
     public function handle(IssueService $issueService): void
     {
-        foreach ($this->repos as $repo) {
-            $issueService->getIssuesForRepo(repo: $repo, forceRefresh: true);
-        }
+        $issueService->getIssuesForRepo(repo: $this->repo, forceRefresh: true);
     }
 }
