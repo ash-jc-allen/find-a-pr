@@ -153,10 +153,8 @@ class ListIssues extends Component
         };
     }
 
-    public function hideFirstTimeNotice(): void
+    public function updatedShouldDisplayFirstTimeNotice(): void
     {
-        $this->shouldDisplayFirstTimeNotice = false;
-
         // 4 weeks = 40,320 minutes
         Cookie::queue('firstTimeNoticeClosed', true, 40_320);
     }

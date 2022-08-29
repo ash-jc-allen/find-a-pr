@@ -1,11 +1,11 @@
-<div class="border bg-green-200 dark:border-slate-600 p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow dark:bg-green-400 dark:text-gray-700">
+<div x-data="{ show: @entangle('shouldDisplayFirstTimeNotice') }" x-show="show" class="border bg-green-200 dark:border-slate-600 p-4 sm:py-5 sm:px-8 my-4 rounded-lg shadow dark:bg-green-400 dark:text-gray-700">
     <div class="flex flex-col sm:flex-row justify-start sm:justify-between items-start gap-2">
         <div class="w-full md:w-3/4">
             <p class="text-xl font-bold inline-block">First time here? 👋</p>
         </div>
 
         <button type="button"
-                wire:click="hideFirstTimeNotice"
+                x-on:click="show = false"
                 class="flex justify-center items-center px-4 py-1.5 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:hover:bg-green-600 dark:focus:ring-offset-green-400 transition ease-out"
         >Okay, got it!</button>
     </div>
