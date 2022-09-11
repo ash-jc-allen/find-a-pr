@@ -163,11 +163,13 @@ class ListIssues extends Component
 
     public function updatedIgnoredUrls(array $urls): void
     {
-        $this->ignoredUrls = $urls = collect($urls)
-            ->filter(fn ($url) => $this->originalIssues->contains(fn (Issue $issue) => $url === $issue->url))
+        $this->ignoredUrls = collect($urls)
+            ->filter(function (string $url): bool {
+                return $this->originalIssues->contains(fn (Issue $issue): bool => $url === $issue->url);
+            })
             ->toArray();
 
-        if (! $urls) {
+        if (! $this->ignoredUrls) {
             $this->showIgnoredIssues = false;
         }
     }
