@@ -149,7 +149,7 @@ class IssueService
             ->client()
             ->get($fullRepoName.'/issues');
 
-        if (!$result->successful()) {
+        if (! $result->successful()) {
             return $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
         }
 
@@ -161,9 +161,10 @@ class IssueService
     }
 
     /**
-     * @param Response $response
-     * @param string $fullRepoName
+     * @param  Response  $response
+     * @param  string  $fullRepoName
      * @return array
+     *
      * @throws GitHubRateLimitException
      */
     private function handleUnsuccessfulIssueRequest(Response $response, string $fullRepoName): array
@@ -183,9 +184,10 @@ class IssueService
     }
 
     /**
-     * @param Response $response
-     * @param string $fullRepoName
+     * @param  Response  $response
+     * @param  string  $fullRepoName
      * @return array
+     *
      * @throws GitHubRateLimitException
      */
     private function handleForbiddenResponse(Response $response, string $fullRepoName): array
@@ -198,5 +200,4 @@ class IssueService
 
         return [];
     }
-
 }
