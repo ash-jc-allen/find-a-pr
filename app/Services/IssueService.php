@@ -194,6 +194,8 @@ class IssueService
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
         }
 
+        report($fullRepoName.' is a forbidden GitHub repo.');
+
         return [];
     }
 
