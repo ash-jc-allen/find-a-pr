@@ -13,14 +13,14 @@
 
         <div class="flex">
             <a href="{{ $issue->url }}" target="_blank"
-                class="inline-block w-full px-5 py-2 text-sm font-medium text-white transition ease-out bg-green-400 border border-transparent rounded-md shadow-sm dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700">View
+                class="inline-block w-full my-auto px-5 py-2.5 text-sm font-medium text-white transition ease-out bg-green-400 border border-transparent rounded-md shadow-sm dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700">View
                 Issue
             </a>
             <x-ignore-issue issueUrl="{{ $issue->url }}" :is-ignored="$isIgnored" />
         </div>
     </div>
 
-    <div class="my-2">
+    <div class="my-2 space-x-1">
         @foreach ($issue->labels as $label)
             <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold border bg-opacity-20"
                 style="color: {{ $label->color }}; border-color: {{ $label->color }}; background-color: {{ $label->color . '30' }}">
