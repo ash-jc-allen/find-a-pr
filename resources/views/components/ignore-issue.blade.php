@@ -25,7 +25,7 @@
 >
     <button
         @click="toggleIgnoredUrl('{{$issueUrl}}');"
-        class="flex-1 border text-gray-400 hover:bg-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 font-bold px-3 py-2 ml-1 rounded-md outline-none focus:outline-none ease-linear transition-all duration-150"
+        class="flex-1 btn-secondary"
         type="button"
     >
         @if($isIgnored)

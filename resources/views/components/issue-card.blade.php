@@ -13,8 +13,7 @@
 
         <div class="flex">
             <a href="{{ $issue->url }}" target="_blank"
-                class="inline-block w-full my-auto px-5 py-2.5 text-sm font-medium text-white transition ease-out bg-green-400 border border-transparent rounded-md shadow-sm dark:bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:hover:bg-green-700">View
-                Issue
+                class="inline-block w-full btn-primary">View Issue
             </a>
             <x-ignore-issue issueUrl="{{ $issue->url }}" :is-ignored="$isIgnored" />
         </div>
