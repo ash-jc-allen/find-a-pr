@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="my-2">
+    <div class="my-2 space-x-0.5">
         @foreach ($issue->labels as $label)
             <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold border bg-opacity-20"
                 style="color: {{ $label->color }}; border-color: {{ $label->color }}; background-color: {{ $label->color . '30' }}">
