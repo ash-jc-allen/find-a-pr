@@ -101,7 +101,6 @@ class RepoService
      */
     private function handleForbiddenResponse(Response $response, string $fullRepoName): array
     {
-        dd('here');
         if ($response->header('X-RateLimit-Remaining') === '0') {
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
         }
