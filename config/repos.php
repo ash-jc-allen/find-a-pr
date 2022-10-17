@@ -82,7 +82,7 @@ return [
             'laravel-validation-rules', 'laravel-varnish', 'laravel-view-components', 'laravel-view-models', 'laravel-visit',
             'laravel-visit-app', 'laravel-web-tinker', 'laravel-webhook-client', 'laravel-webhook-server', 'laravel-welcome-notification',
             'laravel4-googletagmanager', 'laravelpackage.training', 'last-fm-now-playing', 'macroable', 'mailchimp-boilerplate',
-            'mailcoach-docs', 'mailcoach-packages', 'mailcoach-packer', 'mailcoach-support', 'mailcoach-ui', 'mailcoach-vapor',
+            'mailcoach-packages', 'mailcoach-packer', 'mailcoach-support', 'mailcoach-ui', 'mailcoach-vapor',
             'medialibrary-app', 'medialibrary-demo', 'medialibrary.pro', 'meetup.laravel.com', 'menu', 'mixed-content-scanner',
             'mixed-content-scanner-cli', 'myray.app', 'newsletter-form', 'nova-app-event-projector', 'nova-backup-tool',
             'nova-tags-field', 'nova-tail-tool', 'nova-translatable', 'nova-translatable-testapp', 'npm-install-peers',
