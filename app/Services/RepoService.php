@@ -28,8 +28,8 @@ class RepoService
     {
         $repositoryData = $this->cacheRepoData($repository);
 
-        return !empty($repositoryData)
-            && !$this->repoIsArchived($repositoryData);
+        return ! empty($repositoryData)
+            && ! $this->repoIsArchived($repositoryData);
     }
 
     private function cacheRepoData(Repository $repo): array
