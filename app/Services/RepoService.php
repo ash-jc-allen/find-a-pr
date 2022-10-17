@@ -12,56 +12,43 @@ use Illuminate\Support\Facades\Cache;
 
 class RepoService
 {
-    /**
-     * Loop through the formatted repos and return filtered repos
-     *
-     * @return Collection
-     */
     public function reposToCrawl(): Collection
     {
-        return $this->getAllRepos(config('repos.repos'))
-            ->map(fn (Repository $repo): array|Repository => $this->getRepo($repo))
-            ->filter();
-    }
-
-    /**
-    * get all formatted repos
-    *
-    * @return Collection
-    */
-    public function getAllRepos(array $repos): collection
-    {
-        return collect($repos)
+        return collect(config('repos.repos'))
             ->flatMap(function (array $repoNames, string $owner): array {
                 return Arr::map(
                     $repoNames,
                     static fn (string $repoName): Repository => new Repository($owner, $repoName)
                 );
-            });
+            })
+            ->filter(fn (Repository $repository): bool => $this->repoCanBeCrawled($repository));
     }
 
-    public function getRepo(Repository $repo, bool $forceRefresh = false): array|Repository
+    private function repoCanBeCrawled(Repository $repository): bool
+    {
+        $repositoryData = $this->cacheRepoData($repository);
+
+        return !empty($repositoryData)
+            && !$this->repoIsArchived($repositoryData);
+    }
+
+    private function cacheRepoData(Repository $repo): array
     {
         $cacheKey = $repo->owner.'/'.$repo->name.'-repo';
 
-        if ($forceRefresh) {
-            Cache::forget($cacheKey);
-        }
-
-        $fetchedRepo = Cache::remember(
+        return Cache::remember(
             $cacheKey,
-            now()->addMinutes(120),
+            now()->addDay(),
             fn (): array => $this->getRepoFromGitHubApi($repo),
         );
-        
-        if(! isset($fetchedRepo['archived']) || $fetchedRepo['archived']) {
-            return [];
-        }
-
-        return $repo;
     }
 
-    public function getRepoFromGitHubApi(Repository $repo): array
+    private function repoIsArchived(array $repoData): bool
+    {
+        return $repoData['archived'] ?? true;
+    }
+
+    private function getRepoFromGitHubApi(Repository $repo): array
     {
         $fullRepoName = $repo->owner.'/'.$repo->name;
 
@@ -88,7 +75,7 @@ class RepoService
     private function handleNotFoundResponse(string $fullRepoName): array
     {
         report($fullRepoName.' is not a valid GitHub repo.');
-        
+
         return [];
     }
 
