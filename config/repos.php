@@ -157,6 +157,9 @@ return [
             'web-link', 'web-profiler-bundle', 'web-server-bundle', 'webapp-meta', 'webapp-pack', 'webpack-encore', 'webpack-encore-bundle',
             'website-skeleton', 'workflow', 'yaml', 'yunpian-notifier', 'zendesk-notifier', 'zulip-notifier',
         ],
+        'ylsideas' => [
+            'cockroachdb-laravel', 'feature-flags', 'subscribable-notifications',
+        ],
     ],
 
     'labels' => [
