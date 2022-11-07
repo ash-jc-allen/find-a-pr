@@ -38,7 +38,7 @@ class RepoService
 
         return Cache::remember(
             $cacheKey,
-            now()->addDay(),
+            now()->addWeek(),
             fn (): array => $this->getRepoFromGitHubApi($repo),
         );
     }
