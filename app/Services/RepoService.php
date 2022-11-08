@@ -71,8 +71,8 @@ final class RepoService
     }
 
     /**
-     * @param Response $response
-     * @param string $fullRepoName
+     * @param  Response  $response
+     * @param  string  $fullRepoName
      * @return void
      *
      * @throws GitHubRateLimitException
