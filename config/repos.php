@@ -71,7 +71,7 @@ return [
             'laravel-prefixed-ids', 'laravel-query-builder', 'laravel-query-builder-security-issue-poc', 'laravel-queue-aware',
             'laravel-queueable-action', 'laravel-queued-db-cleanup', 'laravel-queues-demo-app', 'laravel-random-command',
             'laravel-rate-limited-job-middleware', 'laravel-ray', 'laravel-ray-demo-app', 'laravel-rdap', 'laravel-referer',
-            'laravel-relatable', 'laravel-remote', 'laravel-resource-links', 'laravel-responsecache', 'laravel-robots-middleware',
+            'laravel-relatable', 'laravel-remote', 'laravel-responsecache', 'laravel-robots-middleware',
             'laravel-route-attributes', 'laravel-route-discovery', 'laravel-schedule-monitor', 'laravel-schemaless-attributes',
             'laravel-searchable', 'laravel-server-monitor', 'laravel-server-side-rendering', 'laravel-server-side-rendering-examples',
             'laravel-settings', 'laravel-short-schedule', 'laravel-signal-aware-command', 'laravel-site-search', 'laravel-sitemap',
