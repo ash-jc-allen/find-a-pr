@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Jobs;
 
 use App\DataTransferObjects\Repository;
+use App\Exceptions\RepoNotCrawlableException;
 use App\Services\RepoService;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
@@ -33,7 +34,11 @@ final class EnsureRepoIsCrawlable implements ShouldQueue
     public function handle(RepoService $repoService): void
     {
         foreach ($this->repos as $repo) {
-            $repoService->repoCanBeCrawled($repo);
+            try {
+                $repoService->ensureRepoCanBeCrawled($repo);
+            } catch (RepoNotCrawlableException $e) {
+                report($e);
+            }
         }
     }
 }
