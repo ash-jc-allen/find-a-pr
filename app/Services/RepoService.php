@@ -26,8 +26,9 @@ final class RepoService
     }
 
     /**
-     * @param Repository $repository
+     * @param  Repository  $repository
      * @return void
+     *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
@@ -48,8 +49,9 @@ final class RepoService
     }
 
     /**
-     * @param Repository $repo
+     * @param  Repository  $repo
      * @return array
+     *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
@@ -69,9 +71,10 @@ final class RepoService
     }
 
     /**
-     * @param Response $response
-     * @param string $fullRepoName
+     * @param  Response  $response
+     * @param  string  $fullRepoName
      * @return array
+     *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
@@ -85,8 +88,9 @@ final class RepoService
     }
 
     /**
-     * @param string $fullRepoName
+     * @param  string  $fullRepoName
      * @return void
+     *
      * @throws RepoNotCrawlableException
      */
     private function handleNotFoundResponse(string $fullRepoName): void
@@ -95,8 +99,8 @@ final class RepoService
     }
 
     /**
-     * @param Response $response
-     * @param string $fullRepoName
+     * @param  Response  $response
+     * @param  string  $fullRepoName
      * @return void
      *
      * @throws GitHubRateLimitException
