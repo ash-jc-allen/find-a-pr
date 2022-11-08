@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Clients\GitHub;
 use App\DataTransferObjects\Repository;
 use App\Exceptions\GitHubRateLimitException;
+use App\Exceptions\RepoNotCrawlableException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
-class RepoService
+final class RepoService
 {
     public function reposToCrawl(): Collection
     {
@@ -20,27 +22,25 @@ class RepoService
                     $repoNames,
                     static fn (string $repoName): Repository => new Repository($owner, $repoName)
                 );
-            })
-            ->filter(fn (Repository $repository): bool => $this->repoCanBeCrawled($repository));
+            });
     }
 
-    private function repoCanBeCrawled(Repository $repository): bool
+    /**
+     * @param  Repository  $repository
+     * @return void
+     *
+     * @throws GitHubRateLimitException
+     * @throws RepoNotCrawlableException
+     */
+    public function ensureRepoCanBeCrawled(Repository $repository): void
     {
-        $repositoryData = $this->cacheRepoData($repository);
+        $repositoryData = $this->getRepoFromGitHubApi($repository);
 
-        return ! empty($repositoryData)
-            && ! $this->repoIsArchived($repositoryData);
-    }
-
-    private function cacheRepoData(Repository $repo): array
-    {
-        $cacheKey = $repo->owner.'/'.$repo->name.'-repo';
-
-        return Cache::remember(
-            $cacheKey,
-            now()->addWeek(),
-            fn (): array => $this->getRepoFromGitHubApi($repo),
-        );
+        if ($this->repoIsArchived($repositoryData)) {
+            throw new RepoNotCrawlableException(
+                "Repository {$repository->owner}/{$repository->name} is archived."
+            );
+        }
     }
 
     private function repoIsArchived(array $repoData): bool
@@ -48,6 +48,13 @@ class RepoService
         return $repoData['archived'] ?? true;
     }
 
+    /**
+     * @param  Repository  $repo
+     * @return array
+     *
+     * @throws GitHubRateLimitException
+     * @throws RepoNotCrawlableException
+     */
     private function getRepoFromGitHubApi(Repository $repo): array
     {
         $fullRepoName = $repo->owner.'/'.$repo->name;
@@ -57,43 +64,54 @@ class RepoService
             ->get($fullRepoName);
 
         if (! $result->successful()) {
-            return $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
+            $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
         }
 
         return $result->json();
     }
 
-    private function handleUnsuccessfulIssueRequest(Response $response, string $fullRepoName): array
+    /**
+     * @param  Response  $response
+     * @param  string  $fullRepoName
+     * @return void
+     *
+     * @throws GitHubRateLimitException
+     * @throws RepoNotCrawlableException
+     */
+    private function handleUnsuccessfulIssueRequest(Response $response, string $fullRepoName): void
     {
-        return match ($response->status()) {
+        match ($response->status()) {
             404 => $this->handleNotFoundResponse($fullRepoName),
             403 => $this->handleForbiddenResponse($response, $fullRepoName),
-            default => [],
+            default => throw new RepoNotCrawlableException('Unknown error for repo '.$fullRepoName),
         };
     }
 
-    private function handleNotFoundResponse(string $fullRepoName): array
+    /**
+     * @param  string  $fullRepoName
+     * @return void
+     *
+     * @throws RepoNotCrawlableException
+     */
+    private function handleNotFoundResponse(string $fullRepoName): void
     {
-        report($fullRepoName.' is not a valid GitHub repo.');
-
-        return [];
+        throw new RepoNotCrawlableException($fullRepoName.' is not a valid GitHub repo.');
     }
 
     /**
      * @param  Response  $response
      * @param  string  $fullRepoName
-     * @return array
+     * @return void
      *
      * @throws GitHubRateLimitException
+     * @throws RepoNotCrawlableException
      */
-    private function handleForbiddenResponse(Response $response, string $fullRepoName): array
+    private function handleForbiddenResponse(Response $response, string $fullRepoName): void
     {
         if ($response->header('X-RateLimit-Remaining') === '0') {
             throw new GitHubRateLimitException('GitHub API rate limit reached!');
         }
 
-        report($fullRepoName.' is a forbidden GitHub repo.');
-
-        return [];
+        throw new RepoNotCrawlableException($fullRepoName.' is a forbidden GitHub repo.');
     }
 }
