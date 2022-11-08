@@ -20,11 +20,10 @@ class RepoService
                     $repoNames,
                     static fn (string $repoName): Repository => new Repository($owner, $repoName)
                 );
-            })
-            ->filter(fn (Repository $repository): bool => $this->repoCanBeCrawled($repository));
+            });
     }
 
-    private function repoCanBeCrawled(Repository $repository): bool
+    public function repoCanBeCrawled(Repository $repository): bool
     {
         $repositoryData = $this->cacheRepoData($repository);
 
