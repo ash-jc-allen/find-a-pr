@@ -64,21 +64,21 @@ final class RepoService
             ->get($fullRepoName);
 
         if (! $result->successful()) {
-            return $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
+            $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
         }
 
         return $result->json();
     }
 
     /**
-     * @param  Response  $response
-     * @param  string  $fullRepoName
-     * @return array
+     * @param Response $response
+     * @param string $fullRepoName
+     * @return void
      *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
-    private function handleUnsuccessfulIssueRequest(Response $response, string $fullRepoName): array
+    private function handleUnsuccessfulIssueRequest(Response $response, string $fullRepoName): void
     {
         match ($response->status()) {
             404 => $this->handleNotFoundResponse($fullRepoName),
