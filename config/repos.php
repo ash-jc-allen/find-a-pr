@@ -122,7 +122,7 @@ return [
         'symfony' => [
             '.github', 'acl-bundle', 'all-my-sms-notifier', 'amazon-mailer', 'amazon-sns-notifier', 'amazon-sqs-messenger',
             'amqp-messenger', 'amqp-pack', 'apache-pack', 'asset', 'assetic-bundle', 'beanstalkd-messenger', 'binary-utils',
-            'browser-kit', 'cache', 'cache-contracts', 'class-loader', 'cli', 'clickatell-notifier', 'clock', 'config',
+            'browser-kit', 'cache', 'cache-contracts', 'cli', 'clickatell-notifier', 'clock', 'config',
             'console', 'contact-everyone-notifier', 'contracts', 'crowdin-translation-provider', 'css-selector', 'debug',
             'debug-bundle', 'debug-pack', 'demo', 'dependency-injection', 'deprecation-contracts', 'discord-notifier',
             'diversity', 'doctrine-bridge', 'doctrine-messenger', 'dom-crawler', 'dotenv', 'engagespot-notifier', 'error-handler',
