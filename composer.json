@@ -11,8 +11,8 @@
         "bugsnag/bugsnag-laravel": "^2.0",
         "doctrine/dbal": "^3.3",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.19",
-        "laravel/sanctum": "^2.14.1",
+        "laravel/framework": "^10.x-dev",
+        "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "silviolleite/laravelpwa": "^2.0"
@@ -21,10 +21,10 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
+        "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.0",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -65,5 +65,11 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/rubenvanerk/bugsnag-laravel"
+        }
+    ]
 }
