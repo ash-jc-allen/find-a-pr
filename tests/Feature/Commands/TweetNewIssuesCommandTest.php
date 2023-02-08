@@ -29,6 +29,7 @@ class TweetNewIssuesCommandTest extends TestCase
         ]);
 
         Config::set('repos.repos', ['ash-jc-allen' => ['find-a-pr']]);
+        Config::set('find-a-pr.tweet_issues', true);
     }
 
     public function test_tweets_new_issues()
@@ -88,5 +89,16 @@ class TweetNewIssuesCommandTest extends TestCase
         $this->artisan('issues:tweet');
 
         Twitter::assertTweetCount(1);
+    }
+
+    /** @test */
+    public function tweets_are_not_sent_if_the_feature_is_disabled(): void
+    {
+        Config::set('find-a-pr.tweet_issues', false);
+
+        $this->artisan('issues:tweet')
+            ->expectsOutputToContain('Tweeting about issues is disabled');
+
+        Twitter::assertNoTweetsSent();
     }
 }

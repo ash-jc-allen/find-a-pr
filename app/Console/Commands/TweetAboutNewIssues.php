@@ -18,6 +18,12 @@ class TweetAboutNewIssues extends Command
 
     public function handle(): int
     {
+        if (! config('find-a-pr.tweet_issues')) {
+            $this->components->info('Tweeting about issues is disabled');
+
+            return 0;
+        }
+
         $issues = $this->getUntweetedIssues();
 
         if ($issues->count() === 0) {
