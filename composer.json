@@ -64,12 +64,6 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/rubenvanerk/bugsnag-laravel"
-        }
-    ]
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
