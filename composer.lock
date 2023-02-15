@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71dba875af2187bcedcf5b91a6180464",
+    "content-hash": "cc40318cec47d509b75217f11127e98b",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -264,16 +264,16 @@
         },
         {
             "name": "bugsnag/bugsnag-laravel",
-            "version": "dev-master",
+            "version": "dev-next",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rubenvanerk/bugsnag-laravel.git",
-                "reference": "0a444a97b929284ff4f44dd229b5fe1493bc7f03"
+                "url": "https://github.com/bugsnag/bugsnag-laravel.git",
+                "reference": "b5e04e6918dfcec170f174381f5f03c6cfe547bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rubenvanerk/bugsnag-laravel/zipball/0a444a97b929284ff4f44dd229b5fe1493bc7f03",
-                "reference": "0a444a97b929284ff4f44dd229b5fe1493bc7f03",
+                "url": "https://api.github.com/repos/bugsnag/bugsnag-laravel/zipball/b5e04e6918dfcec170f174381f5f03c6cfe547bc",
+                "reference": "b5e04e6918dfcec170f174381f5f03c6cfe547bc",
                 "shasum": ""
             },
             "require": {
@@ -285,10 +285,9 @@
                 "php": ">=5.5"
             },
             "require-dev": {
-                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0|^7.0",
+                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0|^7.0|^8.0",
                 "phpunit/phpunit": "^4.8.36|^6.3.1|^7.5.15|^8.3.5|^9.3.10"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -300,19 +299,7 @@
                     "Bugsnag\\BugsnagLaravel\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Bugsnag\\BugsnagLaravel\\Tests\\": "tests/"
-                },
-                "files": [
-                    "tests/bc.php"
-                ]
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -333,9 +320,10 @@
                 "tracking"
             ],
             "support": {
-                "source": "https://github.com/rubenvanerk/bugsnag-laravel/tree/master"
+                "issues": "https://github.com/bugsnag/bugsnag-laravel/issues",
+                "source": "https://github.com/bugsnag/bugsnag-laravel/tree/next"
             },
-            "time": "2023-02-08T18:30:00+00:00"
+            "time": "2023-02-15T15:27:52+00:00"
         },
         {
             "name": "bugsnag/bugsnag-psr-logger",
@@ -1730,20 +1718,21 @@
         },
         {
             "name": "laravel/framework",
-            "version": "10.x-dev",
+            "version": "v10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "89ce187b0d99903dcb68e0651693a692350db530"
+                "reference": "be2ddb5c31b0b9ebc2738d9f37a9d4c960aa3199"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/89ce187b0d99903dcb68e0651693a692350db530",
-                "reference": "89ce187b0d99903dcb68e0651693a692350db530",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/be2ddb5c31b0b9ebc2738d9f37a9d4c960aa3199",
+                "reference": "be2ddb5c31b0b9ebc2738d9f37a9d4c960aa3199",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.9.3|^0.10.2|^0.11",
+                "composer-runtime-api": "^2.2",
                 "doctrine/inflector": "^2.0.5",
                 "dragonmantank/cron-expression": "^3.3.2",
                 "egulias/email-validator": "^3.2.1|^4.0",
@@ -1813,6 +1802,7 @@
                 "illuminate/notifications": "self.version",
                 "illuminate/pagination": "self.version",
                 "illuminate/pipeline": "self.version",
+                "illuminate/process": "self.version",
                 "illuminate/queue": "self.version",
                 "illuminate/redis": "self.version",
                 "illuminate/routing": "self.version",
@@ -1924,7 +1914,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-08T16:52:33+00:00"
+            "time": "2023-02-14T15:12:47+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -2121,16 +2111,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.8",
+            "version": "2.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "c493585c130544c4e91d2e0e131e6d35cb0cbc47"
+                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c493585c130544c4e91d2e0e131e6d35cb0cbc47",
-                "reference": "c493585c130544c4e91d2e0e131e6d35cb0cbc47",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c1e114f74e518daca2729ea8c4bf1167038fa4b5",
+                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5",
                 "shasum": ""
             },
             "require": {
@@ -2223,7 +2213,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-10T16:02:17+00:00"
+            "time": "2023-02-15T14:07:24+00:00"
         },
         {
             "name": "league/config",
@@ -6518,16 +6508,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.20.1",
+            "version": "v1.20.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "4b85dbfa3dceeaf7227e3029707562fd60297e86"
+                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/4b85dbfa3dceeaf7227e3029707562fd60297e86",
-                "reference": "4b85dbfa3dceeaf7227e3029707562fd60297e86",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/5ae072b182b1efbec927409e8a3ce3b1078cc42c",
+                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c",
                 "shasum": ""
             },
             "require": {
@@ -6575,7 +6565,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-02-08T02:08:37+00:00"
+            "time": "2023-02-08T20:22:21+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -6710,16 +6700,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v7.0.1",
+            "version": "v7.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "0422294fcfb1ca2e15dfc20122d218c45c5bbf51"
+                "reference": "15e5fe35305419c9c6cf196be8d62cf70087a20c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/0422294fcfb1ca2e15dfc20122d218c45c5bbf51",
-                "reference": "0422294fcfb1ca2e15dfc20122d218c45c5bbf51",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/15e5fe35305419c9c6cf196be8d62cf70087a20c",
+                "reference": "15e5fe35305419c9c6cf196be8d62cf70087a20c",
                 "shasum": ""
             },
             "require": {
@@ -6737,7 +6727,7 @@
                 "nunomaduro/larastan": "^2.4.0",
                 "orchestra/testbench-core": "^8.0.0",
                 "pestphp/pest": "^2.0.0",
-                "phpunit/phpunit": "^10.0.6",
+                "phpunit/phpunit": "^10.0.7",
                 "spatie/laravel-ignition": "^2.0.0"
             },
             "type": "library",
@@ -6797,7 +6787,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-02-08T12:07:35+00:00"
+            "time": "2023-02-11T18:10:08+00:00"
         },
         {
             "name": "nunomaduro/larastan",
@@ -7231,16 +7221,16 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "7d66d4e816d34e90acec9db9d8d94b5cfbfe926f"
+                "reference": "fd9329ab3368f59fe1fe808a189c51086bd4b6bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/7d66d4e816d34e90acec9db9d8d94b5cfbfe926f",
-                "reference": "7d66d4e816d34e90acec9db9d8d94b5cfbfe926f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/fd9329ab3368f59fe1fe808a189c51086bd4b6bd",
+                "reference": "fd9329ab3368f59fe1fe808a189c51086bd4b6bd",
                 "shasum": ""
             },
             "require": {
@@ -7279,7 +7269,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
-                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/4.0.0"
+                "source": "https://github.com/sebastianbergmann/php-file-iterator/tree/4.0.1"
             },
             "funding": [
                 {
@@ -7287,7 +7277,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T06:55:11+00:00"
+            "time": "2023-02-10T16:53:14+00:00"
         },
         {
             "name": "phpunit/php-invoker",
@@ -8898,9 +8888,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "laravel/framework": 20
+        "bugsnag/bugsnag-laravel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -8908,5 +8898,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
