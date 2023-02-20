@@ -51,7 +51,7 @@ return [
             'laravel-dashboard-oh-dear-uptime-tile', 'laravel-dashboard-skeleton-tile', 'laravel-dashboard-time-weather-tile',
             'laravel-dashboard-twitter-tile', 'laravel-dashboard-velo-tile', 'laravel-data', 'laravel-database-mail-templates',
             'laravel-db-snapshots', 'laravel-demo-mode', 'laravel-directory-cleanup',
-            'laravel-disable-floc', 'laravel-discord-alerts', 'laravel-disk-monitor', 'laravel-enum',
+            'laravel-discord-alerts', 'laravel-disk-monitor', 'laravel-enum',
             'laravel-event-projector-demo-app', 'laravel-event-sourcing', 'laravel-eventsauce', 'laravel-example', 'laravel-export',
             'laravel-failed-job-monitor', 'laravel-feed', 'laravel-flash', 'laravel-fractal', 'laravel-github-webhooks',
             'laravel-glide', 'laravel-google-calendar', 'laravel-google-cloud-storage', 'laravel-google-fonts', 'laravel-googletagmanager',
