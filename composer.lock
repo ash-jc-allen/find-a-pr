@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a18a1c13d01605381ab3f8557b8f3417",
+    "content-hash": "208b784f1858ab2d5f00751d322fb622",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -264,16 +264,16 @@
         },
         {
             "name": "bugsnag/bugsnag-laravel",
-            "version": "dev-next",
+            "version": "v2.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bugsnag/bugsnag-laravel.git",
-                "reference": "b5e04e6918dfcec170f174381f5f03c6cfe547bc"
+                "reference": "333a912e38ead3e02724381093778b271168c8a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bugsnag/bugsnag-laravel/zipball/b5e04e6918dfcec170f174381f5f03c6cfe547bc",
-                "reference": "b5e04e6918dfcec170f174381f5f03c6cfe547bc",
+                "url": "https://api.github.com/repos/bugsnag/bugsnag-laravel/zipball/333a912e38ead3e02724381093778b271168c8a3",
+                "reference": "333a912e38ead3e02724381093778b271168c8a3",
                 "shasum": ""
             },
             "require": {
@@ -321,9 +321,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bugsnag/bugsnag-laravel/issues",
-                "source": "https://github.com/bugsnag/bugsnag-laravel/tree/next"
+                "source": "https://github.com/bugsnag/bugsnag-laravel/tree/v2.26.0"
             },
-            "time": "2023-02-15T15:27:52+00:00"
+            "time": "2023-02-16T08:48:39+00:00"
         },
         {
             "name": "bugsnag/bugsnag-psr-logger",
@@ -8889,9 +8889,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bugsnag/bugsnag-laravel": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
