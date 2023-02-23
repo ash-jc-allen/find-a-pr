@@ -17,6 +17,7 @@ final class RepoService
     public function reposToCrawl(): Collection
     {
         return collect(config('repos.repos'))
+            ->merge($this->fetchReposFromOrgs())
             ->flatMap(function (array $repoNames, string $owner): array {
                 return Arr::map(
                     $repoNames,
@@ -61,7 +62,7 @@ final class RepoService
 
         $result = app(GitHub::class)
             ->client()
-            ->get($fullRepoName);
+            ->get('repos'.$fullRepoName);
 
         if (! $result->successful()) {
             $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
@@ -113,5 +114,25 @@ final class RepoService
         }
 
         throw new RepoNotCrawlableException($fullRepoName.' is a forbidden GitHub repo.');
+    }
+
+    private function fetchReposFromOrgs(): Collection
+    {
+        return collect(config('repos.orgs'))
+            ->mapWithKeys(fn(string $org): array => [$org => $this->fetchReposFromOrg($org)]);
+    }
+
+    private function fetchReposFromOrg(string $org): array
+    {
+        $client = app(GitHub::class)->client();
+        $page = 1;
+        $repos = [];
+
+        while($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
+            $repos = array_merge($repos, Arr::pluck($result, 'name'));
+            $page++;
+        }
+
+        return $repos;
     }
 }
