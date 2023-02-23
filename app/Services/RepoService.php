@@ -62,7 +62,7 @@ final class RepoService
 
         $result = app(GitHub::class)
             ->client()
-            ->get('repos'.$fullRepoName);
+            ->get('repos/'.$fullRepoName);
 
         if (! $result->successful()) {
             $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);

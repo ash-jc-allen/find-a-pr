@@ -147,7 +147,7 @@ class IssueService
 
         $result = app(GitHub::class)
             ->client()
-            ->get('repos'.$fullRepoName.'/issues');
+            ->get('repos/'.$fullRepoName.'/issues');
 
         if (! $result->successful()) {
             return $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
