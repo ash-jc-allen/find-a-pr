@@ -119,7 +119,7 @@ final class RepoService
     private function fetchReposFromOrgs(): Collection
     {
         return collect(config('repos.orgs'))
-            ->mapWithKeys(fn(string $org): array => [$org => $this->fetchReposFromOrg($org)]);
+            ->mapWithKeys(fn (string $org): array => [$org => $this->fetchReposFromOrg($org)]);
     }
 
     private function fetchReposFromOrg(string $org): array
@@ -128,7 +128,7 @@ final class RepoService
         $page = 1;
         $repos = [];
 
-        while($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
+        while ($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
             $repos = array_merge($repos, Arr::pluck($result, 'name'));
             $page++;
         }
