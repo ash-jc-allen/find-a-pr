@@ -11,27 +11,31 @@ class ReposToCrawlTest extends TestCase
     /** @test */
     public function correct_config_is_returned(): void
     {
-        config(['repos.repos' => [
-            'ash-jc-allen' => [
-                'find-a-pr',
-                'favicon-fetcher',
-                'laravel-config-validator',
-                'short-url',
-                'laravel-exchange-rates',
+        config([
+            'repos' => [
+                'repos' => [
+                    'ash-jc-allen' => [
+                        'find-a-pr',
+                        'favicon-fetcher',
+                        'laravel-config-validator',
+                        'short-url',
+                        'laravel-exchange-rates',
+                    ],
+                    'laravel' => [
+                        'framework',
+                        'docs',
+                        'vapor-core',
+                        'octane',
+                    ],
+                    'laravelio' => [
+                        'laravel.io',
+                    ],
+                    'laravel-filament' => [
+                        'filament',
+                    ],
+                ],
             ],
-            'laravel' => [
-                'framework',
-                'docs',
-                'vapor-core',
-                'octane',
-            ],
-            'laravelio' => [
-                'laravel.io',
-            ],
-            'laravel-filament' => [
-                'filament',
-            ],
-        ]]);
+        ]);
 
         $expectedResult = [
             new Repository('ash-jc-allen', 'find-a-pr'),

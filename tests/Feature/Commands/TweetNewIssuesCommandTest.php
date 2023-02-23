@@ -29,6 +29,7 @@ class TweetNewIssuesCommandTest extends TestCase
         ]);
 
         Config::set('repos.repos', ['ash-jc-allen' => ['find-a-pr']]);
+        Config::set('repos.orgs', []);
         Config::set('find-a-pr.tweet_issues', true);
     }
 
@@ -60,7 +61,7 @@ class TweetNewIssuesCommandTest extends TestCase
 
         $issue = app(IssueService::class)->getAll()->first();
 
-        Twitter::assertLastTweet("An issue in {$issue->repoName} may need your help: {$issue->title}".PHP_EOL.$issue->url);
+        Twitter::assertLastTweet("An issue in {$issue->repoName} may need your help: {$issue->title}" . PHP_EOL . $issue->url);
     }
 
     public function test_correctly_sets_tweeted_timestamp()
