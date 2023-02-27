@@ -11,6 +11,7 @@ use App\Exceptions\RepoNotCrawlableException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 final class RepoService
 {
@@ -122,17 +123,31 @@ final class RepoService
             ->mapWithKeys(fn (string $org): array => [$org => $this->fetchReposFromOrg($org)]);
     }
 
+    /**
+     * Fetch all the crawlable repos for a GitHub organization.
+     *
+     * @param string $org
+     * @return array
+     */
     private function fetchReposFromOrg(string $org): array
     {
-        $client = app(GitHub::class)->client();
-        $page = 1;
-        $repos = [];
+        return Cache::remember(
+            key: 'repos.orgs.'.$org,
+            ttl: now()->addWeek(),
+            callback: static function () use ($org): array {
+                $client = app(GitHub::class)->client();
+                $page = 1;
+                $repos = [];
 
-        while ($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
-            $repos = array_merge($repos, Arr::pluck($result, 'name'));
-            $page++;
-        }
+                // TODO Ignore archived
 
-        return $repos;
+                while ($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
+                    $repos = array_merge($repos, Arr::pluck($result, 'name'));
+                    $page++;
+                }
+
+                return $repos;
+            }
+        );
     }
 }
