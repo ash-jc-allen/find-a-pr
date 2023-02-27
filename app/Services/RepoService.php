@@ -134,15 +134,18 @@ final class RepoService
         return Cache::remember(
             key: 'repos.orgs.'.$org,
             ttl: now()->addWeek(),
-            callback: static function () use ($org): array {
+            callback: function () use ($org): array {
                 $client = app(GitHub::class)->client();
                 $page = 1;
                 $repos = [];
 
-                // TODO Ignore archived
-
                 while ($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
-                    $repos = array_merge($repos, Arr::pluck($result, 'name'));
+                    $repoNames =  collect($result)
+                        ->reject(fn (array $repo): bool => $this->repoIsArchived($repo))
+                        ->pluck('name')
+                        ->all();
+
+                    $repos = array_merge($repos, $repoNames);
                     $page++;
                 }
 
