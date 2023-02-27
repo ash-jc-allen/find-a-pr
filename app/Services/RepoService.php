@@ -131,26 +131,27 @@ final class RepoService
      */
     private function fetchReposFromOrg(string $org): array
     {
-        return Cache::remember(
+        return dd(Cache::remember(
             key: 'repos.orgs.'.$org,
-            ttl: now()->addWeek(),
+            ttl: now()->addweek(),
             callback: function () use ($org): array {
                 $client = app(GitHub::class)->client();
                 $page = 1;
-                $repos = [];
+
+                $repos = collect();
 
                 while ($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
                     $repoNames =  collect($result)
                         ->reject(fn (array $repo): bool => $this->repoIsArchived($repo))
-                        ->pluck('name')
-                        ->all();
+                        ->pluck('name');
 
-                    $repos = array_merge($repos, $repoNames);
+                    $repos->push(...$repoNames);
+
                     $page++;
                 }
 
-                return $repos;
+                return $repos->all();
             }
-        );
+        ));
     }
 }
