@@ -126,7 +126,7 @@ final class RepoService
     /**
      * Fetch all the crawlable repos for a GitHub organization.
      *
-     * @param string $org
+     * @param  string  $org
      * @return array
      */
     private function fetchReposFromOrg(string $org): array
@@ -141,7 +141,7 @@ final class RepoService
                 $repos = collect();
 
                 while ($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
-                    $repoNames =  collect($result)
+                    $repoNames = collect($result)
                         ->reject(fn (array $repo): bool => $this->repoIsArchived($repo))
                         ->pluck('name');
 
