@@ -131,9 +131,9 @@ final class RepoService
      */
     private function fetchReposFromOrg(string $org): array
     {
-        return dd(Cache::remember(
+        return Cache::remember(
             key: 'repos.orgs.'.$org,
-            ttl: now()->addweek(),
+            ttl: now()->addWeek(),
             callback: function () use ($org): array {
                 $client = app(GitHub::class)->client();
                 $page = 1;
@@ -152,6 +152,6 @@ final class RepoService
 
                 return $repos->all();
             }
-        ));
+        );
     }
 }
