@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class GitHub
 {
-    private const BASE_URL = 'https://api.github.com/repos/';
+    private const BASE_URL = 'https://api.github.com/';
 
     /**
      * Build and return a client that we can use to make requests to the

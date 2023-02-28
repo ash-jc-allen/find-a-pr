@@ -29,6 +29,7 @@ class TweetNewIssuesCommandTest extends TestCase
         ]);
 
         Config::set('repos.repos', ['ash-jc-allen' => ['find-a-pr']]);
+        Config::set('repos.orgs', []);
         Config::set('find-a-pr.tweet_issues', true);
     }
 

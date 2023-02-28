@@ -11,12 +11,14 @@ use App\Exceptions\RepoNotCrawlableException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 final class RepoService
 {
     public function reposToCrawl(): Collection
     {
         return collect(config('repos.repos'))
+            ->merge($this->fetchReposFromOrgs())
             ->flatMap(function (array $repoNames, string $owner): array {
                 return Arr::map(
                     $repoNames,
@@ -61,7 +63,7 @@ final class RepoService
 
         $result = app(GitHub::class)
             ->client()
-            ->get($fullRepoName);
+            ->get('repos/'.$fullRepoName);
 
         if (! $result->successful()) {
             $this->handleUnsuccessfulIssueRequest($result, $fullRepoName);
@@ -113,5 +115,43 @@ final class RepoService
         }
 
         throw new RepoNotCrawlableException($fullRepoName.' is a forbidden GitHub repo.');
+    }
+
+    private function fetchReposFromOrgs(): Collection
+    {
+        return collect(config('repos.orgs'))
+            ->mapWithKeys(fn (string $org): array => [$org => $this->fetchReposFromOrg($org)]);
+    }
+
+    /**
+     * Fetch all the crawlable repos for a GitHub organization.
+     *
+     * @param  string  $org
+     * @return array
+     */
+    private function fetchReposFromOrg(string $org): array
+    {
+        return Cache::remember(
+            key: 'repos.orgs.'.$org,
+            ttl: now()->addWeek(),
+            callback: function () use ($org): array {
+                $client = app(GitHub::class)->client();
+                $page = 1;
+
+                $repos = collect();
+
+                while ($result = $client->get("orgs/{$org}/repos", ['per_page' => 100, 'type' => 'sources', 'page' => $page])->json()) {
+                    $repoNames = collect($result)
+                        ->reject(fn (array $repo): bool => $this->repoIsArchived($repo))
+                        ->pluck('name');
+
+                    $repos->push(...$repoNames);
+
+                    $page++;
+                }
+
+                return $repos->all();
+            }
+        );
     }
 }
