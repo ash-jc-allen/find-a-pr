@@ -6,7 +6,7 @@ jobs:
   phpunit:
     runs-on: ubuntu-22.04
     container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
+      image: kirschbaumdevelopment/laravel-test-runner:8.2
 
     steps:
       - uses: shivammathur/setup-php@v2

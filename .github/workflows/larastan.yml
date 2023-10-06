@@ -7,6 +7,10 @@ jobs:
       name: larastan
       runs-on: ubuntu-22.04
       steps:
+        - uses: shivammathur/setup-php@v2
+          with:
+            php-version: '8.2'
+
         - name: Checkout
           uses: actions/checkout@v2
 
