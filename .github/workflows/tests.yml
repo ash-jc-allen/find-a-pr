@@ -5,13 +5,11 @@ on: [pull_request, push]
 jobs:
   phpunit:
     runs-on: ubuntu-22.04
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.2
 
     steps:
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: 8.2
       - uses: actions/checkout@v3
         with:
           fetch-depth: 1
