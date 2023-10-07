@@ -7,7 +7,7 @@ namespace App\Jobs;
 use App\DataTransferObjects\Issue;
 use App\Facades\Twitter;
 use App\Models\SocialPost;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
