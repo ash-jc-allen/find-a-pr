@@ -7,7 +7,6 @@ namespace App\Jobs;
 use App\DataTransferObjects\Issue;
 use App\Facades\Twitter;
 use App\Models\SocialPost;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,6 +14,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\RateLimited;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 use RateLimiter;
 
 final class TweetNewIssue implements ShouldQueue, ShouldBeUnique

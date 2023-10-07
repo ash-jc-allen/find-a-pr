@@ -7,9 +7,9 @@ namespace Tests\Feature\Commands;
 use App\Facades\Twitter;
 use App\Models\SocialPost;
 use App\Services\IssueService;
-use Illuminate\Support\Facades\Config;
 use Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
