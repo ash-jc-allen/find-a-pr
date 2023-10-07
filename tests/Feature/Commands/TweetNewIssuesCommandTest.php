@@ -12,7 +12,7 @@ use Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TweetNewIssuesCommandTest extends TestCase
+final class TweetNewIssuesCommandTest extends TestCase
 {
     use RefreshDatabase;
 
