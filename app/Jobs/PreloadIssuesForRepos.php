@@ -14,7 +14,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
-readonly class PreloadIssuesForRepos implements ShouldQueue
+class PreloadIssuesForRepos implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
