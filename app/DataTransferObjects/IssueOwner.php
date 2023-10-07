@@ -7,7 +7,7 @@ namespace App\DataTransferObjects;
 readonly class IssueOwner
 {
     public function __construct(
-        public string          $name,
+        public string $name,
         public readonly string $url,
         public readonly string $profilePictureUrl,
     ) {
