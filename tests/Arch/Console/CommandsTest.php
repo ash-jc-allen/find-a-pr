@@ -6,4 +6,5 @@ test('commands')
     ->expect('App\Commands\Console')
     ->toBeClasses()
     ->toExtend(Command::class)
-    ->toHaveMethod('handle');
+    ->toHaveMethod('handle')
+    ->toUseStrictTypes();

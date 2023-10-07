@@ -3,4 +3,5 @@
 test('middleware')
     ->expect('App\Http\Middleware')
     ->toBeClasses()
-    ->toHaveMethod('handle');
+    ->toHaveMethod('handle')
+    ->toUseStrictTypes();
