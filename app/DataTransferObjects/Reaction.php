@@ -6,12 +6,12 @@ namespace App\DataTransferObjects;
 
 use Illuminate\Support\Arr;
 
-class Reaction
+readonly class Reaction
 {
     public function __construct(
-        public readonly string $content,
-        public readonly int $count,
-        public readonly string $emoji,
+        public string $content,
+        public int $count,
+        public string $emoji,
     ) {
         //
     }

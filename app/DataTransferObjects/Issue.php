@@ -7,25 +7,26 @@ namespace App\DataTransferObjects;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 
-class Issue
+readonly class Issue
 {
-    public readonly int $interactionsCount;
+    public int $interactionsCount;
 
     public function __construct(
-        public readonly int $id,
-        public readonly int $number,
-        public readonly string $repoName,
-        public readonly string $repoUrl,
-        public readonly string $title,
-        public readonly string $url,
-        public readonly ?string $body,
-        public readonly array $labels,
-        public readonly array $reactions,
-        public readonly int $commentCount,
-        public readonly CarbonInterface $createdAt,
-        public readonly IssueOwner $createdBy,
-        public readonly bool $isPullRequest,
+        public int $id,
+        public int $number,
+        public string $repoName,
+        public string $repoUrl,
+        public string $title,
+        public string $url,
+        public ?string $body,
+        public array $labels,
+        public array $reactions,
+        public int $commentCount,
+        public CarbonInterface $createdAt,
+        public IssueOwner $createdBy,
+        public bool $isPullRequest,
     ) {
+        // TODO Add types here
         $this->interactionsCount = collect($this->reactions)->reduce(fn ($carry, $reaction) => $reaction->count + $carry, $this->commentCount);
     }
 

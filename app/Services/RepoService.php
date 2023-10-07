@@ -13,7 +13,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
-final class RepoService
+final readonly class RepoService
 {
     public function reposToCrawl(): Collection
     {

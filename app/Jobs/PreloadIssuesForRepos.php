@@ -25,7 +25,7 @@ class PreloadIssuesForRepos implements ShouldQueue
     /**
      * @param  Collection<Repository>  $repos
      */
-    public function __construct(private readonly Collection $repos)
+    public function __construct(private Collection $repos)
     {
         //
     }
