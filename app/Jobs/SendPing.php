@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 
-class SendPing implements ShouldQueue
+final class SendPing implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

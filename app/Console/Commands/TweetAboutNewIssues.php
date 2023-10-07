@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 
 use function Termwind\terminal;
 
-class TweetAboutNewIssues extends Command
+final class TweetAboutNewIssues extends Command
 {
     protected $signature = 'issues:tweet';
 

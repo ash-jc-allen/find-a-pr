@@ -7,7 +7,7 @@ namespace App\DataTransferObjects;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 
-readonly class Issue
+final readonly class Issue
 {
     public int $interactionsCount;
 

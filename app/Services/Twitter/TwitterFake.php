@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 use PHPUnit\Framework\Assert;
 use stdClass;
 
-class TwitterFake implements TwitterInterface
+final class TwitterFake implements TwitterInterface
 {
     protected array $tweets = [];
 

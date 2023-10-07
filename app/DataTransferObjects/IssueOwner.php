@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataTransferObjects;
 
-readonly class IssueOwner
+final readonly class IssueOwner
 {
     public function __construct(
         public string $name,

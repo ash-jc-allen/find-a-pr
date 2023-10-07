@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Bus;
 
-class PreloadRepoData extends Command
+final class PreloadRepoData extends Command
 {
     protected $signature = 'repos:preload';
 

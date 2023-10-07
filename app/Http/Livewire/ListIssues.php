@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cookie;
 use Livewire\Component;
 
-class ListIssues extends Component
+final class ListIssues extends Component
 {
     private const SORTS = [
         'random' => [

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Facade;
  * @see OAuthTwitter
  * @see TwitterFake
  */
-class Twitter extends Facade
+final class Twitter extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
