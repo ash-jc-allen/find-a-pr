@@ -15,7 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
-final readonly class EnsureRepoIsCrawlable implements ShouldQueue
+final class EnsureRepoIsCrawlable implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
