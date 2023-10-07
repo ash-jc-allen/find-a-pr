@@ -23,6 +23,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.0",
+        "pestphp/pest": "^2.21",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0"
     },
@@ -62,7 +63,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true
