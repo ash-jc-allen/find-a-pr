@@ -8,7 +8,8 @@ test('controllers')
     ->toBeClasses()
     ->toExtend(Controller::class)
     ->toHaveSuffix('Controller')
-    ->ignoring(Controller::class);
+    ->ignoring(Controller::class)
+    ->toUseStrictTypes();
 
 test('base controller')
     ->expect(Controller::class)
