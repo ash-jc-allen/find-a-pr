@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\RepoService;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\DataTransferObjects\Repository;
 use App\Services\RepoService;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class ReposToCrawlTest extends TestCase

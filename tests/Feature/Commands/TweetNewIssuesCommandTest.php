@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commands;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Facades\Twitter;
 use App\Models\SocialPost;
 use App\Services\IssueService;
 use Config;
 use Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class TweetNewIssuesCommandTest extends TestCase
