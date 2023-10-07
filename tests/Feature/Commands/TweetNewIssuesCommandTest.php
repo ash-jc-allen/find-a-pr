@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commands;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Facades\Twitter;
 use App\Models\SocialPost;
 use App\Services\IssueService;
@@ -94,7 +95,7 @@ final class TweetNewIssuesCommandTest extends TestCase
         Twitter::assertTweetCount(1);
     }
 
-    /** @test */
+    #[Test]
     public function tweets_are_not_sent_if_the_feature_is_disabled(): void
     {
         Config::set('find-a-pr.tweet_issues', false);
