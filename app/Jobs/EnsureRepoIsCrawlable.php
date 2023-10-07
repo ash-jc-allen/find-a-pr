@@ -15,7 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
-final class EnsureRepoIsCrawlable implements ShouldQueue
+final readonly class EnsureRepoIsCrawlable implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -26,7 +26,7 @@ final class EnsureRepoIsCrawlable implements ShouldQueue
     /**
      * @param  Collection<Repository>  $repos
      */
-    public function __construct(private readonly Collection $repos)
+    public function __construct(private Collection $repos)
     {
         //
     }

@@ -17,7 +17,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
-class IssueService
+readonly class IssueService
 {
     /**
      * Get all the issues for displaying.

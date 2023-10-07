@@ -14,7 +14,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
-class PreloadIssuesForRepos implements ShouldQueue
+readonly class PreloadIssuesForRepos implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -25,7 +25,7 @@ class PreloadIssuesForRepos implements ShouldQueue
     /**
      * @param  Collection<Repository>  $repos
      */
-    public function __construct(private readonly Collection $repos)
+    public function __construct(private Collection $repos)
     {
         //
     }

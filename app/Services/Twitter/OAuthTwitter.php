@@ -6,7 +6,7 @@ namespace App\Services\Twitter;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-class OAuthTwitter implements TwitterInterface
+readonly class OAuthTwitter implements TwitterInterface
 {
     public function __construct(
         protected TwitterOAuth $twitter,

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataTransferObjects;
 
-class IssueOwner
+readonly class IssueOwner
 {
     public function __construct(
-        public readonly string $name,
+        public string          $name,
         public readonly string $url,
         public readonly string $profilePictureUrl,
     ) {

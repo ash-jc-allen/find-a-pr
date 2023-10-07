@@ -17,7 +17,7 @@ use Illuminate\Queue\Middleware\RateLimited;
 use Illuminate\Queue\SerializesModels;
 use RateLimiter;
 
-class TweetNewIssue implements ShouldQueue, ShouldBeUnique
+readonly class TweetNewIssue implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
