@@ -32,8 +32,6 @@ final readonly class IssueService
     }
 
     /**
-     * @param  Repository  $repo
-     * @param  bool  $forceRefresh
      * @return array<Issue>
      */
     public function getIssuesForRepo(Repository $repo, bool $forceRefresh = false): array
@@ -101,10 +99,6 @@ final readonly class IssueService
         );
     }
 
-    /**
-     * @param  array  $fetchedIssue
-     * @return array
-     */
     private function getIssueLabels(array $fetchedIssue): array
     {
         return collect($fetchedIssue['labels'])
@@ -116,10 +110,6 @@ final readonly class IssueService
             })->toArray();
     }
 
-    /**
-     * @param  array  $fetchedIssue
-     * @return array
-     */
     private function getIssueReactions(array $fetchedIssue): array
     {
         $emojis = config('repos.reactions');
@@ -138,7 +128,6 @@ final readonly class IssueService
     }
 
     /**
-     * @param  Repository  $repo
      * @return array<Issue>
      *
      * @throws GitHubRateLimitException
@@ -163,10 +152,6 @@ final readonly class IssueService
     }
 
     /**
-     * @param  Response  $response
-     * @param  string  $fullRepoName
-     * @return array
-     *
      * @throws GitHubRateLimitException
      */
     private function handleUnsuccessfulIssueRequest(Response $response, string $fullRepoName): array
@@ -186,10 +171,6 @@ final readonly class IssueService
     }
 
     /**
-     * @param  Response  $response
-     * @param  string  $fullRepoName
-     * @return array
-     *
      * @throws GitHubRateLimitException
      */
     private function handleForbiddenResponse(Response $response, string $fullRepoName): array

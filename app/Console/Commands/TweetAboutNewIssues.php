@@ -10,7 +10,6 @@ use App\Models\SocialPost;
 use App\Services\IssueService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-
 use function Termwind\terminal;
 
 final class TweetAboutNewIssues extends Command

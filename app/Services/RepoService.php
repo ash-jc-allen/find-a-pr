@@ -28,9 +28,6 @@ final readonly class RepoService
     }
 
     /**
-     * @param  Repository  $repository
-     * @return void
-     *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
@@ -51,9 +48,6 @@ final readonly class RepoService
     }
 
     /**
-     * @param  Repository  $repo
-     * @return array
-     *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
@@ -73,10 +67,6 @@ final readonly class RepoService
     }
 
     /**
-     * @param  Response  $response
-     * @param  string  $fullRepoName
-     * @return void
-     *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
@@ -90,9 +80,6 @@ final readonly class RepoService
     }
 
     /**
-     * @param  string  $fullRepoName
-     * @return void
-     *
      * @throws RepoNotCrawlableException
      */
     private function handleNotFoundResponse(string $fullRepoName): void
@@ -101,10 +88,6 @@ final readonly class RepoService
     }
 
     /**
-     * @param  Response  $response
-     * @param  string  $fullRepoName
-     * @return void
-     *
      * @throws GitHubRateLimitException
      * @throws RepoNotCrawlableException
      */
@@ -125,9 +108,6 @@ final readonly class RepoService
 
     /**
      * Fetch all the crawlable repos for a GitHub organization.
-     *
-     * @param  string  $org
-     * @return array
      */
     private function fetchReposFromOrg(string $org): array
     {
