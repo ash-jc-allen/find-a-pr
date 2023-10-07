@@ -9,7 +9,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-readonly class RedirectIfAuthenticated
+final readonly class RedirectIfAuthenticated
 {
     /**
      * Handle an incoming request.

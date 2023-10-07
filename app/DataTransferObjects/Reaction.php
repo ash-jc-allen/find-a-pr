@@ -6,7 +6,7 @@ namespace App\DataTransferObjects;
 
 use Illuminate\Support\Arr;
 
-readonly class Reaction
+final readonly class Reaction
 {
     public function __construct(
         public string $content,

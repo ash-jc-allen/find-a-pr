@@ -11,7 +11,7 @@ use App\Services\Twitter\TwitterInterface;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
-class TwitterServiceProvider extends ServiceProvider
+final class TwitterServiceProvider extends ServiceProvider
 {
     public function register(): void
     {

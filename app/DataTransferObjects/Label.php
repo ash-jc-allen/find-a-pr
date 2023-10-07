@@ -6,7 +6,7 @@ namespace App\DataTransferObjects;
 
 use Illuminate\Support\Arr;
 
-readonly class Label
+final readonly class Label
 {
     public function __construct(
         public string $name,

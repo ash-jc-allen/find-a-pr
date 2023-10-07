@@ -8,7 +8,7 @@ use App\DataTransferObjects\Repository;
 use App\Services\RepoService;
 use Tests\TestCase;
 
-class ReposToCrawlTest extends TestCase
+final class ReposToCrawlTest extends TestCase
 {
     /** @test */
     public function correct_config_is_returned(): void

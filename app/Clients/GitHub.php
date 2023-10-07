@@ -7,7 +7,7 @@ namespace App\Clients;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
-readonly class GitHub
+final readonly class GitHub
 {
     private const BASE_URL = 'https://api.github.com/';
 
