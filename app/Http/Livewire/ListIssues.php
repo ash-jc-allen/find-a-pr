@@ -114,8 +114,6 @@ final class ListIssues extends Component
      * When the component re-renders, the items in the 'originalIssues' and 'repos' will be
      * an array. So, hydrate these arrays back into Issue and Repository objects before we
      * try working with them.
-     *
-     * @return void
      */
     public function hydrate(): void
     {

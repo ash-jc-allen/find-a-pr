@@ -9,8 +9,8 @@ return [
         'background_color' => '#334155',
         'theme_color' => '#334155',
         'display' => 'standalone',
-        'orientation'=> 'any',
-        'status_bar'=> '#334155',
+        'orientation' => 'any',
+        'status_bar' => '#334155',
         'icons' => [
             '72x72' => [
                 'path' => '/images/icons/icon-72x72.png',
