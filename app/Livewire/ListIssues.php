@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\DataTransferObjects\Issue;
 use App\DataTransferObjects\Repository;
@@ -55,6 +55,9 @@ final class ListIssues extends Component
 
     public array $labels;
 
+    /**
+     * @var Collection<Repository>
+     */
     public Collection $repos;
 
     /**
@@ -110,22 +113,6 @@ final class ListIssues extends Component
         ]);
     }
 
-    /**
-     * When the component re-renders, the items in the 'originalIssues' and 'repos' will be
-     * an array. So, hydrate these arrays back into Issue and Repository objects before we
-     * try working with them.
-     */
-    public function hydrate(): void
-    {
-        $this->originalIssues = $this->originalIssues->map(
-            fn (array $issueArray): Issue => Issue::fromArray($issueArray),
-        );
-
-        $this->repos = $this->repos->map(
-            fn (array $repo): Repository => new Repository($repo['owner'], $repo['name']),
-        );
-    }
-
     public function updatedSort(string $newSort): void
     {
         if (array_key_exists($newSort, self::SORTS)) {
@@ -159,7 +146,7 @@ final class ListIssues extends Component
         Cookie::queue('firstTimeNoticeClosed', true, 40_320);
     }
 
-    public function updatedIgnoredUrls(array $urls): void
+    public function updateIgnoredUrls(array $urls): void
     {
         $this->ignoredUrls = collect($urls)
             ->filter(function (string $url): bool {

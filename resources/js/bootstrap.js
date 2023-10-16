@@ -1,8 +1,3 @@
-import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus';
+import { Livewire } from '../../vendor/livewire/livewire/dist/livewire.esm';
 
-Alpine.plugin(focus);
-
-window.Alpine = Alpine;
-
-Alpine.start();
+Livewire.start();

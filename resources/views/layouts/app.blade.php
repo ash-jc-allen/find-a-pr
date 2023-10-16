@@ -24,6 +24,6 @@
 
 @yield('content')
 
-@livewireScripts
+@livewireScriptConfig
 </body>
 </html>
