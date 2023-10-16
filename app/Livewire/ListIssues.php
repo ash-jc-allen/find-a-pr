@@ -55,6 +55,9 @@ final class ListIssues extends Component
 
     public array $labels;
 
+    /**
+     * @var Collection<Repository>
+     */
     public Collection $repos;
 
     /**
