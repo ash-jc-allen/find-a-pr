@@ -10,13 +10,14 @@ use App\Services\IssueService;
 use Config;
 use Http;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class TweetNewIssuesCommandTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -35,7 +36,8 @@ final class TweetNewIssuesCommandTest extends TestCase
         Config::set('find-a-pr.tweet_issues', true);
     }
 
-    public function test_tweets_new_issues()
+    #[Test]
+    public function tweets_new_issues(): void
     {
         Twitter::assertNoTweetsSent();
 
@@ -44,7 +46,8 @@ final class TweetNewIssuesCommandTest extends TestCase
         Twitter::assertTweetCount(1);
     }
 
-    public function test_does_not_tweet_issues_that_are_already_tweeted()
+    #[Test]
+    public function does_not_tweet_issues_that_are_already_tweeted(): void
     {
         SocialPost::factory()->tweeted()->state([
             'issue_repo' => 'ash-jc-allen/find-a-pr',
@@ -57,7 +60,8 @@ final class TweetNewIssuesCommandTest extends TestCase
         Twitter::assertNoTweetsSent();
     }
 
-    public function test_the_text_of_the_tweet()
+    #[Test]
+    public function the_text_of_the_tweet(): void
     {
         $this->artisan('issues:tweet');
 
@@ -66,7 +70,8 @@ final class TweetNewIssuesCommandTest extends TestCase
         Twitter::assertLastTweet("An issue in {$issue->repoName} may need your help: {$issue->title}".PHP_EOL.$issue->url);
     }
 
-    public function test_correctly_sets_tweeted_timestamp()
+    #[Test]
+    public function correctly_sets_tweeted_timestamp(): void
     {
         $socialPost = SocialPost::factory()->state([
             'issue_repo' => 'ash-jc-allen/find-a-pr',
@@ -81,7 +86,8 @@ final class TweetNewIssuesCommandTest extends TestCase
         $this->assertTrue($socialPost->refresh()->tweetWasSent());
     }
 
-    public function test_only_tweets_issues_once()
+    #[Test]
+    public function only_tweets_issues_once(): void
     {
         Twitter::assertNoTweetsSent();
 
@@ -94,7 +100,7 @@ final class TweetNewIssuesCommandTest extends TestCase
         Twitter::assertTweetCount(1);
     }
 
-    /** @test */
+    #[Test]
     public function tweets_are_not_sent_if_the_feature_is_disabled(): void
     {
         Config::set('find-a-pr.tweet_issues', false);

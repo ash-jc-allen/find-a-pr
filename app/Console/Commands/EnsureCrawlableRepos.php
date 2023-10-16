@@ -16,8 +16,6 @@ final class EnsureCrawlableRepos extends Command
     protected $description = 'Loop through each repo and ensure it is crawlable. Alert if not.';
 
     /**
-     * @return int
-     *
      * @throws \Throwable
      */
     public function handle(): int

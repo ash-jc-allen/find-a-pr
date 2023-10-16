@@ -6,11 +6,12 @@ namespace Tests\Unit\RepoService;
 
 use App\DataTransferObjects\Repository;
 use App\Services\RepoService;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class ReposToCrawlTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function correct_config_is_returned(): void
     {
         config([
