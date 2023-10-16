@@ -3,7 +3,7 @@
         'showSideBar': false,
         'ignoredUrls': @entangle('ignoredUrls').live,
         getIgnoredUrls(){
-            this.ignoredUrls = Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) || []);
+            $wire.updateIgnoredUrls(Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) || []));
         }
     }"
     x-init="getIgnoredUrls();"

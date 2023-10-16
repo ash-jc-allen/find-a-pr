@@ -146,7 +146,7 @@ final class ListIssues extends Component
         Cookie::queue('firstTimeNoticeClosed', true, 40_320);
     }
 
-    public function updatedIgnoredUrls(array $urls): void
+    public function updateIgnoredUrls(array $urls): void
     {
         $this->ignoredUrls = collect($urls)
             ->filter(function (string $url): bool {
