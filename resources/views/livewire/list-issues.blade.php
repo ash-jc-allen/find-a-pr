@@ -1,7 +1,7 @@
 <div
     x-data="{
         'showSideBar': false,
-        'ignoredUrls': @entangle('ignoredUrls'),
+        'ignoredUrls': @entangle('ignoredUrls').live,
         getIgnoredUrls(){
             this.ignoredUrls = Array.from(JSON.parse(localStorage.getItem('ignoreUrl')) || []);
         }

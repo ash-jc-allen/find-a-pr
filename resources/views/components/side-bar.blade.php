@@ -10,7 +10,7 @@
     <label for="search" class="inline-block pb-1">Search:</label>
     <input id="search"
            x-ref="search"
-           wire:model.debounce="searchTerm"
+           wire:model.live.debounce="searchTerm"
            type="search"
            placeholder="Search... (Press '/')"
            class="w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-500 dark:bg-slate-900 dark:border-slate-600 dark:focus:ring-offset-slate-700 dark:text-gray-100"
@@ -23,7 +23,7 @@
     <hr class="my-6 border-gray-300 w-3/4 mx-auto dark:border-slate-500">
 
     @if($ignoredUrls)
-        <div class="flex items-center justify-between" x-data="{ 'showIgnoredIssues': @entangle('showIgnoredIssues') }">
+        <div class="flex items-center justify-between" x-data="{ 'showIgnoredIssues': @entangle('showIgnoredIssues').live }">
             <span class="flex-grow flex flex-col">
                 <span class="text-sm font-medium" id="show-ignored-issues">Show {{ count($ignoredUrls) }} ignored {{ str('issue')->plural(count($ignoredUrls)) }}</span>
             </span>
