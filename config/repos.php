@@ -41,6 +41,9 @@ return [
         'ylsideas' => [
             'cockroachdb-laravel', 'feature-flags', 'subscribable-notifications',
         ],
+        'SRWieZ' => [
+            'queue-size-health-check',
+        ],
     ],
 
     'labels' => [
