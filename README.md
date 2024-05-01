@@ -10,7 +10,7 @@ This is the official repository for [Find A PR](https://findapr.io/). Find A PR 
 
 The following tools are required in order to start the installation and run the project locally.
 
-- PHP 8.1
+- PHP 8.2
 - [Composer](https://getcomposer.org/download/)
 
 ## Installation
