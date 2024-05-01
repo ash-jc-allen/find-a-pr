@@ -78,6 +78,8 @@ final class ListIssues extends Component
 
     public ?string $sort = null;
 
+    public array $searchLabels = [];
+
     public ?string $searchTerm = null;
 
     public bool $shouldDisplayFirstTimeNotice;
@@ -104,6 +106,7 @@ final class ListIssues extends Component
     {
         $issues = $this->originalIssues
             ->filter(fn (Issue $issue): bool => $this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true))
+            ->when($this->searchLabels, $this->applySearchLabel())
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
 
@@ -131,6 +134,32 @@ final class ListIssues extends Component
                     || str_contains(strtolower($issue->title), $searchTerm);
             });
         };
+    }
+
+    private function applySearchLabel(): \Closure
+    {
+        return static function (Collection $issues, array $searchLabels) : Collection {
+            return $issues->filter(function (Issue $issue) use ($searchLabels): bool {
+                foreach ($searchLabels as $searchLabel)
+                {
+                    if (collect($issue->labels)->contains('name', $searchLabel))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        };
+    }
+
+    public function toggleSearchLabel(string $label)
+    {
+        $key = array_search($label, $this->searchLabels);
+        if ($key !== false) {
+            unset($this->searchLabels[$key]);
+        } else {
+            $this->searchLabels[] = $label;
+        }
     }
 
     private function applySort(): \Closure
