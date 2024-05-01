@@ -138,12 +138,10 @@ final class ListIssues extends Component
 
     private function applySearchLabel(): \Closure
     {
-        return static function (Collection $issues, array $searchLabels) : Collection {
+        return static function (Collection $issues, array $searchLabels): Collection {
             return $issues->filter(function (Issue $issue) use ($searchLabels): bool {
-                foreach ($searchLabels as $searchLabel)
-                {
-                    if (collect($issue->labels)->contains('name', $searchLabel))
-                    {
+                foreach ($searchLabels as $searchLabel) {
+                    if (collect($issue->labels)->contains('name', $searchLabel)) {
                         return true;
                     }
                 }
