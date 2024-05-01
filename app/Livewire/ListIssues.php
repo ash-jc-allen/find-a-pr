@@ -145,6 +145,7 @@ final class ListIssues extends Component
                         return true;
                     }
                 }
+
                 return false;
             });
         };
