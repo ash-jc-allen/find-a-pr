@@ -30,6 +30,9 @@ return [
             'query-string',
             'robots-txt',
         ],
+        'oddvalue' => [
+            'laravel-drafts',
+        ],
         'yieldigit' => [
             'synext',
         ],
