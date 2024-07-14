@@ -47,6 +47,9 @@ return [
         'SRWieZ' => [
             'queue-size-health-check',
         ],
+        'vanguardbackup' => [
+            'vanguard',
+        ],
     ],
 
     'labels' => [
