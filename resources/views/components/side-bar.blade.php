@@ -64,9 +64,9 @@
 
         @foreach($labels as $label)
             <div>
-                <p class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold border bg-gray-400 dark:bg-gray-600 text-white">
+                <button class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold @if (in_array($label, $this->searchLabels)) bg-green-400 dark:bg-green-600 @else bg-gray-400 dark:bg-gray-600 @endif text-white hover:bg-green-500 dark:hover:bg-green-700 transition ease-out" wire:click="toggleSearchLabel('{{ $label }}')">
                     {{ $label }}
-                </p>
+                </button>
             </div>
         @endforeach
     </div>
