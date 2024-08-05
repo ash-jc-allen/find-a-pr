@@ -51,7 +51,7 @@ return [
             'vanguard',
         ],
         'Lakshan-Madushanka' => [
-            'laravel-comments'
+            'laravel-comments',
         ],
     ],
 
