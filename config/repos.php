@@ -50,6 +50,9 @@ return [
         'vanguardbackup' => [
             'vanguard',
         ],
+        'Lakshan-Madushanka' => [
+            'laravel-comments'
+        ],
     ],
 
     'labels' => [
