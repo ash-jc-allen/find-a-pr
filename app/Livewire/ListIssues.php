@@ -111,7 +111,7 @@ final class ListIssues extends Component
                         $this->setLabelsCount($issue);
                     }
                     return true;
-                };
+                }
 
                 return false;
             })
@@ -147,7 +147,6 @@ final class ListIssues extends Component
 
                 return $matched;
             });
-
         };
     }
 
