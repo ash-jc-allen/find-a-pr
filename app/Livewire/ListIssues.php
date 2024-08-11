@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire;
 
 use App\DataTransferObjects\Issue;
+use App\DataTransferObjects\Label;
 use App\DataTransferObjects\Repository;
 use App\Exceptions\GitHubRateLimitException;
 use App\Services\IssueService;
@@ -88,7 +89,6 @@ final class ListIssues extends Component
     {
         $this->setSortOrderOnPageLoad();
 
-        $this->labels = config('repos.labels');
         $this->repos = app(RepoService::class)->reposToCrawl()->sort();
 
         try {
@@ -102,8 +102,19 @@ final class ListIssues extends Component
 
     public function render(): View
     {
+        $this->setLabels();
+
         $issues = $this->originalIssues
-            ->filter(fn (Issue $issue): bool => $this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true))
+            ->filter(function (Issue $issue): bool {
+                if ($this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true)) {
+                    if (! $this->searchTerm) {
+                        $this->setLabelsCount($issue);
+                    }
+                    return true;
+                };
+
+                return false;
+            })
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
 
@@ -123,13 +134,20 @@ final class ListIssues extends Component
 
     private function applySearch(): \Closure
     {
-        return static function (Collection $issues, string $searchTerm): Collection {
+        return function (Collection $issues, string $searchTerm): Collection {
             $searchTerm = strtolower($searchTerm);
 
             return $issues->filter(function (Issue $issue) use ($searchTerm): bool {
-                return str_contains(strtolower($issue->repoName), $searchTerm)
+                $matched = str_contains(strtolower($issue->repoName), $searchTerm)
                     || str_contains(strtolower($issue->title), $searchTerm);
+
+                if ($matched) {
+                    $this->setLabelsCount($issue);
+                }
+
+                return $matched;
             });
+
         };
     }
 
@@ -168,5 +186,22 @@ final class ListIssues extends Component
                 ->keys()
                 ->first();
         }
+    }
+
+    private function setLabels(): void
+    {
+        foreach (config('repos.labels') as $label) {
+            $this->labels[$label] = 0;
+        }
+    }
+
+    private function setLabelsCount(Issue $issue): void
+    {
+        collect($issue->labels)
+            ->each(function (Label $label) {
+                if (isset($this->labels[$label->name])) {
+                    $this->labels[$label->name] += 1;
+                }
+            });
     }
 }

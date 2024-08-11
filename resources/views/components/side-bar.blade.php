@@ -62,12 +62,13 @@
             <p class="text-gray-400 text-sm">({{ count($labels) }})</p>
         </div>
 
-        @foreach($labels as $label)
-            <div>
-                <p class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold border bg-gray-400 dark:bg-gray-600 text-white">
-                    {{ $label }}
-                </p>
-            </div>
+        @foreach($labels as $name => $count)
+                <div class="flex justify-between">
+                    <p class="inline-block items-center px-3 py-1 my-0.5 space-x-1 rounded text-xs font-bold border bg-gray-400 dark:bg-gray-600 text-white">
+                        <span>{{ $name }}</span>
+                        <span>({{$count}})</span>
+                    </p>
+                </div>
         @endforeach
     </div>
 </div>
