@@ -39,7 +39,7 @@
                 </svg>
 
                 <p class="font-medium my-4">No {{ $showIgnoredIssues ? 'Ignored' : '' }} Issues Found!</p>
-                <p>It looks there aren't any issues that fit your criteria.</p>
+                <p>It looks like there aren't any issues that fit your criteria.</p>
             </div>
         @endforelse
     </main>
