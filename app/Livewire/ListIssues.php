@@ -113,6 +113,7 @@ final class ListIssues extends Component
 
                     return true;
                 }
+
                 return false;
             })
             ->when($this->searchTerm, $this->applySearch())
