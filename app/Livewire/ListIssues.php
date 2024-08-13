@@ -110,9 +110,9 @@ final class ListIssues extends Component
                     if (! $this->searchTerm) {
                         $this->setLabelsCount($issue);
                     }
+
                     return true;
                 }
-
                 return false;
             })
             ->when($this->searchTerm, $this->applySearch())
@@ -144,6 +144,7 @@ final class ListIssues extends Component
                 if ($matched) {
                     $this->setLabelsCount($issue);
                 }
+
                 return $matched;
             });
         };
