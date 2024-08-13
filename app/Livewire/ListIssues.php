@@ -144,7 +144,6 @@ final class ListIssues extends Component
                 if ($matched) {
                     $this->setLabelsCount($issue);
                 }
-
                 return $matched;
             });
         };
