@@ -62,10 +62,11 @@
             <p class="text-gray-400 text-sm">({{ count($labels) }})</p>
         </div>
 
-        @foreach($labels as $label)
+        @foreach($labels as $name => $count)
             <div>
-                <button class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs font-bold @if (in_array($label, $this->searchLabels)) bg-green-400 dark:bg-green-600 @else bg-gray-400 dark:bg-gray-600 @endif text-white hover:bg-green-500 dark:hover:bg-green-700 transition ease-out" wire:click="toggleSearchLabel('{{ $label }}')">
-                    {{ $label }}
+                <button class="inline-block items-center px-3 py-1 my-0.5 rounded text-xs space-x-1 font-bold @if (in_array($label, $this->searchLabels)) bg-green-400 dark:bg-green-600 @else bg-gray-400 dark:bg-gray-600 @endif text-white hover:bg-green-500 dark:hover:bg-green-700 transition ease-out" wire:click="toggleSearchLabel('{{ $name }}')">
+                    <span>{{ $name }}</span>
+                    <span>({{$count}})</span>
                 </button>
             </div>
         @endforeach

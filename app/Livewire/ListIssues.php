@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire;
 
 use App\DataTransferObjects\Issue;
+use App\DataTransferObjects\Label;
 use App\DataTransferObjects\Repository;
 use App\Exceptions\GitHubRateLimitException;
 use App\Services\IssueService;
@@ -90,7 +91,6 @@ final class ListIssues extends Component
     {
         $this->setSortOrderOnPageLoad();
 
-        $this->labels = config('repos.labels');
         $this->repos = app(RepoService::class)->reposToCrawl()->sort();
 
         try {
@@ -104,11 +104,17 @@ final class ListIssues extends Component
 
     public function render(): View
     {
+        $this->initialiseLabels();
+
         $issues = $this->originalIssues
             ->filter(fn (Issue $issue): bool => $this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true))
             ->when($this->searchLabels, $this->applySearchLabel())
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
+
+        foreach ($issues as $issue) {
+            $this->incrementLabelCounts($issue);
+        }
 
         return view('livewire.list-issues', [
             'issues' => $issues,
@@ -196,5 +202,43 @@ final class ListIssues extends Component
                 ->keys()
                 ->first();
         }
+    }
+
+    /**
+     * Initialise each of the labels with counts of 0.
+     *
+     * @return void
+     */
+    private function initialiseLabels(): void
+    {
+        foreach (config('repos.labels') as $label) {
+            $this->labels[$label] = 0;
+        }
+    }
+
+    /**
+     * Loop through each of the labels on the issue and increment the count
+     * for each label that we're tracking in Find A PR.
+     *
+     * @param  Issue  $issue
+     * @return void
+     */
+    private function incrementLabelCounts(Issue $issue): void
+    {
+        foreach ($issue->labels as $label) {
+            if (! $this->isValidLabel($label)) {
+                continue;
+            }
+
+            $this->labels[$label->name]++;
+        }
+    }
+
+    /**
+     * Assert whether the label is one that we're tracking in Find A PR.
+     */
+    private function isValidLabel(Label $label): bool
+    {
+        return array_key_exists($label->name, $this->labels);
     }
 }

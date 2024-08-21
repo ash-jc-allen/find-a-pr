@@ -30,6 +30,9 @@ return [
             'query-string',
             'robots-txt',
         ],
+        'oddvalue' => [
+            'laravel-drafts',
+        ],
         'yieldigit' => [
             'synext',
         ],
@@ -43,6 +46,17 @@ return [
         ],
         'SRWieZ' => [
             'queue-size-health-check',
+        ],
+        'vanguardbackup' => [
+            'vanguard',
+        ],
+        'Lakshan-Madushanka' => [
+            'laravel-comments',
+        ],
+        'nativephp' => [
+            'laravel',
+            'electron',
+            'electron-plugin',
         ],
     ],
 
