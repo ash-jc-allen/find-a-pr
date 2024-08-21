@@ -63,12 +63,12 @@
         </div>
 
         @foreach($labels as $name => $count)
-                <div class="flex justify-between">
-                    <p class="inline-block items-center px-3 py-1 my-0.5 space-x-1 rounded text-xs font-bold border bg-gray-400 dark:bg-gray-600 text-white">
-                        <span>{{ $name }}</span>
-                        <span>({{$count}})</span>
-                    </p>
-                </div>
+            <div>
+                <p class="inline-block items-center px-3 py-1 my-0.5 space-x-1 rounded text-xs font-bold border bg-gray-400 dark:bg-gray-600 text-white">
+                    <span>{{ $name }}</span>
+                    <span>({{$count}})</span>
+                </p>
+            </div>
         @endforeach
     </div>
 </div>
