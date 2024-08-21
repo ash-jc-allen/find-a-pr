@@ -157,9 +157,10 @@ final class ListIssues extends Component
         };
     }
 
-    public function toggleSearchLabel(string $label)
+    public function toggleSearchLabel(string $label): void
     {
-        $key = array_search($label, $this->searchLabels);
+        $key = array_search($label, $this->searchLabels, strict: true);
+
         if ($key !== false) {
             unset($this->searchLabels[$key]);
         } else {
