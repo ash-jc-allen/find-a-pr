@@ -105,19 +105,13 @@ final class ListIssues extends Component
         $this->initialiseLabels();
 
         $issues = $this->originalIssues
-            ->filter(function (Issue $issue): bool {
-                if ($this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true)) {
-                    if (! $this->searchTerm) {
-                        $this->setLabelsCount($issue);
-                    }
-
-                    return true;
-                }
-
-                return false;
-            })
+            ->filter(fn (Issue $issue): bool => $this->showIgnoredIssues === in_array($issue->url, $this->ignoredUrls, true))
             ->when($this->searchTerm, $this->applySearch())
             ->when($this->sort, $this->applySort());
+
+        foreach ($issues as $issue) {
+            $this->incrementLabelCounts($issue);
+        }
 
         return view('livewire.list-issues', [
             'issues' => $issues,
@@ -135,18 +129,12 @@ final class ListIssues extends Component
 
     private function applySearch(): \Closure
     {
-        return function (Collection $issues, string $searchTerm): Collection {
+        return static function (Collection $issues, string $searchTerm): Collection {
             $searchTerm = strtolower($searchTerm);
 
             return $issues->filter(function (Issue $issue) use ($searchTerm): bool {
-                $matched = str_contains(strtolower($issue->repoName), $searchTerm)
+                return str_contains(strtolower($issue->repoName), $searchTerm)
                     || str_contains(strtolower($issue->title), $searchTerm);
-
-                if ($matched) {
-                    $this->setLabelsCount($issue);
-                }
-
-                return $matched;
             });
         };
     }
@@ -200,7 +188,14 @@ final class ListIssues extends Component
         }
     }
 
-    private function setLabelsCount(Issue $issue): void
+    /**
+     * Loop through each of the labels on the issue and increment the count
+     * for each label that we're tracking in Find A PR.
+     *
+     * @param Issue $issue
+     * @return void
+     */
+    private function incrementLabelCounts(Issue $issue): void
     {
         foreach ($issue->labels as $label) {
             if (!$this->isValidLabel($label)) {
