@@ -192,13 +192,13 @@ final class ListIssues extends Component
      * Loop through each of the labels on the issue and increment the count
      * for each label that we're tracking in Find A PR.
      *
-     * @param Issue $issue
+     * @param  Issue  $issue
      * @return void
      */
     private function incrementLabelCounts(Issue $issue): void
     {
         foreach ($issue->labels as $label) {
-            if (!$this->isValidLabel($label)) {
+            if (! $this->isValidLabel($label)) {
                 continue;
             }
 
