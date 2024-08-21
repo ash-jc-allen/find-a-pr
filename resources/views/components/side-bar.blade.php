@@ -64,10 +64,17 @@
 
         @foreach($labels as $name => $count)
             <div>
-                <p class="inline-block items-center px-3 py-1 my-0.5 space-x-1 rounded text-xs font-bold border bg-gray-400 dark:bg-gray-600 text-white">
+                <button
+                    @class([
+                        'inline-block items-center px-3 py-1 my-0.5 rounded text-xs space-x-1 font-bold text-white hover:bg-green-500 dark:hover:bg-green-700 transition ease-out',
+                        'bg-green-400 dark:bg-green-600' => in_array($name, $this->searchLabels, strict: true),
+                        'bg-gray-400 dark:bg-gray-600' => ! in_array($name, $this->searchLabels, strict: true),
+                    ])
+                    wire:click="toggleSearchLabel('{{ $name }}')"
+                >
                     <span>{{ $name }}</span>
                     <span>({{$count}})</span>
-                </p>
+                </button>
             </div>
         @endforeach
     </div>
