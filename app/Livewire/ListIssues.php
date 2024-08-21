@@ -102,7 +102,7 @@ final class ListIssues extends Component
 
     public function render(): View
     {
-        $this->setLabels();
+        $this->initialiseLabels();
 
         $issues = $this->originalIssues
             ->filter(function (Issue $issue): bool {
@@ -188,7 +188,12 @@ final class ListIssues extends Component
         }
     }
 
-    private function setLabels(): void
+    /**
+     * Initialise each of the labels with counts of 0.
+     *
+     * @return void
+     */
+    private function initialiseLabels(): void
     {
         foreach (config('repos.labels') as $label) {
             $this->labels[$label] = 0;
@@ -197,11 +202,20 @@ final class ListIssues extends Component
 
     private function setLabelsCount(Issue $issue): void
     {
-        collect($issue->labels)
-            ->each(function (Label $label) {
-                if (isset($this->labels[$label->name])) {
-                    $this->labels[$label->name] += 1;
-                }
-            });
+        foreach ($issue->labels as $label) {
+            if (!$this->isValidLabel($label)) {
+                continue;
+            }
+
+            $this->labels[$label->name]++;
+        }
+    }
+
+    /**
+     * Assert whether the label is one that we're tracking in Find A PR.
+     */
+    private function isValidLabel(Label $label): bool
+    {
+        return array_key_exists($label->name, $this->labels);
     }
 }
