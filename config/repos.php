@@ -6,6 +6,9 @@ return [
         'spatie',
     ],
     'repos' => [
+        'PapaRascal2020' => [
+            'sidekick',
+        ],
         'ash-jc-allen' => [
             'find-a-pr',
             'short-url',
