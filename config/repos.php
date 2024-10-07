@@ -4,6 +4,7 @@ return [
     'orgs' => [
         'symfony',
         'spatie',
+        'cachethq',
     ],
     'repos' => [
         'PapaRascal2020' => [
