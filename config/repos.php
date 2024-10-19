@@ -58,6 +58,11 @@ return [
             'electron',
             'electron-plugin',
         ],
+        'JonPurvis' => [
+            'profanify',
+            'lawman',
+            'faker-stripe',
+        ]
     ],
 
     'labels' => [
