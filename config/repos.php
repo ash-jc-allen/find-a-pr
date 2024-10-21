@@ -60,7 +60,6 @@ return [
         'nativephp' => [
             'laravel',
             'electron',
-            'electron-plugin',
         ],
         'JonPurvis' => [
             'profanify',
