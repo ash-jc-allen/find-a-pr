@@ -66,6 +66,9 @@ return [
             'lawman',
             'faker-stripe',
         ],
+        'kwakuOfosuAgyeman' => [
+            'ai-assistant',
+        ],
     ],
 
     'labels' => [
