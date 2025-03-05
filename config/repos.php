@@ -65,6 +65,7 @@ return [
             'profanify',
             'lawman',
             'faker-stripe',
+            'squeaky',
         ],
         'kwakuOfosuAgyeman' => [
             'ai-assistant',
