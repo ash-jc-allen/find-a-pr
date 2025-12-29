@@ -7,6 +7,9 @@ return [
         'cachethq',
     ],
     'repos' => [
+        'gurpeetkaits' => [
+            'screensense'
+        ]
         'PapaRascal2020' => [
             'sidekick',
         ],
