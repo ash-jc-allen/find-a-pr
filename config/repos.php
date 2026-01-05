@@ -73,6 +73,9 @@ return [
         'kwakuOfosuAgyeman' => [
             'ai-assistant',
         ],
+        'yoeunes' => [
+            'regex-parser',
+        ],
     ],
 
     'labels' => [
