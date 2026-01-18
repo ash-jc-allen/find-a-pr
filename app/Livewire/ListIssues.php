@@ -96,7 +96,7 @@ final class ListIssues extends Component
         try {
             $this->originalIssues = app(IssueService::class)->getAll()->shuffle();
         } catch (GitHubRateLimitException $e) {
-            abort(503, $e->getMessage());
+            abort(429, $e->getMessage());
         }
 
         $this->shouldDisplayFirstTimeNotice = ! Cookie::get('firstTimeNoticeClosed');
