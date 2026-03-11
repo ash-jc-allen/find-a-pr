@@ -73,6 +73,10 @@ return [
         'yoeunes' => [
             'regex-parser',
         ],
+        'achyutkneupane' => [
+            'filament-log-viewer',
+            'laravel-hls',
+        ],
     ],
 
     'labels' => [
