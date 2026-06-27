@@ -4,30 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "675f2ca6c84e5f2686263a6d9d0bc9ed",
+    "content-hash": "9f7465fda17f317fb0f4f0591336a208",
     "packages": [
         {
             "name": "abraham/twitteroauth",
-            "version": "7.1.0",
+            "version": "8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "5fad27a142d2cf6eed01cb663b746d47b4c66700"
+                "reference": "d7a58e97b5c7aed3ebaa5c63025cd0b361dcd683"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/5fad27a142d2cf6eed01cb663b746d47b4c66700",
-                "reference": "5fad27a142d2cf6eed01cb663b746d47b4c66700",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/d7a58e97b5c7aed3ebaa5c63025cd0b361dcd683",
+                "reference": "d7a58e97b5c7aed3ebaa5c63025cd0b361dcd683",
                 "shasum": ""
             },
             "require": {
-                "composer/ca-bundle": "^1.2",
+                "composer/ca-bundle": "^1",
                 "ext-curl": "*",
-                "php": "^8.1"
+                "php": "^8.2"
             },
             "require-dev": {
-                "php-vcr/php-vcr": "^1",
-                "php-vcr/phpunit-testlistener-vcr": "^3",
                 "phpunit/phpunit": "^9",
                 "rector/rector": "^0.15.7 || ^2.0.0",
                 "squizlabs/php_codesniffer": "^3 || ^4"
@@ -65,7 +63,7 @@
                 "issues": "https://github.com/abraham/twitteroauth/issues",
                 "source": "https://github.com/abraham/twitteroauth"
             },
-            "time": "2025-11-17T02:30:43+00:00"
+            "time": "2026-06-24T04:06:02+00:00"
         },
         {
             "name": "ashallendesign/laravel-config-validator",
