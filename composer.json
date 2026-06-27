@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "abraham/twitteroauth": "^5.0",
+        "abraham/twitteroauth": "^6.0",
         "ashallendesign/laravel-config-validator": "^2.2",
         "bugsnag/bugsnag-laravel": "^2.26.0",
         "doctrine/dbal": "^3.3",
