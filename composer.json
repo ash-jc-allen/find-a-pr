@@ -25,7 +25,6 @@
         "larastan/larastan": "^2.0",
         "pestphp/pest": "^2.21",
         "phpunit/phpunit": "^10.0",
-        "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
