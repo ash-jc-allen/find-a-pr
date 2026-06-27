@@ -4,34 +4,31 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "761140d7a90f12830253a60146e0326e",
+    "content-hash": "9f7465fda17f317fb0f4f0591336a208",
     "packages": [
         {
             "name": "abraham/twitteroauth",
-            "version": "5.0.0",
+            "version": "8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "6a68a5e53f72fbb31d4d304dc4752d3adefe0d10"
+                "reference": "d7a58e97b5c7aed3ebaa5c63025cd0b361dcd683"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/6a68a5e53f72fbb31d4d304dc4752d3adefe0d10",
-                "reference": "6a68a5e53f72fbb31d4d304dc4752d3adefe0d10",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/d7a58e97b5c7aed3ebaa5c63025cd0b361dcd683",
+                "reference": "d7a58e97b5c7aed3ebaa5c63025cd0b361dcd683",
                 "shasum": ""
             },
             "require": {
-                "composer/ca-bundle": "^1.2",
+                "composer/ca-bundle": "^1",
                 "ext-curl": "*",
-                "php": "^8.0 || ^8.1"
+                "php": "^8.2"
             },
             "require-dev": {
-                "php-vcr/php-vcr": "^1",
-                "php-vcr/phpunit-testlistener-vcr": "dev-php8",
-                "phpmd/phpmd": "^2",
                 "phpunit/phpunit": "^9",
-                "rector/rector": "^0.14.0",
-                "squizlabs/php_codesniffer": "^3"
+                "rector/rector": "^0.15.7 || ^2.0.0",
+                "squizlabs/php_codesniffer": "^3 || ^4"
             },
             "type": "library",
             "autoload": {
@@ -66,7 +63,7 @@
                 "issues": "https://github.com/abraham/twitteroauth/issues",
                 "source": "https://github.com/abraham/twitteroauth"
             },
-            "time": "2023-01-17T01:10:54+00:00"
+            "time": "2026-06-24T04:06:02+00:00"
         },
         {
             "name": "ashallendesign/laravel-config-validator",
