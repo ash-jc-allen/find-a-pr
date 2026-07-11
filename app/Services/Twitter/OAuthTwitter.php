@@ -14,7 +14,7 @@ final readonly class OAuthTwitter implements TwitterInterface
         //
     }
 
-    public function tweet(string $status): ?array
+    public function tweet(string $status): array
     {
         return (array) $this->twitter->post('tweets', ['text' => $status], ['jsonPayload' => true]);
     }
