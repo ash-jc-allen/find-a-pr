@@ -47,13 +47,11 @@ final readonly class IssueService
 
         $fetchedIssues = $this->getIssuesFromGitHubApi($repo);
 
-        if (!empty($fetchedIssues)) {
-            Cache::put(
-                key: $cacheKey,
-                value: $fetchedIssues,
-                ttl: now()->addMinutes(random_int(min: 120, max: 240)),
-            );
-        }
+        Cache::put(
+            key: $cacheKey,
+            value: $fetchedIssues,
+            ttl: now()->addMinutes(random_int(min: 120, max: 240)),
+        );
 
         return collect($fetchedIssues)
             ->filter(fn (Issue $issue): bool => $this->shouldIncludeIssue($issue))
