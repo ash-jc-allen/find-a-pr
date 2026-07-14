@@ -38,8 +38,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
 
-                <p class="font-medium my-4">No {{ $showIgnoredIssues ? 'Ignored' : '' }} Issues Found!</p>
-                <p>It looks like there aren't any issues that fit your criteria.</p>
+                @if($this->gitHubRateLimitExceeded)
+                    <p class="font-medium my-4">Rate Limit Exceeded!</p>
+                    <p>Ooops! It looks like we've hit the GitHub API rate limit. Please try again later.</p>
+                @else
+                    <p class="font-medium my-4">No {{ $showIgnoredIssues ? 'Ignored' : '' }} Issues Found!</p>
+                    <p>It looks like there aren't any issues that fit your criteria.</p>
+                @endif
             </div>
         @endforelse
     </main>

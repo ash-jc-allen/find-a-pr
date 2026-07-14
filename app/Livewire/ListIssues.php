@@ -12,7 +12,9 @@ use App\Services\IssueService;
 use App\Services\RepoService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 final class ListIssues extends Component
@@ -87,16 +89,26 @@ final class ListIssues extends Component
 
     public bool $showIgnoredIssues = false;
 
+    #[Computed]
+    public function gitHubRateLimitExceeded(): bool
+    {
+        return Cache::has('GitHub-Rate-Limit-Exceeded');
+    }
+
     public function mount(): void
     {
         $this->setSortOrderOnPageLoad();
 
         $this->repos = app(RepoService::class)->reposToCrawl()->sort();
 
-        try {
-            $this->originalIssues = app(IssueService::class)->getAll()->shuffle();
-        } catch (GitHubRateLimitException $e) {
-            abort(503, $e->getMessage());
+        $this->originalIssues = new Collection();
+
+        if (!$this->gitHubRateLimitExceeded) {
+            try {
+                $this->originalIssues = app(IssueService::class)->getAll()->shuffle();
+            } catch (GitHubRateLimitException $e) {
+                abort(503, $e->getMessage());
+            }
         }
 
         $this->shouldDisplayFirstTimeNotice = ! Cookie::get('firstTimeNoticeClosed');

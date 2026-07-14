@@ -183,9 +183,15 @@ final readonly class IssueService
     private function handleForbiddenResponse(Response $response, string $fullRepoName): array
     {
         if ($response->header('X-RateLimit-Remaining') === '0') {
-            $resetAt = CarbonImmutable::createFromTimestamp($response->header('X-RateLimit-Reset'))->toDateTimeString();
+            $resetAt = CarbonImmutable::createFromTimestamp($response->header('X-RateLimit-Reset'));
 
-            throw new GitHubRateLimitException('GitHub API rate limit reached! Try again at '.$resetAt.' UTC');
+            Cache::put(
+                key: 'GitHub-Rate-Limit-Exceeded',
+                value: $resetAt,
+                ttl: $resetAt,
+            );
+
+            throw new GitHubRateLimitException('GitHub API rate limit reached! Try again at '.$resetAt->toDateTimeString().' UTC');
         }
 
         report($fullRepoName.' is a forbidden GitHub repo.');
