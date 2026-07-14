@@ -41,7 +41,7 @@ final readonly class IssueService
 
         $cached = Cache::get($cacheKey);
 
-        if (!$forceRefresh) {
+        if (! $forceRefresh) {
             return $cached;
         }
 

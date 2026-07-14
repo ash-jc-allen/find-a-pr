@@ -103,7 +103,7 @@ final class ListIssues extends Component
 
         $this->originalIssues = new Collection();
 
-        if (!$this->gitHubRateLimitExceeded) {
+        if (! $this->gitHubRateLimitExceeded) {
             try {
                 $this->originalIssues = app(IssueService::class)->getAll()->shuffle();
             } catch (GitHubRateLimitException $e) {
