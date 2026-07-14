@@ -50,7 +50,7 @@ final readonly class IssueService
             Cache::put(
                 key: $cacheKey,
                 value: $fetchedIssues,
-                ttl: now()->addMinutes(120),
+                ttl: now()->addMinutes(random_int(min: 120, max: 240)),
             );
         }
 
