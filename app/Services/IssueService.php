@@ -40,13 +40,13 @@ final readonly class IssueService
 
         $cached = Cache::get($cacheKey);
 
-        if (!$forceRefresh && $cached !== null) {
+        if (! $forceRefresh && $cached !== null) {
             return $cached;
         }
 
         $fetchedIssues = $this->getIssuesFromGitHubApi($repo);
 
-        if (!empty($fetchedIssues)) {
+        if (! empty($fetchedIssues)) {
             Cache::put(
                 key: $cacheKey,
                 value: $fetchedIssues,
