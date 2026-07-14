@@ -38,15 +38,21 @@ final readonly class IssueService
     {
         $cacheKey = $repo->owner.'/'.$repo->name;
 
-        if ($forceRefresh) {
-            Cache::forget($cacheKey);
+        $cached = Cache::get($cacheKey);
+
+        if (!$forceRefresh && $cached !== null) {
+            return $cached;
         }
 
-        $fetchedIssues = Cache::remember(
-            $cacheKey,
-            now()->addMinutes(120),
-            fn (): array => $this->getIssuesFromGitHubApi($repo),
-        );
+        $fetchedIssues = $this->getIssuesFromGitHubApi($repo);
+
+        if (!empty($fetchedIssues)) {
+            Cache::put(
+                key: $cacheKey,
+                value: $fetchedIssues,
+                ttl: now()->addMinutes(120),
+            );
+        }
 
         return collect($fetchedIssues)
             ->filter(fn (Issue $issue): bool => $this->shouldIncludeIssue($issue))
