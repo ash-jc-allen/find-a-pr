@@ -39,13 +39,13 @@ final readonly class IssueService
     {
         $cacheKey = $repo->owner.'/'.$repo->name;
 
-        $cached = Cache::get($cacheKey);
-
-        if (!$forceRefresh) {
-            return $cached;
+        if (!$forceRefresh && Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
         }
 
-        $fetchedIssues = $this->getIssuesFromGitHubApi($repo);
+        $fetchedIssues = collect($this->getIssuesFromGitHubApi($repo))
+            ->filter(fn (Issue $issue): bool => $this->shouldIncludeIssue($issue))
+            ->all();
 
         Cache::put(
             key: $cacheKey,
@@ -53,9 +53,7 @@ final readonly class IssueService
             ttl: now()->addMinutes(random_int(min: 120, max: 240)),
         );
 
-        return collect($fetchedIssues)
-            ->filter(fn (Issue $issue): bool => $this->shouldIncludeIssue($issue))
-            ->all();
+        return $fetchedIssues;
     }
 
     private function parseIssue(Repository $repo, array $fetchedIssue): Issue
