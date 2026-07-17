@@ -39,7 +39,7 @@ final readonly class IssueService
     {
         $cacheKey = $repo->owner.'/'.$repo->name;
 
-        if (!$forceRefresh && Cache::has($cacheKey)) {
+        if (! $forceRefresh && Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
         }
 
