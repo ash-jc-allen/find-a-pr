@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6140840dc5276075d4048fd276ae51f8",
+    "content-hash": "794c43333aa0875cbae8c82fb48a4eca",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -6987,6 +6987,72 @@
                 }
             ],
             "time": "2026-01-08T08:02:38+00:00"
+        },
+        {
+            "name": "calebdw/larastan-livewire",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/calebdw/larastan-livewire.git",
+                "reference": "4137bf566fe21ddd1374b79687d89df5654c3759"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/calebdw/larastan-livewire/zipball/4137bf566fe21ddd1374b79687d89df5654c3759",
+                "reference": "4137bf566fe21ddd1374b79687d89df5654c3759",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "livewire/livewire": "^3.3 || ^4.0",
+                "php": "^8.2",
+                "phpstan/phpstan": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.5"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CalebDW\\LarastanLivewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb White",
+                    "email": "cdwhite3@pm.me"
+                }
+            ],
+            "description": "A Larastan / PHPStan extension for Livewire.",
+            "homepage": "https://github.com/calebdw/larastan-livewire",
+            "keywords": [
+                "PHPStan",
+                "larastan",
+                "livewire",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/calebdw/larastan-livewire/issues",
+                "source": "https://github.com/calebdw/larastan-livewire/tree/v2.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/calebdw",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-03-04T14:03:08+00:00"
         },
         {
             "name": "fakerphp/faker",
