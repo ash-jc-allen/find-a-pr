@@ -1,0 +1,25 @@
+name: CI
+
+on: [pull_request, push]
+
+permissions:
+  contents: read
+
+jobs:
+  composer:
+    name: Composer Dependencies
+    uses: ./.github/workflows/composer.yml
+
+  npm:
+    name: NPM Dependencies
+    uses: ./.github/workflows/npm.yml
+
+  tests:
+    name: TestSuite
+    needs: [composer, npm]
+    uses: ./.github/workflows/tests.yml
+
+  larastan:
+    name: Static Analysis
+    needs: [composer, npm]
+    uses: ./.github/workflows/larastan.yml
