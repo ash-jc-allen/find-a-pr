@@ -17,6 +17,15 @@ return [
 
     'default' => env('CACHE_DRIVER', 'file'),
 
+    'serializable_classes' => [
+        App\DataTransferObjects\Issue::class,
+        App\DataTransferObjects\IssueOwner::class,
+        App\DataTransferObjects\Label::class,
+        App\DataTransferObjects\Reaction::class,
+        Carbon\Carbon::class,
+        Carbon\CarbonImmutable::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Cache Stores
