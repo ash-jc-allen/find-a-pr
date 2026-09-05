@@ -1,6 +1,6 @@
 name: TestSuite
 
-on: [pull_request, push]
+on: [workflow_call]
 
 jobs:
   phpunit:
