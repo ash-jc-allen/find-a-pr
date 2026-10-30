@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IpCheckController;
 use App\Http\Controllers\IssueController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', IssueController::class);
+
+Route::get('/ip-check', IpCheckController::class)->name('ip-check');
