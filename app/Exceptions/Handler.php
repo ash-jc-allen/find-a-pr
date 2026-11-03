@@ -54,28 +54,28 @@ final class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
     #[Override]
-    public function register(): void
+    public function report(Throwable $e): void
     {
-        $this->reportable(function (Throwable $e) {
-            $ip = request()->ip();
+        $this->blockSuspiciousRequest($e);
 
-            if ($ip === null || ! config('features.enable_firewall')) {
+        parent::report($e);
+    }
+
+    private function blockSuspiciousRequest(Throwable $e): void
+    {
+        $ip = request()->ip();
+
+        if ($ip === null || ! config('features.enable_firewall')) {
+            return;
+        }
+
+        foreach ($this->firewallBlockableExceptions as $exceptionClass) {
+            if ($e instanceof $exceptionClass) {
+                app(Firewall::class)->block($ip, $e);
+
                 return;
             }
-
-            foreach ($this->firewallBlockableExceptions as $exceptionClass) {
-                if ($e instanceof $exceptionClass) {
-                    app(Firewall::class)->block($ip, $e);
-
-                    return;
-                }
-            }
-        });
+        }
     }
 }
